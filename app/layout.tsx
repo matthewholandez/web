@@ -9,7 +9,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   title: "Matthew Holandez",
-  description: "Personal website of Matthew Holandez",
+  description: "Engineering at the University of Waterloo",
   icons: {
     icon: [
       { url: "/favicon.ico" },
