@@ -7,6 +7,7 @@ export const workItems = [
   {
     title: "🌐 Cyber Intelligence Intern",
     company: "DeepCode",
+    dates: "Jan 2026 - Apr 2026"
   },
 ];
 

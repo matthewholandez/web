@@ -1,6 +1,6 @@
 import { Section } from "@/components/ui/section";
 import { Card, CardLink } from "@/components/ui/card";
-import { GitHubIcon, LinkedInIcon, UWaterlooIcon } from "@/components/icons";
+import { GitHubIcon, LinkedInIcon } from "@/components/icons";
 import { siteConfig, workItems, projects, socialLinks } from "@/lib/data";
 
 export default function Home() {
@@ -10,10 +10,7 @@ export default function Home() {
         <h1 className="text-sm font-medium uppercase tracking-widest">
           {siteConfig.name}
         </h1>
-        <p className="text-sm text-foreground/50 flex items-center gap-2">
-          <UWaterlooIcon />
-          {siteConfig.description}
-        </p>
+        <p className="text-sm text-foreground/50">{siteConfig.description}</p>
         <hr className="mt-4 border-foreground/5" />
       </header>
 
@@ -22,7 +19,7 @@ export default function Home() {
           {workItems.map((item) => (
             <Card key={item.title}>
               <p className="font-medium">{item.title}</p>
-              <p className="text-foreground/50">{item.company}</p>
+              <p className="text-foreground/50">{item.company}, <span className="">{item.dates}</span></p>
             </Card>
           ))}
         </div>
@@ -56,6 +53,11 @@ export default function Home() {
           ))}
         </div>
       </Section>
+
+      <footer className="mt-12">
+        <hr className="border-foreground/5" />
+        <p className="mt-4 text-xs text-foreground/50">Feb 2026</p>
+      </footer>
     </main>
   );
 }
