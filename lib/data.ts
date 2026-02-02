@@ -13,7 +13,7 @@ export const workItems = [
 
 export const projects = [
   {
-    title: "🗃️ Podcast Analytics",
+    title: "🎙️ Podcast Analytics",
     description: "Exploratory data analysis",
     href: "https://github.com/matthewholandez",
   },

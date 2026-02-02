@@ -2,6 +2,7 @@ import { Section } from "@/components/ui/section";
 import { Card, CardLink } from "@/components/ui/card";
 import { GitHubIcon, LinkedInIcon } from "@/components/icons";
 import { siteConfig, workItems, projects, socialLinks } from "@/lib/data";
+import Link from "next/link"
 
 export default function Home() {
   return (
@@ -56,7 +57,7 @@ export default function Home() {
 
       <footer className="mt-12">
         <hr className="border-foreground/5" />
-        <p className="mt-4 text-xs text-foreground/50">Feb 2026</p>
+        <p className="mt-4 text-xs text-foreground/50">Feb 2026. See the <Link target="_blank" href="https://howmuch.tax/" className="underline font-bold">inspiration</Link> behind this site.</p>
       </footer>
     </main>
   );
