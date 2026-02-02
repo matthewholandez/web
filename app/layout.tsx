@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+const geistMono = Geist_Mono({
   subsets: ["latin"],
-  variable: "--font-sans",
+  variable: "--font-mono",
 });
 
 export const metadata: Metadata = {
@@ -43,7 +43,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${plusJakartaSans.variable}`}>
+      <body className={`${geistMono.variable}`}>
         {children}
       </body>
     </html>
