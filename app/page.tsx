@@ -1,5 +1,5 @@
 import { Section } from "@/components/ui/section";
-import { Card, CardLink } from "@/components/ui/card";
+import { CardLink } from "@/components/ui/card";
 import { GitHubIcon, LinkedInIcon } from "@/components/icons";
 import { siteConfig, workItems, projects, socialLinks } from "@/lib/data";
 import Link from "next/link"
@@ -18,15 +18,15 @@ export default function Home() {
       <Section title="Work.">
         <div className="space-y-2">
           {workItems.map((item) => (
-            <Card key={item.title}>
-              <p className="font-medium">{item.title}</p>
-              <p className="text-foreground/50">{item.company}, <span className="">{item.dates}</span></p>
-            </Card>
+            <CardLink key={item.title} href={item.href}>
+              <p className="font-medium group-hover:text-white">{item.title}</p>
+              <p className="text-foreground/50 group-hover:text-white/50">{item.company}, <span>{item.dates}</span></p>
+            </CardLink>
           ))}
         </div>
       </Section>
 
-      <Section title="Projects.">
+      {/* <Section title="Projects.">
         <div className="grid grid-cols-2 gap-3">
           {projects.map((project) => (
             <CardLink key={project.title} href={project.href}>
@@ -37,7 +37,7 @@ export default function Home() {
             </CardLink>
           ))}
         </div>
-      </Section>
+      </Section> */}
 
       <Section title="Contact." className="">
         <div className="grid grid-cols-2 gap-3">

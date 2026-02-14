@@ -14,7 +14,7 @@ body {
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: var(--font-mono), monospace;
+  font-family: var(--font-m-plus-1p), sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
@@ -26,7 +26,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-mono), monospace;
+  font-family: var(--font-m-plus-1p), sans-serif;
   font-weight: 700;
   line-height: 1.2;
 }

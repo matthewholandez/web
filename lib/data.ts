@@ -1,13 +1,14 @@
 export const siteConfig = {
   name: "Matthew Holandez",
-  description: "Systems Design Engineering, University of Waterloo",
+  description: "Systems Design Engineering, University of Waterloo (2030)",
 };
 
 export const workItems = [
   {
     title: "🌐 Cyber Intelligence Intern",
     company: "DeepCode",
-    dates: "Jan 2026 - Apr 2026"
+    dates: "Jan 2026 - Apr 2026",
+    href: "https://deepcode.ca"
   },
 ];
 

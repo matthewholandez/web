@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Geist_Mono } from "next/font/google";
+import { M_PLUS_1p } from "next/font/google";
 import "./globals.css";
 
-const geistMono = Geist_Mono({
+const mPlus1p = M_PLUS_1p({
   subsets: ["latin"],
-  variable: "--font-mono",
+  weight: ["400", "500", "700"],
+  variable: "--font-m-plus-1p",
 });
 
 export const metadata: Metadata = {
@@ -43,7 +44,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistMono.variable}`}>
+      <body className={`${mPlus1p.variable} antialiased`}>
         {children}
       </body>
     </html>

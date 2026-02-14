@@ -25,7 +25,7 @@ export function CardLink({ href, children, className = "" }: CardLinkProps) {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className={`group border border-foreground/5 px-4 py-4 hover:bg-black transition-colors ${className}`}
+      className={`block group border border-foreground/5 px-4 py-4 hover:bg-black transition-colors ${className}`}
     >
       {children}
     </a>
