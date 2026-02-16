@@ -1,7 +1,7 @@
 import { Section } from "@/components/ui/section";
 import { CardLink } from "@/components/ui/card";
 import { GitHubIcon, LinkedInIcon } from "@/components/icons";
-import { siteConfig, workItems, projects, socialLinks } from "@/lib/data";
+import { siteConfig, workItems, educationItems, projects, socialLinks } from "@/lib/data";
 import Link from "next/link"
 
 export default function Home() {
@@ -21,6 +21,19 @@ export default function Home() {
             <CardLink key={item.title} href={item.href}>
               <p className="font-medium group-hover:text-white">{item.title}</p>
               <p className="text-foreground/50 group-hover:text-white/50">{item.company}, <span>{item.dates}</span></p>
+            </CardLink>
+          ))}
+        </div>
+      </Section>
+
+      <Section title="Education.">
+        <div className="space-y-2">
+          {educationItems.map((item) => (
+            <CardLink key={item.title} href={item.href}>
+              <p className="font-medium group-hover:text-white">{item.title}</p>
+              <p className="text-foreground/50 group-hover:text-white/50">
+                {item.company}, <span>{item.dates}</span>, <em>{item.gpa}</em>
+              </p>
             </CardLink>
           ))}
         </div>

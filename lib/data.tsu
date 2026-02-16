@@ -1,6 +1,6 @@
 export const siteConfig = {
   name: "Matthew Holandez",
-  description: "A problem-solver. Passionate about software and data.",
+  description: "A problem-solver.",
 };
 
 export const workItems = [
@@ -14,10 +14,9 @@ export const workItems = [
 
 export const educationItems = [
   {
-    title: "🎓 BASc, Systems Design Engineering",
+    title: "🎓 Systems Design Engineering",
     company: "University of Waterloo",
-    dates: "Sep 2025 - Apr 2030",
-    gpa: "GPA 3.9/4.0 (94%)",
+    dates: "Class of 2030",
     href: "https://uwaterloo.ca"
   },
 ];
