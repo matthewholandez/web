@@ -1,0 +1,17 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "tanstack-start-app",
+  "compatibility_date": "2025-09-02",
+  "compatibility_flags": ["nodejs_compat"],
+  "main": "@tanstack/react-start/server-entry",
+  "routes": [
+    {
+        "pattern": "matthewholandez.com",
+        "custom_domain": true,
+    },
+    {
+        "pattern": "www.matthewholandez.com",
+        "custom_domain": true,
+    }
+  ]
+}
