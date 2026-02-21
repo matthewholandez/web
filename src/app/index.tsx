@@ -1,10 +1,20 @@
+import { createFileRoute } from "@tanstack/react-router";
 import { Section } from "@/components/ui/section";
 import { CardLink } from "@/components/ui/card";
 import { GitHubIcon, LinkedInIcon } from "@/components/icons";
-import { siteConfig, workItems, educationItems, projects, socialLinks } from "@/lib/data";
-import Link from "next/link"
+import {
+  siteConfig,
+  workItems,
+  educationItems,
+  projects,
+  socialLinks,
+} from "@/lib/data";
 
-export default function Home() {
+export const Route = createFileRoute("/")({
+  component: Home,
+});
+
+function Home() {
   return (
     <main className="max-w-xl mx-auto py-16 px-6 text-sm">
       <header className="mb-12">
@@ -19,8 +29,12 @@ export default function Home() {
         <div className="space-y-2">
           {workItems.map((item) => (
             <CardLink key={item.title} href={item.href}>
-              <p className="font-medium group-hover:text-white">{item.title}</p>
-              <p className="text-foreground/50 group-hover:text-white/50">{item.company}, <span>{item.dates}</span></p>
+              <p className="font-medium group-hover:text-white">
+                {item.title}
+              </p>
+              <p className="text-foreground/50 group-hover:text-white/50">
+                {item.company}, <span>{item.dates}</span>
+              </p>
             </CardLink>
           ))}
         </div>
@@ -30,9 +44,12 @@ export default function Home() {
         <div className="space-y-2">
           {educationItems.map((item) => (
             <CardLink key={item.title} href={item.href}>
-              <p className="font-medium group-hover:text-white">{item.title}</p>
+              <p className="font-medium group-hover:text-white">
+                {item.title}
+              </p>
               <p className="text-foreground/50 group-hover:text-white/50">
-                {item.company}, <span>{item.dates}</span>, <em>{item.gpa}</em>
+                {item.company}, <span>{item.dates}</span>,{" "}
+                <em>{item.gpa}</em>
               </p>
             </CardLink>
           ))}
@@ -55,7 +72,11 @@ export default function Home() {
       <Section title="Contact." className="">
         <div className="grid grid-cols-2 gap-3">
           {socialLinks.map((link) => (
-            <CardLink key={link.name} href={link.href} className="flex items-center gap-2">
+            <CardLink
+              key={link.name}
+              href={link.href}
+              className="flex items-center gap-2"
+            >
               {link.icon === "github" && (
                 <GitHubIcon className="group-hover:fill-white" />
               )}
@@ -70,7 +91,18 @@ export default function Home() {
 
       <footer className="mt-12">
         <hr className="border-foreground/5" />
-        <p className="mt-4 text-xs text-foreground/50">Feb 2026. See the <Link target="_blank" href="https://howmuch.tax/" className="underline font-bold">inspiration</Link> behind this site.</p>
+        <p className="mt-4 text-xs text-foreground/50">
+          Feb 2026. See the{" "}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://howmuch.tax/"
+            className="underline font-bold"
+          >
+            inspiration
+          </a>{" "}
+          behind this site.
+        </p>
       </footer>
     </main>
   );
