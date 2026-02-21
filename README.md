@@ -61,10 +61,73 @@ npm run start
 - `public/`: Static assets.
 - `vite.config.ts`: Vite and TanStack Start configuration.
 
-## Deployment
+## Deployment (Cloudflare Workers)
 
-This project can be easily deployed on [Vercel](https://vercel.com/).
+Follow the Cloudflare guide for TanStack Start: https://developers.cloudflare.com/workers/framework-guides/web-apps/tanstack-start/
 
-1. Push your code to a Git repository.
-2. Import the project into Vercel.
-3. Deploy.
+### 1. Install Cloudflare tooling
+
+```bash
+npm i @cloudflare/vite-plugin wrangler -- -D
+```
+
+### 2. Update Vite config
+
+Add the Cloudflare plugin before TanStack Start:
+
+```ts
+// vite.config.ts
+import { defineConfig } from "vite";
+import { tanstackStart } from "@tanstack/react-start/plugin/vite";
+import { cloudflare } from "@cloudflare/vite-plugin";
+import react from "@vitejs/plugin-react";
+
+export default defineConfig({
+  plugins: [
+    cloudflare({ viteEnvironment: { name: "ssr" } }),
+    tanstackStart(),
+    react(),
+  ],
+});
+```
+
+### 3. Add Wrangler config
+
+Create `wrangler.jsonc`:
+
+```jsonc
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "<YOUR_PROJECT_NAME>",
+  "compatibility_date": "2026-02-21",
+  "compatibility_flags": ["nodejs_compat"],
+  "main": "@tanstack/react-start/server-entry",
+  "observability": { "enabled": true }
+}
+```
+
+### 4. Update package scripts
+
+```json
+{
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "deploy": "npm run build && wrangler deploy",
+    "cf-typegen": "wrangler types"
+  }
+}
+```
+
+### 5. Deploy
+
+```bash
+npm run deploy
+```
+
+Preview the production build locally:
+
+```bash
+npm run preview
+```
