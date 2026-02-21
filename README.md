@@ -1,12 +1,13 @@
 # Personal Website
 
-A personal portfolio website built with [Next.js 16](https://nextjs.org/).
+A personal portfolio website built with [TanStack Start](https://tanstack.com/start) and [Vite](https://vite.dev/).
 
 ## Features
 
-- **Next.js 16**: App Router and Server Components.
+- **TanStack Start**: Full-stack SSR framework built on TanStack Router.
 - **TypeScript**: Fully typed codebase.
-- **Tailwind CSS**: Utility-first styling.
+- **Tailwind CSS v4**: Utility-first styling.
+- **React 19**: Latest React with server-side rendering.
 
 ## Prerequisites
 
@@ -37,13 +38,28 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+Build for production:
+
+```bash
+npm run build
+```
+
+Start the production server:
+
+```bash
+npm run start
+```
+
 ## Project Structure
 
-- `app/`: Next.js App Router pages and layouts.
-  - `page.tsx`: Home page.
-- `components/`: Reusable UI components.
-- `lib/`: Data and utilities.
+- `src/app/`: TanStack Router routes and layouts.
+  - `__root.tsx`: Root layout.
+  - `index.tsx`: Home page route.
+  - `globals.css`: Global styles.
+- `src/components/`: Reusable UI components.
+- `src/lib/`: Data and utilities.
 - `public/`: Static assets.
+- `vite.config.ts`: Vite and TanStack Start configuration.
 
 ## Deployment
 
@@ -51,4 +67,4 @@ This project can be easily deployed on [Vercel](https://vercel.com/).
 
 1. Push your code to a Git repository.
 2. Import the project into Vercel.
-4. Deploy.
+3. Deploy.
