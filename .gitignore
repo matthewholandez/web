@@ -16,6 +16,7 @@
 # tanstack start
 /.output/
 /.vinxi/
+/.tanstack/
 
 # production
 /build
@@ -41,3 +42,4 @@ yarn-error.log*
 
 # Wrangler
 dist/
+.wrangler/

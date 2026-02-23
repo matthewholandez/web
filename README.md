@@ -1,6 +1,6 @@
 # Personal Website
 
-A personal portfolio website built with [TanStack Start](https://tanstack.com/start) and [Vite](https://vite.dev/).
+My personal portfolio website built with [TanStack Start](https://tanstack.com/start) and [Vite](https://vite.dev/). Deployed on [Cloudflare Workers](https://workers.cloudflare.com/).
 
 ## Features
 
@@ -131,3 +131,7 @@ Preview the production build locally:
 ```bash
 npm run preview
 ```
+
+## Acknowledgements
+
+The frontend of this portfolio was heavily inspired by [Tax](https://www.howmuch.tax/).
