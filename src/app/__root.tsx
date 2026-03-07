@@ -36,6 +36,7 @@ export const Route = createRootRoute({
         type: "image/png",
       },
       { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
+      { rel: "manifest", href: "/site.webmanifest" },
       {
         rel: "icon",
         href: "/android-chrome-192x192.png",
