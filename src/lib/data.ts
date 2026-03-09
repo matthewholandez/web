@@ -5,7 +5,7 @@ export const siteConfig = {
 
 export const workItems = [
   {
-    title: "🌐 Intern, Cyber Intelligence",
+    title: "🌐 Intern, Cyber Intelligence Research",
     company: "DeepCode",
     dates: "Jan 2026 - Apr 2026",
     href: "https://deepcode.ca"

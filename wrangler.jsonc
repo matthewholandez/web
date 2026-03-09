@@ -6,12 +6,12 @@
   "main": "@tanstack/react-start/server-entry",
   "routes": [
     {
-        "pattern": "matthewholandez.com",
-        "custom_domain": true,
+      "pattern": "matthewholandez.com",
+      "custom_domain": true,
     },
     {
-        "pattern": "www.matthewholandez.com",
-        "custom_domain": true,
+      "pattern": "www.matthewholandez.com",
+      "custom_domain": true,
     }
   ]
 }
