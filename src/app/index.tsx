@@ -21,7 +21,7 @@ function Home() {
         <h1 className="text-sm font-medium uppercase tracking-widest">
           {siteConfig.name}
         </h1>
-        <p className="text-sm text-foreground/50">{siteConfig.description}</p>
+        {/* <p className="text-sm text-foreground/50">{siteConfig.description}</p> */}
         <hr className="mt-4 border-foreground/5" />
       </header>
 

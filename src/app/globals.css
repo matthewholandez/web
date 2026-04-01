@@ -17,7 +17,8 @@ body {
 
 body {
   color: var(--foreground);
-  background: var(--background);
+  background: var(--background) url("/dotted.png") repeat;
+  background-size: 950px;
   font-family: "M PLUS 1p", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
