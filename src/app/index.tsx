@@ -18,9 +18,11 @@ function Home() {
   return (
     <main className="max-w-xl mx-auto py-16 px-6 text-sm">
       <header className="mb-12">
-        <h1 className="text-sm font-medium uppercase tracking-widest">
-          {siteConfig.name}
-        </h1>
+        <img
+          src="/signature.png"
+          alt={siteConfig.name}
+          className="h-10 w-auto mix-blend-multiply"
+        />
         {/* <p className="text-sm text-foreground/50">{siteConfig.description}</p> */}
         <hr className="mt-4 border-foreground/5" />
       </header>

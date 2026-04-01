@@ -17,8 +17,9 @@ body {
 
 body {
   color: var(--foreground);
-  background: var(--background) url("/dotted.png") repeat;
-  background-size: 950px;
+  background-color: var(--background);
+  background-image: radial-gradient(circle, #c8c8c8 1px, transparent 1px);
+  background-size: 24px 24px;
   font-family: "M PLUS 1p", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
