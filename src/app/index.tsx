@@ -110,7 +110,7 @@ function Home() {
       <footer className="mt-12">
         <hr className="border-foreground/5" />
         <p className="mt-4 text-xs text-foreground/50">
-          Feb 2026. See the{" "}
+          Apr 2026. See the{" "}
           <a
             target="_blank"
             rel="noopener noreferrer"
