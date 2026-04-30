@@ -17,11 +17,16 @@ function Writing() {
       slug,
       title: frontmatter.title || "Untitled",
       date: frontmatter.date || "",
+      pinned: frontmatter.pinned === true || frontmatter.pinned === "true",
     };
   });
 
-  // Sort by date descending
-  postList.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  // Sort by date descending, but keep pinned posts at the top
+  postList.sort((a, b) => {
+    if (a.pinned && !b.pinned) return -1;
+    if (!a.pinned && b.pinned) return 1;
+    return new Date(b.date).getTime() - new Date(a.date).getTime();
+  });
 
   return (
     <main className="max-w-xl mx-auto py-16 px-6 text-sm">
@@ -41,7 +46,16 @@ function Writing() {
               className="group block"
             >
               <div className="flex items-center justify-between">
-                <span className="font-medium group-hover:text-foreground/80 transition-colors">{post.title}</span>
+                <div className="flex items-center gap-2">
+                  <span className="font-medium group-hover:text-foreground/80 transition-colors">{post.title}</span>
+                  {post.pinned && (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-foreground/40">
+                      <line x1="12" y1="17" x2="12" y2="22"></line>
+                      <path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.6V6h3V2h-3"></path>
+                      <path d="M9 2H6v4h3v4.6a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V17"></path>
+                    </svg>
+                  )}
+                </div>
                 <span className="text-foreground/50 text-xs">{post.date}</span>
               </div>
             </Link>

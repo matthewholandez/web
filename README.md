@@ -135,3 +135,4 @@ npm run preview
 ## Acknowledgements
 
 The frontend of this portfolio was heavily inspired by [Tax](https://www.howmuch.tax/).
+AI agents (Google Gemini 3.1 Pro / OpenCode) were used to assist development.
