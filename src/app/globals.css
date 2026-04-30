@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @import "@fontsource/m-plus-1p/400.css";
 @import "@fontsource/m-plus-1p/500.css";

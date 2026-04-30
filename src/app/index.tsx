@@ -1,7 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Section } from "@/components/ui/section";
 import { CardLink } from "@/components/ui/card";
-import { GitHubIcon, LinkedInIcon } from "@/components/icons";
+import { GitHubIcon, LinkedInIcon, PenIcon } from "@/components/icons";
 import {
   siteConfig,
   workItems,
@@ -90,6 +90,16 @@ function Home() {
           ))}
         </div>
       </Section>
+
+      <section className="mt-12 flex justify-center">
+        <Link
+          to="/writing"
+          className="text-foreground/50 hover:text-white transition-colors p-2"
+          aria-label="Writing"
+        >
+          <PenIcon className="w-5 h-5" />
+        </Link>
+      </section>
 
       <footer className="mt-12">
         <hr className="border-foreground/5" />
