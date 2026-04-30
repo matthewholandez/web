@@ -46,4 +46,14 @@ export const socialLinks = [
     href: "https://linkedin.com/in/matthewholandez",
     icon: "linkedin",
   },
+  {
+    name: "Writing",
+    href: "/writing",
+    icon: "writing",
+  },
+  {
+    name: "Email",
+    href: "mailto:mholandez@uwaterloo.ca",
+    icon: "email",
+  },
 ];

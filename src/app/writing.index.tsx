@@ -32,7 +32,7 @@ function Writing() {
     <main className="max-w-xl mx-auto py-16 px-6 text-sm">
       <header className="mb-12">
         <Link to="/" className="text-foreground/50 hover:text-foreground transition-colors mb-4 inline-block">
-          &larr; Back home
+          &larr; Home
         </Link>
         <h1 className="text-2xl font-bold">Writing</h1>
       </header>

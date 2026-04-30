@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Section } from "@/components/ui/section";
 import { CardLink } from "@/components/ui/card";
-import { GitHubIcon, LinkedInIcon, PenIcon } from "@/components/icons";
+import { GitHubIcon, LinkedInIcon, PenIcon, MailIcon } from "@/components/icons";
 import {
   siteConfig,
   workItems,
@@ -71,7 +71,7 @@ function Home() {
         </div>
       </Section> */}
 
-      <Section title="Contact." className="">
+      <Section title="More of me." className="">
         <div className="grid grid-cols-2 gap-3">
           {socialLinks.map((link) => (
             <CardLink
@@ -85,13 +85,19 @@ function Home() {
               {link.icon === "linkedin" && (
                 <LinkedInIcon className="group-hover:fill-white" />
               )}
+              {link.icon === "writing" && (
+                <PenIcon className="group-hover:stroke-white" />
+              )}
+              {link.icon === "email" && (
+                <MailIcon className="group-hover:stroke-white" />
+              )}
               <span className="group-hover:text-white">{link.name}</span>
             </CardLink>
           ))}
         </div>
       </Section>
 
-      <section className="mt-12 flex justify-center">
+      {/* <section className="mt-12 flex justify-center">
         <Link
           to="/writing"
           className="text-foreground/50 hover:text-white transition-colors p-2"
@@ -99,7 +105,7 @@ function Home() {
         >
           <PenIcon className="w-5 h-5" />
         </Link>
-      </section>
+      </section> */}
 
       <footer className="mt-12">
         <hr className="border-foreground/5" />
