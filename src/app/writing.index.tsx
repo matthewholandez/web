@@ -1,6 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/writing/")({
+  head: () => ({
+    meta: [
+      { title: "Writing | Matthew Holandez" }
+    ]
+  }),
   component: Writing,
 });
 
