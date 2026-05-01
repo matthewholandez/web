@@ -1,11 +1,25 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/writing/$slug")({
-  component: Post,
-});
-
 // Import all mdx files
 const posts = import.meta.glob("../content/*.mdx", { eager: true });
+
+export const Route = createFileRoute("/writing/$slug")({
+  head: ({ params }) => {
+    const slug = params.slug;
+    const postEntry = Object.entries(posts).find(([path]) => {
+      return path.endsWith(`/${slug}.mdx`);
+    });
+    const module = postEntry ? (postEntry[1] as any) : null;
+    const title = module?.frontmatter?.title || 'Post';
+    
+    return {
+      meta: [
+        { title: `${title} | Matthew Holandez` }
+      ]
+    };
+  },
+  component: Post,
+});
 
 function Post() {
   const { slug } = Route.useParams();
@@ -26,7 +40,7 @@ function Post() {
   return (
     <main className="max-w-xl mx-auto py-16 px-6 text-sm">
       <Link to="/writing" className="text-foreground/50 hover:text-foreground transition-colors mb-8 inline-block">
-        &larr; Back to writing
+        &larr; Writing
       </Link>
       
       <header className="mb-8">
