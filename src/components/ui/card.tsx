@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Link } from "@tanstack/react-router";
+import Link from "next/link";
 
 interface CardProps {
   children: ReactNode;
@@ -26,7 +26,7 @@ export function CardLink({ href, children, className = "" }: CardLinkProps) {
 
   if (isInternal) {
     return (
-      <Link to={href} className={classes}>
+      <Link href={href} className={classes}>
         {children}
       </Link>
     );

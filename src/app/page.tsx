@@ -1,4 +1,3 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
 import { Section } from "@/components/ui/section";
 import { CardLink } from "@/components/ui/card";
 import { GitHubIcon, LinkedInIcon, PenIcon, MailIcon } from "@/components/icons";
@@ -9,12 +8,9 @@ import {
   projects,
   socialLinks,
 } from "@/lib/data";
+import Image from "next/image";
 
-export const Route = createFileRoute("/")({
-  component: Home,
-});
-
-function Home() {
+export default function Home() {
   return (
     <main className="max-w-xl mx-auto py-16 px-6 text-sm">
       <header className="mb-12">
@@ -99,7 +95,7 @@ function Home() {
 
       {/* <section className="mt-12 flex justify-center">
         <Link
-          to="/writing"
+          href="/writing"
           className="text-foreground/50 hover:text-white transition-colors p-2"
           aria-label="Writing"
         >
