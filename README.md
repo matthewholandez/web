@@ -36,3 +36,15 @@ vercel link --repo
 
 vercel
 ```
+
+## Acknowledgements
+
+Homepage design inspired by (in no particular order):
+- [no-10.jp](https://www.no-10.jp/en/)
+- [howmuch.tax](https://www.howmuch.tax/)
+- the GoodNotes dotted paper background
+
+Development was assisted by OpenCode, an agentic AI tool, running the Google Gemini 3.1 Pro model.
+
+## License
+[MIT](LICENSE)
