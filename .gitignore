@@ -43,3 +43,6 @@ yarn-error.log*
 # Wrangler
 dist/
 .wrangler/
+
+# Next.js
+.next/

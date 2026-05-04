@@ -48,7 +48,7 @@ export const socialLinks = [
   },
   {
     name: "Writing",
-    href: "/writing",
+    href: "https://writing.mholandez.com",
     icon: "writing",
   },
   {
