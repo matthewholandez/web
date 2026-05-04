@@ -1,9 +1,0 @@
-{
-  "name": "blog",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "dev": "bundle exec jekyll serve --livereload",
-    "build": "bundle exec jekyll build"
-  }
-}
