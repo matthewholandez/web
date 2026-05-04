@@ -106,16 +106,7 @@ export default function Home() {
       <footer className="mt-12">
         <hr className="border-foreground/5" />
         <p className="mt-4 text-xs text-foreground/50">
-          Apr 2026. See the{" "}
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://howmuch.tax/"
-            className="underline font-bold"
-          >
-            inspiration
-          </a>{" "}
-          behind this site.
+          Apr 2026.
         </p>
       </footer>
     </main>
