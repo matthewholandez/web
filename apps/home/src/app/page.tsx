@@ -54,8 +54,8 @@ export default function Home() {
         </div>
       </Section>
 
-      {/* <Section title="Projects.">
-        <div className="grid grid-cols-2 gap-3">
+      <Section title="Projects.">
+        <div className="grid grid-cols-1 gap-3">
           {projects.map((project) => (
             <CardLink key={project.title} href={project.href}>
               <p className="font-medium group-hover:text-white">{project.title}</p>
@@ -65,7 +65,7 @@ export default function Home() {
             </CardLink>
           ))}
         </div>
-      </Section> */}
+      </Section>
 
       <Section title="More of me." className="">
         <div className="grid grid-cols-2 gap-3">

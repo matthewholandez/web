@@ -24,14 +24,24 @@ export const educationItems = [
 
 export const projects = [
   {
-    title: "🎙️ Podcast Analytics",
-    description: "Exploratory data analysis",
-    href: "https://github.com/matthewholandez",
+    title: "Wat Course",
+    description: "AI course advisor for UWaterloo students",
+    href: "https://github.com/matthewholandez/wat-course",
   },
   {
-    title: "💬 Wat Course",
-    description: "UW course advisor chatbot",
-    href: "https://github.com/matthewholandez",
+    title: "Intelligo",
+    description: "Translating web novels with AI",
+    href: "https://github.com/matthewholandez/intelligo",
+  },
+  {
+    title: "AllOfOurVotes.org",
+    description: "Visualizing UN voting data",
+    href: "https://allofourvotes.org",
+  },
+  {
+    title: "Showdown",
+    description: "Eval harness for LLM system prompts",
+    href: "https://github.com/matthewholandez/showdown",
   },
 ];
 
