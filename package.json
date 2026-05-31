@@ -6,9 +6,8 @@
     "apps/*"
   ],
   "scripts": {
-    "dev": "concurrently \"npm run dev:home\" \"npm run dev:blog\"",
-    "dev:home": "npm run dev -w home",
-    "dev:blog": "npm run dev -w blog"
+    "dev": "npm run dev:home",
+    "dev:home": "npm run dev -w home"
   },
   "devDependencies": {
     "concurrently": "^9.2.1"
