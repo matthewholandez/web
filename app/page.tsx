@@ -10,6 +10,34 @@ const phrases = [
   "MattGPT",
 ];
 
+// Generates the reel-roll keyframes from phrases.length, so adding or
+// removing a phrase above is all that's needed — no CSS to update.
+function buildReelKeyframes(count: number) {
+  const items = count + 1; // track has a duplicate of phrases[0] appended for a seamless loop
+  const holdFraction = 0.75; // hold each phrase for 75% of its time slot, then snap
+  const stops = ["0% { transform: translateY(0%); }"];
+
+  for (let i = 0; i < count; i++) {
+    const segStart = (i / count) * 100;
+    const segEnd = ((i + 1) / count) * 100;
+    const holdEnd = segStart + (segEnd - segStart) * holdFraction;
+    const currentPos = (i / items) * 100;
+    const nextPos = ((i + 1) / items) * 100;
+
+    stops.push(
+      `${holdEnd.toFixed(3)}% { transform: translateY(-${currentPos.toFixed(3)}%); }`,
+    );
+    stops.push(
+      `${segEnd.toFixed(3)}% { transform: translateY(-${nextPos.toFixed(3)}%); }`,
+    );
+  }
+
+  return `@keyframes reel-roll { ${stops.join(" ")} }`;
+}
+
+const reelKeyframes = buildReelKeyframes(phrases.length);
+const reelDuration = `${phrases.length * 2}s`;
+
 const projects = [
   {
     name: "Intelligo",
@@ -48,12 +76,13 @@ export default function Home() {
         <span aria-hidden="true">
           I am{" "}
           <span className="reel">
+            <style>{reelKeyframes}</style>
             <span className="reelSizer">
               {phrases.map((phrase) => (
                 <span key={phrase}>{phrase}</span>
               ))}
             </span>
-            <span className="reelTrack">
+            <span className="reelTrack" style={{ animationDuration: reelDuration }}>
               {[...phrases, phrases[0]].map((phrase, i) => (
                 <span key={i}>{phrase}</span>
               ))}

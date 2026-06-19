@@ -88,39 +88,12 @@ button:focus-visible {
   display: flex;
   flex-direction: column;
   white-space: nowrap;
-  animation: reel-roll 10s ease-in-out infinite;
-}
-
-/* translateY % is relative to the track's own height (5 stacked
-   phrases), so one phrase-height step is 100% / 5 = 20%. */
-@keyframes reel-roll {
-  0% {
-    transform: translateY(0);
-  }
-  20% {
-    transform: translateY(0);
-  }
-  25% {
-    transform: translateY(-20%);
-  }
-  45% {
-    transform: translateY(-20%);
-  }
-  50% {
-    transform: translateY(-40%);
-  }
-  70% {
-    transform: translateY(-40%);
-  }
-  75% {
-    transform: translateY(-60%);
-  }
-  95% {
-    transform: translateY(-60%);
-  }
-  100% {
-    transform: translateY(-80%);
-  }
+  /* @keyframes reel-roll and animation-duration are generated in
+     page.tsx from phrases.length, since the stop positions depend
+     on the number of phrases. */
+  animation-name: reel-roll;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
