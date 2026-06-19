@@ -7,6 +7,7 @@ const phrases = [
   "a shawarma enjoyer",
   "a web novel reader",
   "a cat lover",
+  "MattGPT",
 ];
 
 const projects = [
