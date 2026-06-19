@@ -145,7 +145,7 @@ export default function Home() {
         ))}
       </div>
 
-      <div className="contact">
+      <nav className="contact" aria-label="Contact links">
         <a
           className="contactIcon"
           href="mailto:mholandez@uwaterloo.ca"
@@ -171,7 +171,7 @@ export default function Home() {
         >
           <Linkedin size={20} />
         </a>
-      </div>
+      </nav>
     </main>
   );
 }
