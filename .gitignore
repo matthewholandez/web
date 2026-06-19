@@ -13,10 +13,9 @@
 # testing
 /coverage
 
-# tanstack start
-/.output/
-/.vinxi/
-/.tanstack/
+# next.js
+/.next/
+/out/
 
 # production
 /build
@@ -39,10 +38,4 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
-
-# Wrangler
-dist/
-.wrangler/
-
-# Next.js
-.next/
+next-env.d.ts

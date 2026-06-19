@@ -1,0 +1,221 @@
+:root {
+  --bg: #ffffff;
+  --text: #111111;
+  --muted: #666666;
+  --accent: #0b132b;
+
+  color-scheme: light only;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 120px 24px 64px;
+}
+
+@media (max-width: 480px) {
+  .page {
+    padding-top: 64px;
+  }
+}
+
+/* Signature */
+
+.signature {
+  display: block;
+  height: 32px;
+  width: auto;
+  margin-bottom: 24px;
+}
+
+/* Hero */
+
+.hero {
+  margin: 0;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.reel {
+  position: relative;
+  display: inline-block;
+  height: 1.2em;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+.reelSizer {
+  visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+}
+
+.reelTrack {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+  animation: reel-roll 10s ease-in-out infinite;
+}
+
+/* translateY % is relative to the track's own height (5 stacked
+   phrases), so one phrase-height step is 100% / 5 = 20%. */
+@keyframes reel-roll {
+  0% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-20%);
+  }
+  45% {
+    transform: translateY(-20%);
+  }
+  50% {
+    transform: translateY(-40%);
+  }
+  70% {
+    transform: translateY(-40%);
+  }
+  75% {
+    transform: translateY(-60%);
+  }
+  95% {
+    transform: translateY(-60%);
+  }
+  100% {
+    transform: translateY(-80%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reelTrack {
+    animation: none;
+  }
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Info lines */
+
+.infoLines {
+  margin-top: 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.infoLine {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+  font-weight: 400;
+  width: fit-content;
+}
+
+.infoLine:hover .infoLineText {
+  text-decoration: underline;
+}
+
+.infoIcon {
+  height: 20px;
+  width: auto;
+  flex-shrink: 0;
+}
+
+/* Projects */
+
+.projects {
+  margin-top: 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.project {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.projectName {
+  font-size: 1.0625rem;
+  font-weight: 500;
+  width: fit-content;
+}
+
+.projectName:hover {
+  text-decoration: underline;
+}
+
+.projectDesc {
+  font-size: 0.9375rem;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+/* Contact */
+
+.contact {
+  margin-top: 56px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.contactIcon {
+  display: inline-flex;
+  color: var(--muted);
+  transition: color 150ms;
+}
+
+.contactIcon:hover {
+  color: var(--accent);
+}

@@ -1,50 +1,36 @@
-<div align="center">
-    <img src="apps/home/public/android-chrome-192x192.png"
-        alt="mholandez" width="100" />
-    <h1>mholandez.com</h1>
-    <a href="https://mholandez.com">
-      Matthew's personal website
-    </a>
-</div>
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Structure
+## Getting Started
 
-- **Homepage** located in `apps/home`, a Next.js application
-- **Blog** located in `apps/blog`, built with Jekyll
-
-Both are hosted on [Vercel](https://vercel.com/).
-
-## Start
+First, run the development server:
 
 ```bash
 npm run dev
-
-# Or, to start only the homepage
-npm run dev:home
-
-# Or, to start only the blog
-npm run dev:blog
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-## Deploy
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-Deployment is made simple with Vercel's monorepo support.
-Install the [Vercel CLI](https://vercel.com/docs/cli) first.
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-```bash
-vercel link --repo
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-vercel
-```
+## Learn More
 
-## Acknowledgements
+To learn more about Next.js, take a look at the following resources:
 
-Homepage design inspired by (in no particular order):
-- [no-10.jp](https://www.no-10.jp/en/)
-- [howmuch.tax](https://www.howmuch.tax/)
-- the GoodNotes dotted paper background
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-Development was assisted by OpenCode, an agentic AI tool, running the Google Gemini 3.1 Pro model.
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## License
-[MIT](LICENSE)
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
