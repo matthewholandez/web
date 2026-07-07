@@ -1,0 +1,228 @@
+/* Styles for the /time countdown route.
+   Everything is scoped under `.time-remaining` so the dark, inverted-monochrome
+   theme (and the Neue Montreal font) stay contained to this route and never leak
+   into the light homepage — the App Router root layout owns <html>/<body>, so the
+   dark surface is rendered by this full-viewport wrapper instead of on <body>. */
+
+.time-remaining {
+  /* Palette tokens (--paper/--ink/--muted/--faint) are inherited from :root, which
+     is now the site-wide dark monochrome. This route is the centered countdown
+     variant: one weight (Semibold), hierarchy by scale/value/tracking. */
+  min-height: 100dvh;
+  background: var(--paper);
+  color: var(--ink);
+  font-weight: 600;
+  text-rendering: optimizeLegibility;
+}
+
+.time-remaining *,
+.time-remaining *::before,
+.time-remaining *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.time-remaining .main {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(2.5rem, 8vh, 5.5rem);
+  padding: 2rem 1.25rem;
+  text-align: center;
+}
+
+/* ---- eyebrow ---------------------------------------------------------- */
+
+.time-remaining .eyebrow {
+  font-size: clamp(0.68rem, 1.4vw, 0.82rem);
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-left: 0.42em; /* optical: balance the trailing letter-spacing */
+}
+
+/* ---- the readout ------------------------------------------------------ */
+
+.time-remaining .readout {
+  --gap: clamp(0.65rem, 4.5vw, 2.75rem);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(--gap);
+  max-width: 100%;
+}
+
+.time-remaining .readout--pending {
+  min-height: calc(clamp(3.5rem, 17vw, 13rem) + 3rem);
+}
+
+.time-remaining .cell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.time-remaining .num {
+  font-size: clamp(3.5rem, 17vw, 13rem);
+  line-height: 0.86;
+  letter-spacing: -0.045em;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+.time-remaining .sep {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: clamp(3.5rem, 17vw, 13rem);
+  line-height: 0.86;
+  color: var(--faint);
+  pointer-events: none;
+  /* Center the square-dot colon horizontally in the gap and lift it to sit
+     on the numerals' optical midline. */
+  transform: translate(calc(var(--gap) / 2 + 50%), -0.12em);
+}
+
+.time-remaining .sep--blink {
+  animation: blink 1s steps(1, end) infinite;
+}
+
+@keyframes blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0.16;
+  }
+}
+
+.time-remaining .label {
+  margin-top: clamp(0.7rem, 2vh, 1.25rem);
+  font-size: clamp(0.6rem, 1.3vw, 0.76rem);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ---- meta ------------------------------------------------------------- */
+
+.time-remaining .meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.time-remaining .meta__line {
+  font-size: clamp(0.85rem, 2vw, 1.05rem);
+  letter-spacing: 0.01em;
+  color: var(--muted);
+}
+
+.time-remaining .meta__line--strong {
+  color: var(--ink);
+}
+
+/* ---- footer ----------------------------------------------------------- */
+
+.time-remaining .footer {
+  position: fixed;
+  left: 50%;
+  bottom: clamp(1.25rem, 4vh, 2.5rem);
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.time-remaining .footer__btn {
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0.15rem 0.1rem;
+  font: inherit;
+  font-size: clamp(0.68rem, 1.4vw, 0.78rem);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.time-remaining .footer__btn:hover,
+.time-remaining .footer__btn:focus-visible {
+  color: var(--ink);
+}
+
+.time-remaining .footer__dot {
+  width: 3px;
+  height: 3px;
+  background: var(--faint);
+}
+
+/* ---- about modal ------------------------------------------------------ */
+
+.time-remaining .modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(0, 0, 0, 0.72);
+  z-index: 10;
+  animation: fade 0.15s ease;
+}
+
+.time-remaining .modal__panel {
+  width: min(30rem, 100%);
+  background: #0d0d0d;
+  border: 1px solid var(--faint);
+  padding: clamp(1.75rem, 4vw, 2.5rem);
+  text-align: left;
+}
+
+.time-remaining .modal__title {
+  font-size: clamp(1.1rem, 3vw, 1.4rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-bottom: 1rem;
+}
+
+.time-remaining .modal__body {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  line-height: 1.55;
+  color: var(--muted);
+  margin-bottom: 1.75rem;
+}
+
+.time-remaining .modal__close {
+  padding: 0;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ---- accessibility ---------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .time-remaining .sep--blink {
+    animation: none;
+  }
+  .time-remaining .modal {
+    animation: none;
+  }
+}
