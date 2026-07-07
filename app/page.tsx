@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Mail } from "lucide-react";
 import { Github, Linkedin } from "./brand-icons";
 
@@ -73,25 +74,26 @@ export default function Home() {
         priority
       />
       <h1 className="hero">
-        <span aria-hidden="true">
-          I am{" "}
-          <span className="reel">
-            <style>{reelKeyframes}</style>
-            <span className="reelSizer">
-              {phrases.map((phrase) => (
-                <span key={phrase}>{phrase}</span>
-              ))}
-            </span>
-            <span className="reelTrack" style={{ animationDuration: reelDuration }}>
-              {[...phrases, phrases[0]].map((phrase, i) => (
-                <span key={i}>{phrase}</span>
-              ))}
-            </span>
+        <span className="heroLead" aria-hidden="true">
+          I am
+        </span>
+        <span className="reel" aria-hidden="true">
+          <style>{reelKeyframes}</style>
+          <span className="reelSizer">
+            {phrases.map((phrase) => (
+              <span key={phrase}>{phrase}</span>
+            ))}
+          </span>
+          <span className="reelTrack" style={{ animationDuration: reelDuration }}>
+            {[...phrases, phrases[0]].map((phrase, i) => (
+              <span key={i}>{phrase}</span>
+            ))}
           </span>
         </span>
         <span className="srOnly">I am a Waterloo student.</span>
       </h1>
 
+      <p className="eyebrow">Currently</p>
       <div className="infoLines">
         <a
           className="infoLine"
@@ -129,6 +131,7 @@ export default function Home() {
         </a>
       </div>
 
+      <p className="eyebrow">Selected work</p>
       <div className="projects">
         {projects.map((project) => (
           <div className="project" key={project.name}>
@@ -144,6 +147,10 @@ export default function Home() {
           </div>
         ))}
       </div>
+
+      <Link className="timeLink" href="/time">
+        Time remaining <span aria-hidden="true">→</span>
+      </Link>
 
       <nav className="contact" aria-label="Contact links">
         <a

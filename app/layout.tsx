@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
-import { GeistSans } from "geist/font/sans";
+import type { Metadata, Viewport } from "next";
+import { neue } from "./fonts";
 import "./globals.css";
 
 const title = "Matthew Holandez";
@@ -53,6 +53,10 @@ export const metadata: Metadata = {
   manifest: "/site.webmanifest",
 };
 
+export const viewport: Viewport = {
+  themeColor: "#050505",
+};
+
 const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
@@ -72,7 +76,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={GeistSans.variable} style={{ colorScheme: "light" }}>
+    <html lang="en" className={neue.variable} style={{ colorScheme: "dark" }}>
       <body>
         <script
           type="application/ld+json"

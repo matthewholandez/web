@@ -1,10 +1,12 @@
 :root {
-  --bg: #ffffff;
-  --text: #111111;
-  --muted: #666666;
-  --accent: #0b132b;
+  /* Site-wide dark monochrome. Hierarchy comes from value, scale, and tracking —
+     never from an accent hue. Shared with the /time countdown route. */
+  --paper: #050505;
+  --ink: #f6f6f4;
+  --muted: #8a8a88;
+  --faint: #4a4a48;
 
-  color-scheme: light only;
+  color-scheme: dark;
 }
 
 * {
@@ -13,16 +15,18 @@
 
 html,
 body {
-  background: var(--bg);
-  color: var(--text);
+  background: var(--paper);
+  color: var(--ink);
 }
 
 body {
   margin: 0;
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-family: var(--font-neue), ui-sans-serif, system-ui, -apple-system, sans-serif;
   font-size: 16px;
   font-weight: 400;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 a {
@@ -32,14 +36,14 @@ a {
 
 a:focus-visible,
 button:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
 }
 
 .page {
   max-width: 640px;
   margin: 0 auto;
-  padding: 120px 24px 64px;
+  padding: 120px 24px 96px;
 }
 
 @media (max-width: 480px) {
@@ -48,30 +52,44 @@ button:focus-visible {
   }
 }
 
-/* Signature */
+/* Signature — black brushstroke wordmark inverted to white ink on the dark page. */
 
 .signature {
   display: block;
-  height: 32px;
+  height: 38px;
   width: auto;
-  margin-bottom: 24px;
+  margin-bottom: 40px;
+  filter: invert(1);
 }
 
-/* Hero */
+/* Hero — the signature moment. A small lead line ("I am") over a giant Extrabold
+   reel that ticks through identities, echoing the /time countdown's big readout. */
 
 .hero {
   margin: 0;
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
-  font-weight: 500;
-  line-height: 1.2;
+}
+
+.heroLead {
+  display: block;
+  font-size: 1.125rem;
+  font-weight: 400;
+  color: var(--muted);
+  letter-spacing: 0.01em;
+  margin-bottom: 6px;
 }
 
 .reel {
   position: relative;
-  display: inline-block;
-  height: 1.2em;
+  display: block;
+  height: 1.15em;
   overflow: hidden;
-  vertical-align: bottom;
+  /* Max is capped so the longest phrase ("a shawarma enjoyer") fits the 640px
+     container at desktop width — the reel is overflow:hidden and single-line. */
+  font-size: clamp(1.9rem, 7.5vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: var(--ink);
 }
 
 .reelSizer {
@@ -114,10 +132,21 @@ button:focus-visible {
   border: 0;
 }
 
+/* Section eyebrow — small uppercase label marking a real group (Currently, Selected
+   work), reusing the /time label treatment. Sets the top rhythm for its section. */
+
+.eyebrow {
+  margin: 64px 0 18px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
 /* Info lines */
 
 .infoLines {
-  margin-top: 56px;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -126,9 +155,10 @@ button:focus-visible {
 .infoLine {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   font-size: 1rem;
   font-weight: 400;
+  color: var(--ink);
   width: fit-content;
 }
 
@@ -136,16 +166,20 @@ button:focus-visible {
   text-decoration: underline;
 }
 
+/* Raster logos normalized to clean circular marks so they read on black
+   (fixes the DeepCode white-background chip). */
 .infoIcon {
   height: 20px;
-  width: auto;
+  width: 20px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: inset 0 0 0 1px var(--faint);
   flex-shrink: 0;
 }
 
 /* Projects */
 
 .projects {
-  margin-top: 56px;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -160,7 +194,8 @@ button:focus-visible {
 
 .projectName {
   font-size: 1.0625rem;
-  font-weight: 500;
+  font-weight: 600;
+  color: var(--ink);
   width: fit-content;
 }
 
@@ -174,10 +209,28 @@ button:focus-visible {
   color: var(--muted);
 }
 
+/* Time link */
+
+.timeLink {
+  margin-top: 64px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  font-size: 0.875rem;
+  color: var(--muted);
+  transition: color 150ms;
+}
+
+.timeLink:hover {
+  color: var(--ink);
+  text-decoration: underline;
+}
+
 /* Contact */
 
 .contact {
-  margin-top: 56px;
+  margin-top: 64px;
   display: flex;
   align-items: center;
   gap: 20px;
@@ -190,5 +243,5 @@ button:focus-visible {
 }
 
 .contactIcon:hover {
-  color: var(--accent);
+  color: var(--ink);
 }
