@@ -37,7 +37,7 @@ function buildReelKeyframes(count: number) {
 }
 
 const reelKeyframes = buildReelKeyframes(phrases.length);
-const reelDuration = `${phrases.length * 2}s`;
+const reelDuration = `${phrases.length * 3.5}s`;
 
 const projects = [
   {
@@ -148,6 +148,7 @@ export default function Home() {
         ))}
       </div>
 
+      <p className="eyebrow">Other</p>
       <Link className="timeLink" href="/time">
         Time remaining <span aria-hidden="true">→</span>
       </Link>

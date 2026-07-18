@@ -133,7 +133,7 @@ button:focus-visible {
 }
 
 /* Section eyebrow — small uppercase label marking a real group (Currently, Selected
-   work), reusing the /time label treatment. Sets the top rhythm for its section. */
+   work, Other), reusing the /time label treatment. Sets the top rhythm for its section. */
 
 .eyebrow {
   margin: 64px 0 18px;
@@ -212,7 +212,6 @@ button:focus-visible {
 /* Time link */
 
 .timeLink {
-  margin-top: 64px;
   display: inline-flex;
   align-items: center;
   gap: 6px;

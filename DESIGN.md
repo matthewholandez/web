@@ -115,14 +115,14 @@ than hand-writing markup.
   its own full-width line** that ticks through `phrases` like a mechanical display (the
   homepage's echo of the `/time` readout). The `@keyframes reel-roll` is **generated in
   JS** (`buildReelKeyframes` in `page.tsx`) from `phrases.length`, so adding/removing a
-  phrase needs no CSS edits. Duration = `phrases.length * 2s`. The reel is
+  phrase needs no CSS edits. Duration = `phrases.length * 3.5s`. The reel is
   `overflow: hidden` — keep the max clamp small enough that the longest phrase fits the
   container without clipping. Respects `prefers-reduced-motion: reduce` (animation
   disabled); a visually-hidden `.srOnly` sentence carries the accessible text.
 - **Eyebrow** (`.eyebrow`) — small uppercase `--muted` label (weight 600, tracking
   `0.28em`) marking a real group. Only used where content genuinely is a category
-  ("Currently", "Selected work"); it also sets that section's top rhythm. Not decoration
-  — don't add one without a group under it.
+  ("Currently", "Selected work", "Other"); it also sets that section's top rhythm. Not
+  decoration — don't add one without a group under it.
 - **Info lines** (`.infoLines` / `.infoLine`) — icon + label rows linking to
   affiliations. The raster logos are normalized to **clean 20px circular marks**
   (`.infoIcon`: `border-radius: 50%`, `object-fit: cover`, `1px --faint` inset ring) so
@@ -131,9 +131,9 @@ than hand-writing markup.
 - **Projects** (`.projects` / `.project`) — name (weight 600) + muted description on a
   baseline-aligned, wrapping flex row. Project name underlines on hover.
 - **Time link** (`.timeLink`) — a discreet `next/link` text link ("Time remaining →")
-  to the `/time` countdown page, between projects and contact. Quiet: `0.875rem`,
-  `--muted`, no border/fill; underlines and shifts to `--ink` on hover. The trailing
-  `→` is `aria-hidden`.
+  to the `/time` countdown page, under the "Other" eyebrow (between Selected work and
+  contact). Quiet: `0.875rem`, `--muted`, no border/fill; underlines and shifts to
+  `--ink` on hover. The trailing `→` is `aria-hidden`.
 - **Contact** (`.contact` / `.contactIcon`) — a `<nav>` of 20px icon links. Icons are
   `--muted`, transitioning to `--ink` on hover over `150ms`.
 
