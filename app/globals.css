@@ -1,12 +1,12 @@
 :root {
-  /* Site-wide dark monochrome. Hierarchy comes from value, scale, and tracking —
-     never from an accent hue. Shared with the /time countdown route. */
-  --paper: #050505;
-  --ink: #f6f6f4;
-  --muted: #8a8a88;
-  --faint: #4a4a48;
+  /* Light monochrome. Hierarchy is almost none — value shifts only.
+     Shared with the /time countdown route. */
+  --paper: #fafafa;
+  --ink: #111111;
+  --muted: #8a8a8a;
+  --faint: #e8e8e8;
 
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 * {
@@ -22,8 +22,10 @@ body {
 body {
   margin: 0;
   font-family: var(--font-neue), ui-sans-serif, system-ui, -apple-system, sans-serif;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 400;
+  line-height: 1.55;
+  letter-spacing: -0.005em;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -34,6 +36,11 @@ a {
   text-decoration: none;
 }
 
+a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
 a:focus-visible,
 button:focus-visible {
   outline: 2px solid var(--ink);
@@ -41,198 +48,71 @@ button:focus-visible {
 }
 
 .page {
-  max-width: 640px;
+  max-width: 28rem;
   margin: 0 auto;
-  padding: 120px 24px 96px;
+  padding: 6rem 1.5rem 5rem;
 }
 
 @media (max-width: 480px) {
   .page {
-    padding-top: 64px;
+    padding-top: 3.5rem;
   }
 }
 
-/* Signature — black brushstroke wordmark inverted to white ink on the dark page. */
+/* Name — semantic h1, visually just the first line of body type. */
 
-.signature {
-  display: block;
-  height: 38px;
-  width: auto;
-  margin-bottom: 40px;
-  filter: invert(1);
-}
-
-/* Hero — the signature moment. A small lead line ("I am") over a giant Extrabold
-   reel that ticks through identities, echoing the /time countdown's big readout. */
-
-.hero {
+.name {
   margin: 0;
-}
-
-.heroLead {
-  display: block;
-  font-size: 1.125rem;
+  font-size: inherit;
   font-weight: 400;
-  color: var(--muted);
-  letter-spacing: 0.01em;
-  margin-bottom: 6px;
-}
-
-.reel {
-  position: relative;
-  display: block;
-  height: 1.15em;
-  overflow: hidden;
-  /* Max is capped so the longest phrase ("a shawarma enjoyer") fits the 640px
-     container at desktop width — the reel is overflow:hidden and single-line. */
-  font-size: clamp(1.9rem, 7.5vw, 3.25rem);
-  font-weight: 800;
-  line-height: 1.15;
-  letter-spacing: -0.03em;
+  line-height: inherit;
+  letter-spacing: inherit;
   color: var(--ink);
 }
 
-.reelSizer {
-  visibility: hidden;
-  display: flex;
-  flex-direction: column;
-  white-space: nowrap;
-}
-
-.reelTrack {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: flex;
-  flex-direction: column;
-  white-space: nowrap;
-  /* @keyframes reel-roll and animation-duration are generated in
-     page.tsx from phrases.length, since the stop positions depend
-     on the number of phrases. */
-  animation-name: reel-roll;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .reelTrack {
-    animation: none;
-  }
-}
-
-.srOnly {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-/* Section eyebrow — small uppercase label marking a real group (Currently, Selected
-   work, Other), reusing the /time label treatment. Sets the top rhythm for its section. */
-
-.eyebrow {
-  margin: 64px 0 18px;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
+.tagline {
+  margin: 0.15rem 0 0;
   color: var(--muted);
 }
-
-/* Info lines */
-
-.infoLines {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.infoLine {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 1rem;
-  font-weight: 400;
-  color: var(--ink);
-  width: fit-content;
-}
-
-.infoLine:hover .infoLineText {
-  text-decoration: underline;
-}
-
-/* Raster logos normalized to clean circular marks so they read on black
-   (fixes the DeepCode white-background chip). */
-.infoIcon {
-  height: 20px;
-  width: 20px;
-  border-radius: 50%;
-  object-fit: cover;
-  box-shadow: inset 0 0 0 1px var(--faint);
-  flex-shrink: 0;
-}
-
-/* Projects */
 
 .projects {
+  margin-top: 2.5rem;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 0.55rem;
 }
 
 .project {
+  margin: 0;
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  gap: 8px;
-}
-
-.projectName {
-  font-size: 1.0625rem;
-  font-weight: 600;
-  color: var(--ink);
-  width: fit-content;
-}
-
-.projectName:hover {
-  text-decoration: underline;
+  gap: 0.45rem 0.65rem;
 }
 
 .projectDesc {
-  font-size: 0.9375rem;
-  font-weight: 400;
   color: var(--muted);
 }
-
-/* Time link */
 
 .timeLink {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 0.35rem;
+  margin-top: 2.5rem;
   width: fit-content;
-  font-size: 0.875rem;
   color: var(--muted);
   transition: color 150ms;
 }
 
 .timeLink:hover {
   color: var(--ink);
-  text-decoration: underline;
 }
 
-/* Contact */
-
 .contact {
-  margin-top: 64px;
+  margin-top: 2.5rem;
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 1.1rem;
 }
 
 .contactIcon {
@@ -243,4 +123,12 @@ button:focus-visible {
 
 .contactIcon:hover {
   color: var(--ink);
+  text-decoration: none;
+}
+
+.signature {
+  display: block;
+  height: 32px;
+  width: auto;
+  margin-top: 2.5rem;
 }

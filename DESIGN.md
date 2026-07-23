@@ -1,17 +1,18 @@
 # Design System
 
 This is the design reference for **mholandez.com** — a personal site for Matthew
-Holandez. The aesthetic is **inverted monochrome**: white ink on a near-black page,
-set in **Neue Montreal**, with type pushed to a bold, poppy scale. There is no
-component library and no UI framework beyond the basics; everything is hand-authored
-plain CSS in `app/globals.css` (homepage) and `app/time/time.css` (the `/time` route).
+Holandez. The aesthetic is **extreme light minimalism**: dark ink on an off-white
+page, set entirely in **Neue Montreal**, with almost no typographic hierarchy.
+There is no component library and no UI framework beyond the basics; everything is
+hand-authored plain CSS in `app/globals.css` (homepage) and `app/time/time.css`
+(the `/time` route).
 
-If you're picking this up as a designer, the guiding principle is **restraint with one
-loud voice**. The page is quiet and typographic — no shadows, no gradients, no borders,
-no accent hue — and spends all of its boldness in one place: **scale and contrast**. The
-homepage hero and the `/time` countdown are two versions of the same idea — a giant,
-mechanical, monochrome counter — and that kinship is what makes the site feel like one
-thing. Hierarchy comes from **value, scale, and letter-spacing**, never from color.
+If you're picking this up as a designer, the guiding principle is **whisper, don't
+shout**. The page reads like a short CV or calling card — no shadows, no gradients,
+no borders, no accent hue, no section labels, and **no visual headings**. The name
+is a semantic `<h1>` but is styled identically to body type. Hierarchy comes only
+from **value** (`--ink` vs `--muted`) and spacing — never from scale, weight, or
+color.
 
 ---
 
@@ -23,7 +24,7 @@ thing. Hierarchy comes from **value, scale, and letter-spacing**, never from col
   installed via PostCSS but the page is styled with semantic class names and
   raw CSS — keep new styling in `globals.css` to match.)
 - **Neue Montreal** via `next/font/local`, registered once in `app/fonts.ts` (exposed
-  as `--font-neue`, applied to `<html>` in `app/layout.tsx`). Three weight-mapped cuts
+  as `--font-neue`, applied to `<html>` in `app/layout.tsx`). Two weight-mapped cuts
   are bundled from `app/fonts/`, so `font-weight` picks the cut.
 - **lucide-react** for the mail icon; brand icons (GitHub, LinkedIn) are
   hand-inlined SVGs in `app/brand-icons.tsx`.
@@ -33,23 +34,23 @@ thing. Hierarchy comes from **value, scale, and letter-spacing**, never from col
 ## Color
 
 Defined as CSS custom properties on `:root` in `app/globals.css` and shared by every
-route. The site is **dark-only** (`color-scheme: dark`) — there is intentionally no
-light mode and no accent hue.
+route. The site is **light-only** (`color-scheme: light`) — there is intentionally no
+dark mode and no accent hue.
 
 | Token     | Value     | Role                                                       |
 | --------- | --------- | ---------------------------------------------------------- |
-| `--paper` | `#050505` | Page background (near-black)                               |
-| `--ink`   | `#f6f6f4` | Primary text, hero, active hover state                     |
-| `--muted` | `#8a8a88` | Secondary text — eyebrows, descriptions, resting icons     |
-| `--faint` | `#4a4a48` | Dividers, icon rings, the `/time` colon separators         |
+| `--paper` | `#fafafa` | Page background (off-white)                                |
+| `--ink`   | `#111111` | Primary text, active hover state                           |
+| `--muted` | `#8a8a8a` | Secondary text — tagline, descriptions, resting icons      |
+| `--faint` | `#e8e8e8` | Soft marks (footer dot, `/time` colon separators)          |
 
 Usage rules:
 
 - Primary copy is `--ink`; supporting/secondary copy is `--muted`.
 - Hover promotes `--muted` → `--ink`. That value shift *is* the interaction language —
   don't introduce a color for it.
-- No accent hue anywhere. If you feel a design needs a pop, reach for **scale or
-  weight**, not color.
+- No accent hue anywhere. If you feel a design needs a pop, **don't** — add whitespace
+  or cut something instead.
 - Brand/theme colors (`theme_color`, `background_color` in `public/site.webmanifest`,
   and the OG image background) are all `--paper`.
 
@@ -59,94 +60,73 @@ Usage rules:
 
 - **Typeface:** Neue Montreal, exposed through the `--font-neue` CSS variable. Fallback
   stack: `ui-sans-serif, system-ui, -apple-system, sans-serif`.
-- **Base:** 16px, weight 400, on the `body`.
-- **Weights in use — three cuts** (`app/fonts.ts` maps each to a `font-weight`):
-  - **400 Regular** — body, descriptions, the "I am" lead.
-  - **600 Semibold** — emphasis: project names, section eyebrows. Also the single
-    weight of the entire `/time` page.
-  - **800 Extrabold** — reserved for the giant homepage hero reel.
+- **Base:** 15px, weight 400, line-height 1.55, tracking `-0.005em` on the `body`.
+- **Weights in use — two cuts** (`app/fonts.ts` maps each to a `font-weight`):
+  - **400 Regular** — everything on the homepage, and all secondary copy on `/time`.
+  - **600 Semibold** — reserved for the `/time` countdown numerals and separators.
 
-| Element              | Size                              | Weight | Color     |
-| -------------------- | --------------------------------- | ------ | --------- |
-| Hero reel (`.reel`)  | `clamp(2rem, 8vw, 3.75rem)`, tracking `-0.03em` | 800 | `--ink`   |
-| Hero lead (`.heroLead`) | `1.125rem`                     | 400    | `--muted` |
-| Eyebrow (`.eyebrow`) | `0.72rem`, tracking `0.28em`, uppercase | 600 | `--muted` |
-| Info line            | `1rem`                            | 400    | `--ink`   |
-| Project name         | `1.0625rem`                       | 600    | `--ink`   |
-| Project description  | `0.9375rem`                       | 400    | `--muted` |
-| Body / default       | `1rem` (16px)                     | 400    | `--ink`   |
+| Element              | Size       | Weight | Color     |
+| -------------------- | ---------- | ------ | --------- |
+| Name (`.name`)       | inherit (15px) | 400 | `--ink` |
+| Tagline              | inherit    | 400    | `--muted` |
+| Body / links / projects | inherit | 400 | `--ink` / `--muted` for descriptions |
+| Time link            | inherit    | 400    | `--muted` |
 
-The hero is the only fluid (responsive) type — everything else is fixed-size. Keep the
-Extrabold cut for the hero only; over-using 800 flattens the hierarchy.
+There are **no display sizes and no visual headings** on the homepage. Do not introduce
+a larger or heavier treatment for the name, section titles, or project names — keep
+the page flat. The Extrabold cut is intentionally unused and not registered.
 
 ---
 
 ## Layout & spacing
 
-- **Container:** `.page` — `max-width: 640px`, centered (`margin: 0 auto`),
-  padding `120px 24px 96px`. On screens ≤480px the top padding drops to `64px`.
-- **Single column, left-aligned.** The whole page is a vertical stack of sections.
-- **Section rhythm:** major sections are separated by `64px` — carried by the
-  `.eyebrow`'s `margin-top` where a section has one (Currently, Selected work), and by
-  `margin-top: 64px` on the time link and contact. Reuse `64px` for any new top-level
-  section.
-- **Intra-section gaps:** flexbox `gap` of `12px` (info lines), `16px` (projects),
-  `8px` (within a project row), `12–20px` (icon/text and contact spacing).
+- **Container:** `.page` — `max-width: 28rem`, centered (`margin: 0 auto`),
+  padding `6rem 1.5rem 5rem`. On screens ≤480px the top padding drops to `3.5rem`.
+- **Single column, left-aligned.** The whole page is a vertical stack of quiet text.
+- **Section rhythm:** major blocks are separated by `2.5rem` (`margin-top` on
+  projects, time link, contact, and signature). Reuse `2.5rem` for any new
+  top-level block.
+- **Intra-section gaps:** `0.55rem` between projects; `0.45rem 0.65rem` within a
+  project row; `1.1rem` between contact icons.
 - No grid, no cards, no containers-within-containers. Keep nesting flat.
+- No section eyebrows, category labels, or decorative rules — content flows as flat text.
 
 The single breakpoint is **480px** (`@media (max-width: 480px)`), used only to tighten
-the top padding. The layout is otherwise intrinsically responsive via `max-width` +
-fluid hero type.
+the top padding. The layout is otherwise intrinsically responsive via `max-width`.
 
 ---
 
 ## Components / patterns
 
 All class names are semantic and live in `app/globals.css`. The page (`app/page.tsx`)
-drives content from small data arrays (`phrases`, `projects`) — add items there rather
-than hand-writing markup.
+drives content from a small data array (`projects`) — add items there rather than
+hand-writing markup.
 
-- **Signature** (`.signature`) — `public/signature.png` (a black "MATTHEW."
-  brushstroke wordmark) rendered at 38px tall, `width: auto`, `filter: invert(1)` so it
-  reads as **white ink on the dark page**, `margin-bottom: 40px`. Loaded with `priority`
-  (it's the LCP element).
-- **Hero reel** (`.hero` / `.heroLead` / `.reel` / `.reelTrack` / `.reelSizer`) — the
-  signature moment. A small `--muted` "I am" lead sits over a **giant Extrabold reel on
-  its own full-width line** that ticks through `phrases` like a mechanical display (the
-  homepage's echo of the `/time` readout). The `@keyframes reel-roll` is **generated in
-  JS** (`buildReelKeyframes` in `page.tsx`) from `phrases.length`, so adding/removing a
-  phrase needs no CSS edits. Duration = `phrases.length * 3.5s`. The reel is
-  `overflow: hidden` — keep the max clamp small enough that the longest phrase fits the
-  container without clipping. Respects `prefers-reduced-motion: reduce` (animation
-  disabled); a visually-hidden `.srOnly` sentence carries the accessible text.
-- **Eyebrow** (`.eyebrow`) — small uppercase `--muted` label (weight 600, tracking
-  `0.28em`) marking a real group. Only used where content genuinely is a category
-  ("Currently", "Selected work", "Other"); it also sets that section's top rhythm. Not
-  decoration — don't add one without a group under it.
-- **Info lines** (`.infoLines` / `.infoLine`) — icon + label rows linking to
-  affiliations. The raster logos are normalized to **clean 20px circular marks**
-  (`.infoIcon`: `border-radius: 50%`, `object-fit: cover`, `1px --faint` inset ring) so
-  a logo on a white background doesn't read as a harsh chip on black. Text underlines on
-  row hover.
-- **Projects** (`.projects` / `.project`) — name (weight 600) + muted description on a
-  baseline-aligned, wrapping flex row. Project name underlines on hover.
+- **Name** (`.name`) — semantic `<h1>`, visually identical to body type. Single line.
+  This is deliberate: the page has no hero lockup.
+- **Tagline** (`.tagline`) — muted identity lines under the name: school, then
+  "Prev @ DeepCode" (DeepCode linked). Same class, tight `0.15rem` stack — one
+  identity block, not a separate section.
+- **Projects** (`.projects` / `.project`) — name + muted description on a wrapping
+  baseline row. Same weight/size as body; name underlines on hover.
 - **Time link** (`.timeLink`) — a discreet `next/link` text link ("Time remaining →")
-  to the `/time` countdown page, under the "Other" eyebrow (between Selected work and
-  contact). Quiet: `0.875rem`, `--muted`, no border/fill; underlines and shifts to
-  `--ink` on hover. The trailing `→` is `aria-hidden`.
-- **Contact** (`.contact` / `.contactIcon`) — a `<nav>` of 20px icon links. Icons are
-  `--muted`, transitioning to `--ink` on hover over `150ms`.
+  to the `/time` countdown page. Quiet: `--muted`, underlines and shifts to `--ink`
+  on hover. The trailing `→` is `aria-hidden`.
+- **Contact** (`.contact` / `.contactIcon`) — a `<nav>` of 18px icon links. Icons are
+  `--muted`, transitioning to `--ink` on hover over `150ms`. Stroke weight `1.75`.
+- **Signature** (`.signature`) — `public/signature.png` (dark "MATTHEW." brushstroke on
+  transparent) at the bottom of the page, 32px tall, `width: auto`, `margin-top: 2.5rem`.
+  No invert — the asset is already dark ink for the light page.
 
 ---
 
 ## Interaction & motion
 
-- **Hover:** links reveal an underline (info lines, project names, time link); icons
-  shift `--muted` → `--ink`. Keep hover affordances this subtle.
+- **Hover:** links underline (`text-underline-offset: 0.15em`); icons shift
+  `--muted` → `--ink`. Keep hover affordances this subtle.
 - **Focus:** a visible `2px solid var(--ink)` outline with `3px` offset on all focusable
   `a`/`button` (`:focus-visible`). Don't remove this.
-- **Transitions:** only color, `150ms`. The reel uses `ease-in-out`. There are no other
-  homepage animations.
+- **Transitions:** only color, `150ms`. There are no homepage animations.
 - **Reduced motion:** always honor `prefers-reduced-motion`. Any new motion must have a
   static fallback.
 
@@ -154,22 +134,21 @@ than hand-writing markup.
 
 ## Iconography
 
-- **Size:** 20px in the live UI.
-- **Style:** stroke-based, `stroke-width: 2`, `round` caps/joins, no fill —
+- **Size:** 18px in the live UI.
+- **Style:** stroke-based, `stroke-width: 1.75`, `round` caps/joins, no fill —
   consistent with lucide-react. Hand-authored brand icons in `app/brand-icons.tsx`
   follow the same `viewBox="0 0 24 24"` / `stroke="currentColor"` convention so they
-  inherit text color. Raster affiliation logos are the exception — masked to circular
-  marks (see Info lines).
+  inherit text color.
 - Line icons inherit `currentColor`; control their color via the parent's `color`.
+- No raster affiliation logos on the homepage.
 
 ---
 
 ## Accessibility
 
-- Dark-only, high contrast (`#f6f6f4` on `#050505`).
+- Light-only, high contrast (`#111111` on `#fafafa`).
 - Visible focus rings (above) — preserve them.
-- Decorative animated hero is `aria-hidden`; a screen-reader-only sentence carries the
-  real meaning.
+- The name is a semantic `<h1>` even though it is not visually enlarged.
 - All icon-only links have `aria-label`s; the contact group is a labeled
   `<nav aria-label="Contact links">`.
 - External links use `target="_blank"` + `rel="noopener noreferrer"`.
@@ -178,18 +157,18 @@ than hand-writing markup.
 
 ## The `/time` countdown page
 
-`/time` (`app/time/`) is the **centered countdown variant** of the same system — a
-full-screen live countdown to the end of the 1B term at Waterloo. It shares the site's
-palette (`:root` tokens) and typeface (`--font-neue`, inherited from `<html>`); it
-differs only in being centered and using a single weight.
+`/time` (`app/time/`) is the **one place scale is allowed** — a full-screen live
+countdown to the end of the 1B term at Waterloo. It shares the site's palette
+(`:root` tokens) and typeface (`--font-neue`, inherited from `<html>`); it differs by
+centering the readout and using Semibold for the numerals.
 
-- **One weight.** The whole page is Neue Montreal **Semibold (600)**; hierarchy comes
-  from scale, value, and tracking alone — never from mixing cuts.
+- **Weights.** Numerals/separators are Neue Montreal **Semibold (600)**; labels, meta,
+  and footer are **Regular (400)**. No uppercase tracked eyebrows.
 - **Scoping convention:** all styles live in `app/time/time.css`, every selector
   prefixed with `.time-remaining`. That wrapper (rendered in `app/time/layout.tsx`) is a
   full-viewport surface (`min-height: 100dvh`) that centers the readout. Keep any new
   `/time` styles under this prefix so they stay contained to the route.
-- **Key pieces:** `.readout`/`.cell`/`.num` (fluid `clamp(3.5rem, 17vw, 13rem)`
+- **Key pieces:** `.readout`/`.cell`/`.num` (fluid `clamp(2.75rem, 12vw, 8rem)`
   numerals, `tabular-nums`), a blinking `.sep--blink` colon on the minutes cell,
   `.meta` lines (business-days count + target), a fixed `.footer` with a
   "What is this?" button + "Home" link, and an accessible about `.modal`
@@ -203,26 +182,25 @@ differs only in being centered and using a single weight.
 
 ## Assets & metadata
 
+- **Signature:** `public/signature.png` — dark brushstroke "MATTHEW." wordmark on a
+  transparent background (2400×400). Used at the bottom of the homepage.
 - **Favicons / app icons:** in `public/` (`favicon.ico`, 16/32 PNGs,
   android-chrome 192/512, apple-touch-icon). Wired up in `app/layout.tsx`.
-- **Web manifest:** `public/site.webmanifest` — `--paper` (`#050505`) theme/background,
+- **Web manifest:** `public/site.webmanifest` — `--paper` (`#fafafa`) theme/background,
   `display: standalone`. `themeColor` is also set via the `viewport` export in
   `app/layout.tsx`.
 - **Open Graph image:** generated at build via `app/opengraph-image.tsx` (1200×630).
-  Mirrors the site look — name at 96px/weight 800 in `--ink` over `--paper`, tagline at
-  34px in `--muted`, both set in Neue Montreal (the `.otf`s are read from `app/fonts/`
-  and passed to `ImageResponse`). Keep it in sync with the page's type/color if those
-  change.
+  Mirrors the quiet homepage — name at 42px/weight 400 in `--ink` over `--paper`,
+  tagline at 28px in `--muted`, both set in Neue Montreal Regular. Keep it in sync
+  with the page's type/color if those change.
 - **Structured data:** `Person` JSON-LD injected in `app/layout.tsx`.
 
 ---
 
 ## Adding to the page — quick rules
 
-1. New top-level section → wrap in a semantic class; lead with an `.eyebrow` (which
-   carries the `64px` top rhythm) if it's a real group, else give it `margin-top: 64px`.
+1. New top-level block → give it `margin-top: 2.5rem` to match existing rhythm.
 2. New styles → write plain CSS in `app/globals.css`, using the color tokens.
-3. New content (a phrase, a project) → push to the data arrays in `page.tsx`.
-4. Pop comes from **scale or weight**, not color — don't add an accent hue.
-5. Keep it dark-only, single-column, ≤640px wide, three font weights (400/600/800),
-   Extrabold for the hero only.
+3. New content (a project) → push to the data array in `page.tsx`.
+4. Do **not** add display type, section headings, accent color, cards, or logos.
+5. Keep it light-only, single-column, ≤28rem wide, Regular weight on the homepage.
