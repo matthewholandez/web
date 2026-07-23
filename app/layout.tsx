@@ -54,7 +54,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#050505",
+  themeColor: "#fafafa",
 };
 
 const personJsonLd = {
@@ -76,7 +76,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={neue.variable} style={{ colorScheme: "dark" }}>
+    <html lang="en" className={neue.variable} style={{ colorScheme: "light" }}>
       <body>
         <script
           type="application/ld+json"

@@ -7,10 +7,9 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default async function Image() {
-  const [neueExtrabold, neueRegular] = await Promise.all([
-    readFile(join(process.cwd(), "app/fonts/PPNeueMontreal-Extrabold.otf")),
-    readFile(join(process.cwd(), "app/fonts/PPNeueMontreal-Regular.otf")),
-  ]);
+  const neueRegular = await readFile(
+    join(process.cwd(), "app/fonts/PPNeueMontreal-Regular.otf"),
+  );
 
   return new ImageResponse(
     (
@@ -22,16 +21,16 @@ export default async function Image() {
           flexDirection: "column",
           alignItems: "flex-start",
           justifyContent: "center",
-          background: "#050505",
-          color: "#f6f6f4",
+          background: "#fafafa",
+          color: "#111111",
           padding: "0 96px",
           fontFamily: "Neue Montreal",
         }}
       >
-        <div style={{ fontSize: 96, fontWeight: 800, letterSpacing: "-0.03em" }}>
+        <div style={{ fontSize: 42, fontWeight: 400, letterSpacing: "-0.02em" }}>
           Matthew Holandez
         </div>
-        <div style={{ fontSize: 34, fontWeight: 400, color: "#8a8a88", marginTop: 20 }}>
+        <div style={{ fontSize: 28, fontWeight: 400, color: "#8a8a8a", marginTop: 14 }}>
           Systems Design Engineering @ UWaterloo
         </div>
       </div>
@@ -39,7 +38,6 @@ export default async function Image() {
     {
       ...size,
       fonts: [
-        { name: "Neue Montreal", data: neueExtrabold, weight: 800, style: "normal" },
         { name: "Neue Montreal", data: neueRegular, weight: 400, style: "normal" },
       ],
     },

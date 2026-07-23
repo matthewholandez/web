@@ -1,13 +1,10 @@
 /* Styles for the /time countdown route.
-   Everything is scoped under `.time-remaining` so the dark, inverted-monochrome
-   theme (and the Neue Montreal font) stay contained to this route and never leak
-   into the light homepage — the App Router root layout owns <html>/<body>, so the
-   dark surface is rendered by this full-viewport wrapper instead of on <body>. */
+   Everything is scoped under `.time-remaining` so route-specific layout stays
+   contained. Palette tokens (--paper/--ink/--muted/--faint) are inherited from
+   :root — the site-wide light monochrome. */
 
 .time-remaining {
-  /* Palette tokens (--paper/--ink/--muted/--faint) are inherited from :root, which
-     is now the site-wide dark monochrome. This route is the centered countdown
-     variant: one weight (Semibold), hierarchy by scale/value/tracking. */
+  /* Centered countdown: Semibold only. Hierarchy by scale and value. */
   min-height: 100dvh;
   background: var(--paper);
   color: var(--ink);
@@ -29,25 +26,15 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: clamp(2.5rem, 8vh, 5.5rem);
+  gap: clamp(2rem, 6vh, 3.5rem);
   padding: 2rem 1.25rem;
   text-align: center;
-}
-
-/* ---- eyebrow ---------------------------------------------------------- */
-
-.time-remaining .eyebrow {
-  font-size: clamp(0.68rem, 1.4vw, 0.82rem);
-  letter-spacing: 0.42em;
-  text-transform: uppercase;
-  color: var(--muted);
-  padding-left: 0.42em; /* optical: balance the trailing letter-spacing */
 }
 
 /* ---- the readout ------------------------------------------------------ */
 
 .time-remaining .readout {
-  --gap: clamp(0.65rem, 4.5vw, 2.75rem);
+  --gap: clamp(0.55rem, 3.5vw, 2rem);
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -56,7 +43,7 @@
 }
 
 .time-remaining .readout--pending {
-  min-height: calc(clamp(3.5rem, 17vw, 13rem) + 3rem);
+  min-height: calc(clamp(2.75rem, 12vw, 8rem) + 2.25rem);
 }
 
 .time-remaining .cell {
@@ -67,9 +54,9 @@
 }
 
 .time-remaining .num {
-  font-size: clamp(3.5rem, 17vw, 13rem);
-  line-height: 0.86;
-  letter-spacing: -0.045em;
+  font-size: clamp(2.75rem, 12vw, 8rem);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
   font-variant-numeric: tabular-nums;
   color: var(--ink);
 }
@@ -78,13 +65,11 @@
   position: absolute;
   top: 0;
   right: 0;
-  font-size: clamp(3.5rem, 17vw, 13rem);
-  line-height: 0.86;
+  font-size: clamp(2.75rem, 12vw, 8rem);
+  line-height: 0.9;
   color: var(--faint);
   pointer-events: none;
-  /* Center the square-dot colon horizontally in the gap and lift it to sit
-     on the numerals' optical midline. */
-  transform: translate(calc(var(--gap) / 2 + 50%), -0.12em);
+  transform: translate(calc(var(--gap) / 2 + 50%), -0.08em);
 }
 
 .time-remaining .sep--blink {
@@ -103,11 +88,12 @@
 }
 
 .time-remaining .label {
-  margin-top: clamp(0.7rem, 2vh, 1.25rem);
-  font-size: clamp(0.6rem, 1.3vw, 0.76rem);
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
+  margin-top: 0.85rem;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
   color: var(--muted);
+  text-transform: none;
 }
 
 /* ---- meta ------------------------------------------------------------- */
@@ -115,12 +101,13 @@
 .time-remaining .meta {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.25rem;
 }
 
 .time-remaining .meta__line {
-  font-size: clamp(0.85rem, 2vw, 1.05rem);
-  letter-spacing: 0.01em;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  letter-spacing: -0.005em;
   color: var(--muted);
 }
 
@@ -137,7 +124,7 @@
   transform: translateX(-50%);
   display: flex;
   align-items: center;
-  gap: 0.9rem;
+  gap: 0.75rem;
 }
 
 .time-remaining .footer__btn {
@@ -146,9 +133,10 @@
   border: none;
   padding: 0.15rem 0.1rem;
   font: inherit;
-  font-size: clamp(0.68rem, 1.4vw, 0.78rem);
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  text-transform: none;
   color: var(--muted);
   text-decoration: none;
   cursor: pointer;
@@ -163,6 +151,7 @@
 .time-remaining .footer__dot {
   width: 3px;
   height: 3px;
+  border-radius: 50%;
   background: var(--faint);
 }
 
@@ -175,32 +164,32 @@
   align-items: center;
   justify-content: center;
   padding: 1.5rem;
-  background: rgba(0, 0, 0, 0.72);
+  background: rgba(17, 17, 17, 0.28);
   z-index: 10;
   animation: fade 0.15s ease;
 }
 
 .time-remaining .modal__panel {
-  width: min(30rem, 100%);
-  background: #0d0d0d;
-  border: 1px solid var(--faint);
-  padding: clamp(1.75rem, 4vw, 2.5rem);
+  width: min(26rem, 100%);
+  background: var(--paper);
+  padding: 1.75rem;
   text-align: left;
 }
 
 .time-remaining .modal__title {
-  font-size: clamp(1.1rem, 3vw, 1.4rem);
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  letter-spacing: -0.005em;
   color: var(--ink);
-  margin-bottom: 1rem;
+  margin-bottom: 0.65rem;
 }
 
 .time-remaining .modal__body {
-  font-size: clamp(0.9rem, 2vw, 1rem);
+  font-size: 0.9375rem;
+  font-weight: 400;
   line-height: 1.55;
   color: var(--muted);
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.25rem;
 }
 
 .time-remaining .modal__close {

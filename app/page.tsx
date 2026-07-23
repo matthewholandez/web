@@ -3,42 +3,6 @@ import Link from "next/link";
 import { Mail } from "lucide-react";
 import { Github, Linkedin } from "./brand-icons";
 
-const phrases = [
-  "a Waterloo student",
-  "a shawarma enjoyer",
-  "a web novel reader",
-  "a cat lover",
-  "MattGPT",
-];
-
-// Generates the reel-roll keyframes from phrases.length, so adding or
-// removing a phrase above is all that's needed — no CSS to update.
-function buildReelKeyframes(count: number) {
-  const items = count + 1; // track has a duplicate of phrases[0] appended for a seamless loop
-  const holdFraction = 0.75; // hold each phrase for 75% of its time slot, then snap
-  const stops = ["0% { transform: translateY(0%); }"];
-
-  for (let i = 0; i < count; i++) {
-    const segStart = (i / count) * 100;
-    const segEnd = ((i + 1) / count) * 100;
-    const holdEnd = segStart + (segEnd - segStart) * holdFraction;
-    const currentPos = (i / items) * 100;
-    const nextPos = ((i + 1) / items) * 100;
-
-    stops.push(
-      `${holdEnd.toFixed(3)}% { transform: translateY(-${currentPos.toFixed(3)}%); }`,
-    );
-    stops.push(
-      `${segEnd.toFixed(3)}% { transform: translateY(-${nextPos.toFixed(3)}%); }`,
-    );
-  }
-
-  return `@keyframes reel-roll { ${stops.join(" ")} }`;
-}
-
-const reelKeyframes = buildReelKeyframes(phrases.length);
-const reelDuration = `${phrases.length * 3.5}s`;
-
 const projects = [
   {
     name: "Intelligo",
@@ -65,78 +29,19 @@ const projects = [
 export default function Home() {
   return (
     <main className="page">
-      <Image
-        className="signature"
-        src="/signature.png"
-        alt="Matthew Holandez signature"
-        width={2400}
-        height={400}
-        priority
-      />
-      <h1 className="hero">
-        <span className="heroLead" aria-hidden="true">
-          I am
-        </span>
-        <span className="reel" aria-hidden="true">
-          <style>{reelKeyframes}</style>
-          <span className="reelSizer">
-            {phrases.map((phrase) => (
-              <span key={phrase}>{phrase}</span>
-            ))}
-          </span>
-          <span className="reelTrack" style={{ animationDuration: reelDuration }}>
-            {[...phrases, phrases[0]].map((phrase, i) => (
-              <span key={i}>{phrase}</span>
-            ))}
-          </span>
-        </span>
-        <span className="srOnly">I am a Waterloo student.</span>
-      </h1>
-
-      <p className="eyebrow">Currently</p>
-      <div className="infoLines">
-        <a
-          className="infoLine"
-          href="https://uwaterloo.ca"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            className="infoIcon"
-            src="/waterloo.svg"
-            alt="University of Waterloo"
-            width={20}
-            height={20}
-          />
-          <span className="infoLineText">
-            Systems Design Engineering at UWaterloo
-          </span>
+      <h1 className="name">Matthew Holandez</h1>
+      <p className="tagline">Systems Design Engineering @ UWaterloo</p>
+      <p className="tagline">
+        Prev @{" "}
+        <a href="https://deepcode.ca" target="_blank" rel="noopener noreferrer">
+          DeepCode
         </a>
-        <a
-          className="infoLine"
-          href="https://deepcode.ca"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            className="infoIcon"
-            src="/deepcode.jpeg"
-            alt="DeepCode"
-            width={20}
-            height={20}
-          />
-          <span className="infoLineText">
-            Former Cyber Intelligence Dev Intern at DeepCode
-          </span>
-        </a>
-      </div>
+      </p>
 
-      <p className="eyebrow">Selected work</p>
       <div className="projects">
         {projects.map((project) => (
-          <div className="project" key={project.name}>
+          <p className="project" key={project.name}>
             <a
-              className="projectName"
               href={project.href}
               target="_blank"
               rel="noopener noreferrer"
@@ -144,11 +49,10 @@ export default function Home() {
               {project.name}
             </a>
             <span className="projectDesc">{project.description}</span>
-          </div>
+          </p>
         ))}
       </div>
 
-      <p className="eyebrow">Other</p>
       <Link className="timeLink" href="/time">
         Time remaining <span aria-hidden="true">→</span>
       </Link>
@@ -159,7 +63,7 @@ export default function Home() {
           href="mailto:mholandez@uwaterloo.ca"
           aria-label="Email"
         >
-          <Mail size={20} />
+          <Mail size={18} strokeWidth={1.75} />
         </a>
         <a
           className="contactIcon"
@@ -168,7 +72,7 @@ export default function Home() {
           rel="noopener noreferrer"
           aria-label="GitHub"
         >
-          <Github size={20} />
+          <Github size={18} />
         </a>
         <a
           className="contactIcon"
@@ -177,9 +81,17 @@ export default function Home() {
           rel="noopener noreferrer"
           aria-label="LinkedIn"
         >
-          <Linkedin size={20} />
+          <Linkedin size={18} />
         </a>
       </nav>
+
+      <Image
+        className="signature"
+        src="/signature.png"
+        alt="Matthew Holandez signature"
+        width={2400}
+        height={400}
+      />
     </main>
   );
 }
