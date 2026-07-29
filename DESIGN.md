@@ -23,8 +23,9 @@ color.
   styled-components, no Tailwind utility classes in markup. (Tailwind v4 is
   installed via PostCSS but the page is styled with semantic class names and
   raw CSS — keep new styling in `globals.css` / route CSS files to match.)
-- **MDX** via `@next/mdx` for the `/now` page — markdown in `content/now/` is
-  compiled to React and mapped through `mdx-components.tsx`.
+- **MDX** via `@next/mdx` for the `/now` page — dated markdown in
+  `content/now/YYYY-MM-DD.md` is compiled to React and mapped through
+  `mdx-components.tsx`.
 - **Neue Montreal** via `next/font/local`, registered once in `app/fonts.ts` (exposed
   as `--font-neue`, applied to `<html>` in `app/layout.tsx`). Two weight-mapped cuts
   are bundled from `app/fonts/`, so `font-weight` picks the cut.
