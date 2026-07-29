@@ -1,0 +1,63 @@
+/* /now — scoped under .now. Reuses homepage .page container + tokens. */
+
+.now .now-entry {
+  margin-top: 2.5rem;
+}
+
+.now .now-date {
+  display: block;
+  margin: 0 0 0.75rem;
+  color: var(--muted);
+}
+
+.now .now-body > :first-child {
+  margin-top: 0;
+}
+
+.now .now-heading {
+  margin: 1.5rem 0 0.55rem;
+  font-size: inherit;
+  font-weight: 400;
+  line-height: inherit;
+  letter-spacing: inherit;
+  color: var(--ink);
+}
+
+.now .now-p {
+  margin: 0.75rem 0 0;
+  color: var(--ink);
+}
+
+.now .now-list {
+  margin: 0.75rem 0 0;
+  padding-left: 1.15rem;
+  color: var(--ink);
+}
+
+.now .now-list li + li {
+  margin-top: 0.35rem;
+}
+
+.now .now-strong {
+  font-weight: 400;
+  color: var(--ink);
+}
+
+.now .now-quote {
+  margin: 0.75rem 0 0;
+  padding: 0;
+  border: 0;
+  color: var(--muted);
+}
+
+.now .now-hr {
+  margin: 2.5rem 0 0;
+  border: 0;
+  border-top: 1px solid var(--faint);
+}
+
+.now .now-code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.92em;
+  color: var(--ink);
+}
