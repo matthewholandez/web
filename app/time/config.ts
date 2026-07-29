@@ -18,6 +18,11 @@ export const EVENTS: CountdownEvent[] = [
     targetLabel: "August 5, 2026 · 5:00 PM ET",
     eventLabel: "End of 1B term at Waterloo",
   },
+    {
+    target: new Date("2026-09-08T13:00:00Z"),
+    targetLabel: "September 8, 2026 · 9:00 AM ET",
+    eventLabel: "Start of 2nd co-op",
+  },
 ];
 
 /**
