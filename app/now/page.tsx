@@ -10,7 +10,7 @@ export default async function NowPage() {
       <h1 className="name">Now</h1>
       <p className="tagline">
         {latest
-          ? `Updated ${formatNowDate(latest.meta.date)}`
+          ? `Updated ${formatNowDate(latest.date)}`
           : "What I'm up to"}
       </p>
 
@@ -18,11 +18,9 @@ export default async function NowPage() {
         const Content = entry.Content;
         return (
           <article className="now-entry" key={entry.slug}>
-            {entry !== latest ? (
-              <time className="now-date" dateTime={entry.meta.date}>
-                {formatNowDate(entry.meta.date)}
-              </time>
-            ) : null}
+            <time className="now-date" dateTime={entry.date}>
+              {formatNowDate(entry.date)}
+            </time>
             <div className="now-body">
               <Content />
             </div>

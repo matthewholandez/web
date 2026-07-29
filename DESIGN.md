@@ -165,17 +165,18 @@ blurb about what Matthew is currently up to. It reuses the homepage `.page`
 container, palette, and flat typography; route-specific prose styles live in
 `app/now/now.css`, scoped under `.now`.
 
-- **Authoring.** Write markdown/MDX in `content/now/*.mdx`. Each file exports
-  `meta = { date: "YYYY-MM-DD" }` and plain markdown body. Drop a new file to
-  post an update; older entries stay on the page newest-first.
+- **Authoring.** One file per point in time: `content/now/YYYY-MM-DD.md`
+  (plain markdown body, no frontmatter). Drop a new dated file to post an
+  update; older files stay and remain visible. Display order is filename
+  descending (`2026-07-29.md` above `2026-01-15.md`).
 - **Markdown → components.** `@next/mdx` compiles the files. Root
   `mdx-components.tsx` maps markdown elements (`p`, `a`, `ul`, headings, etc.)
   to quiet React components styled for this site — no display type, no accent,
   external links open in a new tab.
 - **Layout.** Semantic `<h1 class="name">Now</h1>`, muted "Updated …" tagline
-  from the latest entry's date, then `<article class="now-entry">` blocks.
-  The latest entry omits a repeated date line; older ones show a muted
-  `<time>`. A "← Home" `.timeLink` closes the page.
+  from the newest filename, then one `<article class="now-entry">` per file —
+  each with a muted `<time>` taken from its `YYYY-MM-DD` name. A "← Home"
+  `.timeLink` closes the page.
 - **Prose rules.** Headings inherit body size/weight (flat hierarchy). Body is
   `--ink`; dates and blockquotes are `--muted`. Soft `hr` uses `--faint`.
   Section rhythm stays `2.5rem`.
@@ -229,7 +230,7 @@ centering the readout and using Semibold for the numerals.
 1. New top-level block → give it `margin-top: 2.5rem` to match existing rhythm.
 2. New styles → write plain CSS in `app/globals.css`, using the color tokens.
 3. New content (a project) → push to the data array in `page.tsx`.
-4. New `/now` update → add a dated `.mdx` file under `content/now/` with
-   `export const meta = { date: "YYYY-MM-DD" }`.
+4. New `/now` update → add `content/now/YYYY-MM-DD.md` (filename is the date;
+   older files stay on the page, sorted newest-first).
 5. Do **not** add display type, section headings, accent color, cards, or logos.
 6. Keep it light-only, single-column, ≤28rem wide, Regular weight on the homepage.
