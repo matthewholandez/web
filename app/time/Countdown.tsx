@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { TARGET, TARGET_LABEL, EVENT_LABEL, HOLIDAYS } from "./config";
+import { getDisplayEvent, HOLIDAYS, type CountdownEvent } from "./config";
 import { businessDaysBetween } from "./businessDays";
 
 const HOLIDAY_SET = new Set(HOLIDAYS);
@@ -13,13 +13,25 @@ type Remaining = {
   seconds: number;
   businessDays: number;
   done: boolean;
+  event: CountdownEvent;
 };
 
-function computeRemaining(now: Date): Remaining {
-  const diffMs = TARGET.getTime() - now.getTime();
+function computeRemaining(now: Date): Remaining | null {
+  const event = getDisplayEvent(now);
+  if (!event) return null;
+
+  const diffMs = event.target.getTime() - now.getTime();
 
   if (diffMs <= 0) {
-    return { days: 0, hours: 0, minutes: 0, seconds: 0, businessDays: 0, done: true };
+    return {
+      days: 0,
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
+      businessDays: 0,
+      done: true,
+      event,
+    };
   }
 
   const totalSeconds = Math.floor(diffMs / 1000);
@@ -27,9 +39,9 @@ function computeRemaining(now: Date): Remaining {
   const hours = Math.floor((totalSeconds % 86400) / 3600);
   const minutes = Math.floor((totalSeconds % 3600) / 60);
   const seconds = totalSeconds % 60;
-  const businessDays = businessDaysBetween(now, TARGET, HOLIDAY_SET);
+  const businessDays = businessDaysBetween(now, event.target, HOLIDAY_SET);
 
-  return { days, hours, minutes, seconds, businessDays, done: false };
+  return { days, hours, minutes, seconds, businessDays, done: false, event };
 }
 
 function pad(n: number): string {
@@ -51,6 +63,8 @@ export default function Countdown() {
   if (!remaining) {
     return <div className="readout readout--pending" aria-hidden="true" />;
   }
+
+  const { event } = remaining;
 
   const cells: { label: string; value: string }[] = [
     { label: "Days", value: String(remaining.days) },
@@ -88,8 +102,8 @@ export default function Countdown() {
         )}
         <p className="meta__line">
           {remaining.done
-            ? `${TARGET_LABEL} (${EVENT_LABEL})`
-            : `until ${TARGET_LABEL} (${EVENT_LABEL})`}
+            ? `${event.targetLabel} (${event.eventLabel})`
+            : `until ${event.targetLabel} (${event.eventLabel})`}
         </p>
       </div>
     </>

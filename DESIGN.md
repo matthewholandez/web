@@ -187,7 +187,7 @@ container, palette, and flat typography; route-specific prose styles live in
 ## The `/time` countdown page
 
 `/time` (`app/time/`) is the **one place scale is allowed** — a full-screen live
-countdown to the end of the 1B term at Waterloo. It shares the site's palette
+countdown to the next queued milestone. It shares the site's palette
 (`:root` tokens) and typeface (`--font-neue`, inherited from `<html>`); it differs by
 centering the readout and using Semibold for the numerals.
 
@@ -204,8 +204,12 @@ centering the readout and using Semibold for the numerals.
   (`role="dialog"`, Escape / click-outside to close, focus moved to Close).
 - **Motion:** `blink` (1s) and `fade` (0.15s) keyframes, both disabled under
   `prefers-reduced-motion: reduce`.
-- **Data:** the target date, labels, and Ontario stat-holiday list live in
-  `app/time/config.ts`; business-day math in `app/time/businessDays.ts`.
+- **Data:** `app/time/config.ts` holds an `EVENTS` queue (`target`, `targetLabel`,
+  `eventLabel`) plus Ontario holidays. `getActiveEvent(now)` / `getDisplayEvent(now)`
+  pick the closest future milestone (or the latest past one when the queue is
+  exhausted). Business-day math lives in `app/time/businessDays.ts`. To schedule
+  another countdown, append to `EVENTS` — the page always shows the soonest
+  upcoming entry.
 
 ---
 

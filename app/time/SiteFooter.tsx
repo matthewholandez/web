@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { TARGET_LABEL } from "./config";
 
 export default function SiteFooter() {
   const [open, setOpen] = useState(false);
