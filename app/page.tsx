@@ -53,9 +53,14 @@ export default function Home() {
         ))}
       </div>
 
-      <Link className="timeLink" href="/time">
-        Time remaining <span aria-hidden="true">→</span>
-      </Link>
+      <div className="pageLinks">
+        <Link className="timeLink" href="/now">
+          Now <span aria-hidden="true">→</span>
+        </Link>
+        <Link className="timeLink" href="/time">
+          Time remaining <span aria-hidden="true">→</span>
+        </Link>
+      </div>
 
       <nav className="contact" aria-label="Contact links">
         <a

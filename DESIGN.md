@@ -4,8 +4,8 @@ This is the design reference for **mholandez.com** — a personal site for Matth
 Holandez. The aesthetic is **extreme light minimalism**: dark ink on an off-white
 page, set entirely in **Neue Montreal**, with almost no typographic hierarchy.
 There is no component library and no UI framework beyond the basics; everything is
-hand-authored plain CSS in `app/globals.css` (homepage) and `app/time/time.css`
-(the `/time` route).
+hand-authored plain CSS in `app/globals.css` (homepage), `app/now/now.css`
+(the `/now` route), and `app/time/time.css` (the `/time` route).
 
 If you're picking this up as a designer, the guiding principle is **whisper, don't
 shout**. The page reads like a short CV or calling card — no shadows, no gradients,
@@ -22,7 +22,9 @@ color.
 - **Plain CSS**, hand-written in `app/globals.css`. No CSS modules, no
   styled-components, no Tailwind utility classes in markup. (Tailwind v4 is
   installed via PostCSS but the page is styled with semantic class names and
-  raw CSS — keep new styling in `globals.css` to match.)
+  raw CSS — keep new styling in `globals.css` / route CSS files to match.)
+- **MDX** via `@next/mdx` for the `/now` page — markdown in `content/now/` is
+  compiled to React and mapped through `mdx-components.tsx`.
 - **Neue Montreal** via `next/font/local`, registered once in `app/fonts.ts` (exposed
   as `--font-neue`, applied to `<html>` in `app/layout.tsx`). Two weight-mapped cuts
   are bundled from `app/fonts/`, so `font-weight` picks the cut.
@@ -84,7 +86,7 @@ the page flat. The Extrabold cut is intentionally unused and not registered.
   padding `6rem 1.5rem 5rem`. On screens ≤480px the top padding drops to `3.5rem`.
 - **Single column, left-aligned.** The whole page is a vertical stack of quiet text.
 - **Section rhythm:** major blocks are separated by `2.5rem` (`margin-top` on
-  projects, time link, contact, and signature). Reuse `2.5rem` for any new
+  projects, page links, contact, and signature). Reuse `2.5rem` for any new
   top-level block.
 - **Intra-section gaps:** `0.55rem` between projects; `0.45rem 0.65rem` within a
   project row; `1.1rem` between contact icons.
@@ -109,9 +111,10 @@ hand-writing markup.
   identity block, not a separate section.
 - **Projects** (`.projects` / `.project`) — name + muted description on a wrapping
   baseline row. Same weight/size as body; name underlines on hover.
-- **Time link** (`.timeLink`) — a discreet `next/link` text link ("Time remaining →")
-  to the `/time` countdown page. Quiet: `--muted`, underlines and shifts to `--ink`
-  on hover. The trailing `→` is `aria-hidden`.
+- **Page links** (`.pageLinks` / `.timeLink`) — a quiet stack of `next/link` text
+  links ("Now →", "Time remaining →"). Quiet: `--muted`, underlines and shifts to
+  `--ink` on hover. The trailing `→` is `aria-hidden`. The wrapper owns the
+  `2.5rem` section spacing; individual links have no top margin inside it.
 - **Contact** (`.contact` / `.contactIcon`) — a `<nav>` of 18px icon links. Icons are
   `--muted`, transitioning to `--ink` on hover over `150ms`. Stroke weight `1.75`.
 - **Signature** (`.signature`) — `public/signature.png` (dark "MATTHEW." brushstroke on
@@ -152,6 +155,30 @@ hand-writing markup.
 - All icon-only links have `aria-label`s; the contact group is a labeled
   `<nav aria-label="Contact links">`.
 - External links use `target="_blank"` + `rel="noopener noreferrer"`.
+
+---
+
+## The `/now` page
+
+`/now` (`app/now/`) is a quiet [now page](https://nownownow.com/about) — a dated
+blurb about what Matthew is currently up to. It reuses the homepage `.page`
+container, palette, and flat typography; route-specific prose styles live in
+`app/now/now.css`, scoped under `.now`.
+
+- **Authoring.** Write markdown/MDX in `content/now/*.mdx`. Each file exports
+  `meta = { date: "YYYY-MM-DD" }` and plain markdown body. Drop a new file to
+  post an update; older entries stay on the page newest-first.
+- **Markdown → components.** `@next/mdx` compiles the files. Root
+  `mdx-components.tsx` maps markdown elements (`p`, `a`, `ul`, headings, etc.)
+  to quiet React components styled for this site — no display type, no accent,
+  external links open in a new tab.
+- **Layout.** Semantic `<h1 class="name">Now</h1>`, muted "Updated …" tagline
+  from the latest entry's date, then `<article class="now-entry">` blocks.
+  The latest entry omits a repeated date line; older ones show a muted
+  `<time>`. A "← Home" `.timeLink` closes the page.
+- **Prose rules.** Headings inherit body size/weight (flat hierarchy). Body is
+  `--ink`; dates and blockquotes are `--muted`. Soft `hr` uses `--faint`.
+  Section rhythm stays `2.5rem`.
 
 ---
 
@@ -202,5 +229,7 @@ centering the readout and using Semibold for the numerals.
 1. New top-level block → give it `margin-top: 2.5rem` to match existing rhythm.
 2. New styles → write plain CSS in `app/globals.css`, using the color tokens.
 3. New content (a project) → push to the data array in `page.tsx`.
-4. Do **not** add display type, section headings, accent color, cards, or logos.
-5. Keep it light-only, single-column, ≤28rem wide, Regular weight on the homepage.
+4. New `/now` update → add a dated `.mdx` file under `content/now/` with
+   `export const meta = { date: "YYYY-MM-DD" }`.
+5. Do **not** add display type, section headings, accent color, cards, or logos.
+6. Keep it light-only, single-column, ≤28rem wide, Regular weight on the homepage.
