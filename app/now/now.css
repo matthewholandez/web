@@ -1,4 +1,8 @@
-/* /now — scoped under .now. Reuses homepage .page container + tokens. */
+/* /now — scoped under .now. Reuses shell prose layout + tokens. */
+
+.now .name {
+  margin-bottom: 0.15rem;
+}
 
 .now .now-entry {
   margin-top: 2.5rem;

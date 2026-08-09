@@ -21,8 +21,8 @@ export default async function Image() {
           flexDirection: "column",
           alignItems: "flex-start",
           justifyContent: "center",
-          background: "#fafafa",
-          color: "#111111",
+          background: "#f5f6f4",
+          color: "#151716",
           padding: "0 96px",
           fontFamily: "Neue Montreal",
         }}
@@ -30,7 +30,7 @@ export default async function Image() {
         <div style={{ fontSize: 42, fontWeight: 400, letterSpacing: "-0.02em" }}>
           Matthew Holandez
         </div>
-        <div style={{ fontSize: 28, fontWeight: 400, color: "#8a8a8a", marginTop: 14 }}>
+        <div style={{ fontSize: 28, fontWeight: 400, color: "#6e7470", marginTop: 14 }}>
           Systems Design Engineering @ UWaterloo
         </div>
       </div>

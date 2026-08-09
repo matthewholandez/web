@@ -10,12 +10,18 @@ function ExternalAwareLink({
   return (
     <a
       href={href}
+      className="mark"
       {...(external
         ? { target: "_blank", rel: "noopener noreferrer" }
         : undefined)}
       {...rest}
     >
       {children}
+      {external ? (
+        <span className="extArrow" aria-hidden="true">
+          ↗
+        </span>
+      ) : null}
     </a>
   );
 }

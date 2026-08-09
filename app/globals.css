@@ -1,10 +1,13 @@
 :root {
-  /* Light monochrome. Hierarchy is almost none — value shifts only.
-     Shared with the /time countdown route. */
-  --paper: #fafafa;
-  --ink: #111111;
-  --muted: #8a8a8a;
-  --faint: #e8e8e8;
+  /* Cool sage minimalism — layout borrowed from quiet personal sites,
+     palette deliberately not cream/pink. */
+  --paper: #f5f6f4;
+  --paper-deep: #eef1ec;
+  --ink: #151716;
+  --muted: #6e7470;
+  --mark: #cfe3d6;
+  --mark-hover: #b9d6c4;
+  --faint: #e2e6e3;
 
   color-scheme: light;
 }
@@ -15,16 +18,20 @@
 
 html,
 body {
-  background: var(--paper);
+  background:
+    radial-gradient(120% 80% at 0% 0%, rgba(207, 227, 214, 0.35), transparent 55%),
+    linear-gradient(180deg, var(--paper) 0%, var(--paper-deep) 100%);
+  background-attachment: fixed;
   color: var(--ink);
+  min-height: 100%;
 }
 
 body {
   margin: 0;
   font-family: var(--font-neue), ui-sans-serif, system-ui, -apple-system, sans-serif;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 400;
-  line-height: 1.55;
+  line-height: 1.7;
   letter-spacing: -0.005em;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -37,8 +44,7 @@ a {
 }
 
 a:hover {
-  text-decoration: underline;
-  text-underline-offset: 0.15em;
+  text-decoration: none;
 }
 
 a:focus-visible,
@@ -47,55 +53,190 @@ button:focus-visible {
   outline-offset: 3px;
 }
 
-.page {
-  max-width: 28rem;
-  margin: 0 auto;
-  padding: 6rem 1.5rem 5rem;
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
-@media (max-width: 480px) {
-  .page {
-    padding-top: 3.5rem;
+/* ——— Shell: sidebar + main ——— */
+
+.shell {
+  display: grid;
+  grid-template-columns: 9.5rem minmax(0, 34rem);
+  justify-content: start;
+  gap: 3.5rem;
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 5.5rem 2rem 5rem;
+  min-height: 100dvh;
+}
+
+.shell__nav {
+  position: sticky;
+  top: 5.5rem;
+  align-self: start;
+}
+
+.shell__main {
+  min-width: 0;
+  animation: rise 0.55s ease both;
+}
+
+@media (max-width: 720px) {
+  .shell {
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+    padding: 2.25rem 1.35rem 4rem;
+  }
+
+  .shell__nav {
+    position: static;
+    top: auto;
   }
 }
 
-/* Name — semantic h1, visually just the first line of body type. */
+/* ——— Sidebar nav ——— */
 
-.name {
+.siteNav__list {
   margin: 0;
-  font-size: inherit;
-  font-weight: 400;
-  line-height: inherit;
-  letter-spacing: inherit;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
+}
+
+.siteNav__link {
+  display: inline-block;
+  padding: 0.2rem 0.45rem;
+  margin-left: -0.45rem;
+  border-radius: 2px;
+  color: var(--ink);
+  transition:
+    background-color 150ms ease,
+    color 150ms ease;
+}
+
+.siteNav__link:hover {
+  background-color: var(--mark);
+}
+
+.siteNav__link--active {
+  background-color: var(--mark);
+}
+
+@media (max-width: 720px) {
+  .siteNav__list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.15rem 0.35rem;
+  }
+}
+
+/* ——— Page / prose ——— */
+
+.page {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.prose {
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+}
+
+.prose p {
+  margin: 0;
+  max-width: 34rem;
   color: var(--ink);
 }
 
-.tagline {
-  margin: 0.15rem 0 0;
-  color: var(--muted);
+.mark {
+  background-color: var(--mark);
+  padding: 0.08em 0.22em;
+  border-radius: 2px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  transition: background-color 150ms ease;
 }
 
-.projects {
-  margin-top: 2.5rem;
+a.mark:hover,
+.mark:hover {
+  background-color: var(--mark-hover);
+}
+
+.extArrow {
+  display: inline-block;
+  margin-left: 0.15em;
+  font-size: 0.85em;
+  line-height: 1;
+  transition: transform 150ms ease;
+}
+
+a:hover .extArrow {
+  transform: translate(0.08em, -0.08em);
+}
+
+.extLinks {
+  margin-top: 2.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.85rem 1.35rem;
+}
+
+.extLinks a {
+  color: var(--ink);
+}
+
+.extLinks a:hover {
+  color: var(--ink);
+}
+
+.signature {
+  display: block;
+  height: 32px;
+  width: auto;
+  margin-top: 2.75rem;
+  opacity: 0.9;
+}
+
+/* ——— Projects list ——— */
+
+.projectList {
+  margin: 2rem 0 0;
+  padding: 0;
+  list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.55rem;
+  gap: 1.1rem;
 }
 
-.project {
-  margin: 0;
+.projectList__item {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  gap: 0.45rem 0.65rem;
+  gap: 0.45rem 0.75rem;
 }
 
-.projectDesc {
+.projectList__desc {
   color: var(--muted);
 }
 
+/* Legacy helpers still used on /now */
+
 .pageLinks {
-  margin-top: 2.5rem;
+  margin-top: 2.75rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -111,35 +252,48 @@ button:focus-visible {
   transition: color 150ms;
 }
 
-.pageLinks .timeLink {
-  margin-top: 0;
-}
-
 .timeLink:hover {
   color: var(--ink);
 }
 
-.contact {
-  margin-top: 2.5rem;
-  display: flex;
-  align-items: center;
-  gap: 1.1rem;
-}
-
-.contactIcon {
-  display: inline-flex;
-  color: var(--muted);
-  transition: color 150ms;
-}
-
-.contactIcon:hover {
+.name {
+  margin: 0;
+  font-size: inherit;
+  font-weight: 400;
+  line-height: inherit;
+  letter-spacing: inherit;
   color: var(--ink);
-  text-decoration: none;
 }
 
-.signature {
-  display: block;
-  height: 32px;
-  width: auto;
-  margin-top: 2.5rem;
+.tagline {
+  margin: 0.15rem 0 0;
+  color: var(--muted);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.45rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shell__main {
+    animation: none;
+  }
+
+  a:hover .extArrow {
+    transform: none;
+  }
+
+  .siteNav__link,
+  .mark,
+  .extArrow,
+  .timeLink {
+    transition: none;
+  }
 }
