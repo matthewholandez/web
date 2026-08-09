@@ -101,8 +101,9 @@ in a visually hidden `<h1 class="srOnly">` — identity lives in the opening pro
 - **`SiteShell`** — wraps About, Now, and Projects with `.shell` / sticky
   `.shell__nav` / `.shell__main`.
 - **`SiteNav`** — vertical list: About (`/`), Now (`/now`), Projects (`/projects`),
-  Say Hi (`mailto:…`). Active route gets `.siteNav__link--active` (sage mark
-  background). Hover uses the same mark. On small screens the list goes horizontal.
+  Say Hi (`mailto:…`). Hover uses `--mark`; the active route uses the deeper
+  `--mark-hover` so current page reads clearly. On small screens the list goes
+  horizontal.
 
 ### About (`/`)
 

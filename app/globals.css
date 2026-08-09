@@ -129,8 +129,9 @@ button:focus-visible {
   background-color: var(--mark);
 }
 
-.siteNav__link--active {
-  background-color: var(--mark);
+.siteNav__link--active,
+.siteNav__link--active:hover {
+  background-color: var(--mark-hover);
 }
 
 @media (max-width: 720px) {
