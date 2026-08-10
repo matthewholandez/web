@@ -156,7 +156,8 @@ button:focus-visible {
   gap: 1.35rem;
 }
 
-.prose p {
+.prose p,
+.prose .md-p {
   margin: 0;
   max-width: 34rem;
   color: var(--ink);

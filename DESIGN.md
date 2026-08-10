@@ -107,10 +107,14 @@ in a visually hidden `<h1 class="srOnly">` — identity lives in the opening pro
 
 ### About (`/`)
 
-- Prose paragraphs in `.prose` with selected keywords as `.mark` links
-  (internal `Link` or `ExternalLink`).
-- **`ExternalLink`** — outbound `<a>` with a trailing `↗` (`.extArrow`). Pass
-  `mark` for the sage highlight treatment.
+- **Authoring.** Edit `content/about.md` — plain markdown, no frontmatter.
+  The homepage (`app/page.tsx`) imports that file via `@next/mdx` and renders
+  it inside `.prose`. Chrome around it (contact `.extLinks` row + signature)
+  stays in the React page.
+- **Markdown → marks.** Links become sage `.mark` chips (`mdx-components.tsx`):
+  external `https://…` links also get a trailing ↗; internal paths use
+  `next/link`. Wrap a non-link keyword in `**bold**` to get the same mark
+  highlight (e.g. `**Systems Design Engineering**`).
 - **`.extLinks`** — bottom row of GitHub / LinkedIn / Email with ↗ suffixes.
 - **Signature** — `public/signature.png` at 32px tall under the link row.
 
@@ -235,13 +239,12 @@ shell**.
 
 ## Adding to the page — quick rules
 
-1. New content route → wrap in `SiteShell` and keep prose ≤~34rem.
-2. New styles → write plain CSS in `app/globals.css`, using the color tokens.
-3. New project → push to `app/projects-data.ts`.
-4. New `/now` update → add `content/now/YYYY-MM-DD.md` (filename is the date;
+1. Edit About copy → change `content/about.md` (links + `**highlights**`).
+2. New `/now` update → add `content/now/YYYY-MM-DD.md` (filename is the date;
    older files stay on the page, sorted newest-first).
-5. Inline keywords that should draw the eye → use `.mark` (and `ExternalLink`
-   with `mark` for outbound URLs).
+3. New project → push to `app/projects-data.ts`.
+4. New content route → wrap in `SiteShell` and keep prose ≤~34rem.
+5. New styles → write plain CSS in `app/globals.css`, using the color tokens.
 6. Do **not** add display type, cards, pink/cream accents, or icon-heavy chrome
    on the content routes.
 7. Keep it light-only; honor `prefers-reduced-motion`.

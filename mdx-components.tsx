@@ -1,27 +1,43 @@
 import type { MDXComponents } from "mdx/types";
+import Link from "next/link";
 import type { ComponentPropsWithoutRef } from "react";
 
-function ExternalAwareLink({
+function SmartLink({
   href,
   children,
   ...rest
 }: ComponentPropsWithoutRef<"a">) {
-  const external = typeof href === "string" && /^https?:\/\//.test(href);
-  return (
-    <a
-      href={href}
-      className="mark"
-      {...(external
-        ? { target: "_blank", rel: "noopener noreferrer" }
-        : undefined)}
-      {...rest}
-    >
-      {children}
-      {external ? (
+  const url = typeof href === "string" ? href : undefined;
+  const external = !!url && /^https?:\/\//.test(url);
+
+  if (external) {
+    return (
+      <a
+        href={url}
+        className="mark"
+        target="_blank"
+        rel="noopener noreferrer"
+        {...rest}
+      >
+        {children}
         <span className="extArrow" aria-hidden="true">
           ↗
         </span>
-      ) : null}
+      </a>
+    );
+  }
+
+  if (url && (url.startsWith("/") || url.startsWith("#"))) {
+    return (
+      <Link href={url} className="mark" {...rest}>
+        {children}
+      </Link>
+    );
+  }
+
+  return (
+    <a href={url} className="mark" {...rest}>
+      {children}
     </a>
   );
 }
@@ -37,9 +53,9 @@ const components = {
     <h3 className="now-heading">{children}</h3>
   ),
   p: ({ children }: ComponentPropsWithoutRef<"p">) => (
-    <p className="now-p">{children}</p>
+    <p className="md-p">{children}</p>
   ),
-  a: ExternalAwareLink,
+  a: SmartLink,
   ul: ({ children }: ComponentPropsWithoutRef<"ul">) => (
     <ul className="now-list">{children}</ul>
   ),
@@ -47,8 +63,9 @@ const components = {
     <ol className="now-list">{children}</ol>
   ),
   li: ({ children }: ComponentPropsWithoutRef<"li">) => <li>{children}</li>,
+  // **bold** → sage mark highlight (easy emphasis in markdown)
   strong: ({ children }: ComponentPropsWithoutRef<"strong">) => (
-    <strong className="now-strong">{children}</strong>
+    <strong className="mark">{children}</strong>
   ),
   em: ({ children }: ComponentPropsWithoutRef<"em">) => <em>{children}</em>,
   hr: () => <hr className="now-hr" />,
