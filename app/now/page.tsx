@@ -7,7 +7,7 @@ export default async function NowPage() {
 
   return (
     <SiteShell>
-      <main className="page">
+      <main>
         <h1 className="name">Now</h1>
         <p className="tagline">
           {latest

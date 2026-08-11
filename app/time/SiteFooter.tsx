@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 export default function SiteFooter() {
@@ -29,9 +30,9 @@ export default function SiteFooter() {
           What is this?
         </button>
         <span className="footer__dot" aria-hidden="true" />
-        <a className="footer__btn" href="/">
+        <Link className="footer__btn" href="/">
           Home
-        </a>
+        </Link>
       </footer>
 
       {open && (

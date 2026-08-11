@@ -14,7 +14,7 @@ export function SiteNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="siteNav" aria-label="Primary">
+    <nav aria-label="Primary">
       <ul className="siteNav__list">
         {links.map((link) => {
           const active =

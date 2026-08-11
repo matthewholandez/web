@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 export default function ProjectsPage() {
   return (
     <SiteShell>
-      <main className="page">
+      <main>
         <h1 className="srOnly">Projects</h1>
 
         <div className="prose">

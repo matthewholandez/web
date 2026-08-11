@@ -6,7 +6,7 @@ import { SiteShell } from "./components/SiteShell";
 export default function Home() {
   return (
     <SiteShell>
-      <main className="page">
+      <main>
         <h1 className="srOnly">Matthew Holandez</h1>
 
         <div className="prose">
@@ -20,12 +20,9 @@ export default function Home() {
           <ExternalLink href="https://linkedin.com/in/mholandez">
             LinkedIn
           </ExternalLink>
-          <a href="mailto:mholandez@uwaterloo.ca">
+          <ExternalLink href="mailto:mholandez@uwaterloo.ca">
             Email
-            <span className="extArrow" aria-hidden="true">
-              ↗
-            </span>
-          </a>
+          </ExternalLink>
         </div>
 
         <Image

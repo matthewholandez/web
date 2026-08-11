@@ -18,16 +18,13 @@ type or heavy chrome.
 ## Stack
 
 - **Next.js 16** (App Router) + **React 19**
-- **Plain CSS**, hand-written in `app/globals.css`. No CSS modules, no
-  styled-components, no Tailwind utility classes in markup. (Tailwind v4 is
-  installed via PostCSS but the page is styled with semantic class names and
-  raw CSS — keep new styling in `globals.css` / route CSS files to match.)
-- **MDX** via `@next/mdx` for the `/now` page — dated markdown in
-  `content/now/YYYY-MM-DD.md` is compiled to React and mapped through
-  `mdx-components.tsx`.
+- **Plain CSS**, hand-written in `app/globals.css` / route CSS files. No CSS
+  modules, no styled-components, no Tailwind.
+- **MDX** via `@next/mdx` for About (`content/about.md`) and `/now`
+  (`content/now/YYYY-MM-DD.md`), mapped through `mdx-components.tsx`.
 - **Neue Montreal** via `next/font/local`, registered once in `app/fonts.ts` (exposed
   as `--font-neue`, applied to `<html>` in `app/layout.tsx`). Two weight-mapped cuts
-  are bundled from `app/fonts/`, so `font-weight` picks the cut.
+  are bundled from `app/fonts/` (Regular + Semibold), so `font-weight` picks the cut.
 - Shared chrome lives in `app/components/` — `SiteShell`, `SiteNav` (client, for
   active route), and `ExternalLink` (↗ suffix for outbound links).
 
@@ -150,10 +147,9 @@ in a visually hidden `<h1 class="srOnly">` — identity lives in the opening pro
 
 ## Iconography
 
-- Content routes prefer text + ↗ over icon rows.
-- `/time` and any remaining icon use keep stroke-based lucide / hand-authored
-  brand icons at 18px, `stroke-width: 1.75`, when needed.
-- Brand SVGs live in `app/brand-icons.tsx`.
+- Content routes use text + ↗ (`.extArrow` via `ExternalLink` / MDX links).
+  There is no icon library.
+- No raster affiliation logos on content routes.
 
 ---
 
