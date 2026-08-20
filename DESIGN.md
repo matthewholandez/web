@@ -21,8 +21,9 @@ type or heavy chrome.
 - **Plain CSS**, hand-written in `app/globals.css` / route CSS files. No CSS
   modules, no styled-components, no Tailwind.
 - **MDX** via `@next/mdx` for About (`content/about.md`), Contact
-  (`content/contact.md`), and `/now` (`content/now/YYYY-MM-DD.md`), mapped
-  through `mdx-components.tsx`.
+  (`content/contact.md`), Privacy (`content/privacy.md`), and `/now`
+  (`content/now/YYYY-MM-DD.md`), mapped through `mdx-components.tsx`.
+- **Vercel Web Analytics** via `@vercel/analytics` in the root layout.
 - **Neue Montreal** via `next/font/local`, registered once in `app/fonts.ts` (exposed
   as `--font-neue`, applied to `<html>` in `app/layout.tsx`). Regular is bundled from
   `app/fonts/`, so `font-weight: 400` picks that cut.
@@ -93,8 +94,9 @@ in a visually hidden `<h1 class="srOnly">` — identity lives in the opening pro
 
 ### Site shell
 
-- **`SiteShell`** — wraps About, Now, Projects, and Contact with `.shell` / sticky
-  `.shell__nav` / `.shell__main`.
+- **`SiteShell`** — wraps About, Now, Projects, Contact, and Privacy with
+  `.shell` / sticky `.shell__nav` / `.shell__main`, plus a quiet `.siteFooter`
+  privacy link at the bottom of the main column.
 - **`SiteNav`** — vertical list: About (`/`), Projects (`/projects`), Contact
   (`/contact`). `/now` stays in the links array but is unpublished via
   `NOW_PUBLISHED` in `app/now/published.ts`. Hover uses `--mark`; the active
@@ -126,6 +128,14 @@ in a visually hidden `<h1 class="srOnly">` — identity lives in the opening pro
   The page (`app/contact/page.tsx`) imports it via `@next/mdx` and renders it
   inside `.prose`. Typically one marked `mailto:` link (no form, no ↗).
   Semantic heading is visually hidden like About and Projects.
+
+### Privacy (`/privacy`)
+
+- **Authoring.** Edit `content/privacy.md` — plain markdown, no frontmatter.
+  Boilerplate privacy copy noting Vercel Web Analytics (cookieless page-view
+  analytics). Rendered in `.prose.privacy` with quiet body-sized `h2`s.
+- **Footer link.** Every `SiteShell` page shows a muted lowercase `privacy`
+  link (`.siteFooter`) at the bottom of the main column — not in the nav.
 
 ### Marks & arrows
 
@@ -210,7 +220,11 @@ copy link in `content/about.md` at the same time.
   both set in Neue Montreal Regular. Keep it in sync with the page's type/color
   if those change.
 - **Structured data:** `Person` JSON-LD injected in `app/layout.tsx`.
-- **Sitemap:** `/`, `/projects`, `/contact` (`/now` omitted while unpublished).
+- **Sitemap:** `/`, `/projects`, `/contact`, `/privacy` (`/now` omitted while
+  unpublished).
+- **Analytics:** `@vercel/analytics` (`Analytics` from `@vercel/analytics/next`)
+  in `app/layout.tsx`. Tracks page views in production when Web Analytics is
+  enabled on the Vercel project.
 
 ---
 
@@ -218,11 +232,12 @@ copy link in `content/about.md` at the same time.
 
 1. Edit About copy → change `content/about.md` (links + `**highlights**`).
 2. Edit Contact copy → change `content/contact.md`.
-3. New `/now` update → add `content/now/YYYY-MM-DD.md` (filename is the date;
+3. Edit Privacy copy → change `content/privacy.md`.
+4. New `/now` update → add `content/now/YYYY-MM-DD.md` (filename is the date;
    older files stay on the page, sorted newest-first).
-4. New project → push to `app/projects-data.ts`.
-5. New content route → wrap in `SiteShell` and keep prose ≤~34rem.
-6. New styles → write plain CSS in `app/globals.css`, using the color tokens.
-7. Do **not** add display type, cards, pink/cream accents, or icon-heavy chrome
+5. New project → push to `app/projects-data.ts`.
+6. New content route → wrap in `SiteShell` and keep prose ≤~34rem.
+7. New styles → write plain CSS in `app/globals.css`, using the color tokens.
+8. Do **not** add display type, cards, pink/cream accents, or icon-heavy chrome
    on the content routes.
-8. Keep it light-only; honor `prefers-reduced-motion`.
+9. Keep it light-only; honor `prefers-reduced-motion`.

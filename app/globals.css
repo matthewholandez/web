@@ -192,6 +192,41 @@ a:hover .extArrow {
   opacity: 0.9;
 }
 
+/* ——— Site footer ——— */
+
+.siteFooter {
+  margin: 4rem 0 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.siteFooter__link {
+  color: var(--muted);
+  transition: color 150ms ease;
+}
+
+.siteFooter__link:hover {
+  color: var(--ink);
+}
+
+/* ——— Privacy prose headings ——— */
+
+.privacy h2,
+.privacy .md-heading {
+  margin: 1.75rem 0 0;
+  font-size: inherit;
+  font-weight: 400;
+  line-height: inherit;
+  letter-spacing: inherit;
+  color: var(--ink);
+}
+
+.privacy h2:first-child,
+.privacy .md-heading:first-child {
+  margin-top: 1.35rem;
+}
+
 /* ——— Projects list ——— */
 
 .projectList {
@@ -252,7 +287,8 @@ a:hover .extArrow {
 
   .siteNav__link,
   .mark,
-  .extArrow {
+  .extArrow,
+  .siteFooter__link {
     transition: none;
   }
 }
