@@ -20,9 +20,6 @@ export default function Home() {
           <ExternalLink href="https://linkedin.com/in/mholandez">
             LinkedIn
           </ExternalLink>
-          <ExternalLink href="mailto:mholandez@uwaterloo.ca">
-            Email
-          </ExternalLink>
         </div>
 
         <Image

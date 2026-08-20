@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { NOW_PUBLISHED } from "../now/published";
 
 const links = [
   { href: "/", label: "About" },
-  { href: "/now", label: "Now" },
+  { href: "/now", label: "Now", hidden: !NOW_PUBLISHED },
   { href: "/projects", label: "Projects" },
-  { href: "mailto:mholandez@uwaterloo.ca", label: "Say Hi", external: true },
+  { href: "/contact", label: "Contact" },
 ] as const;
 
 export function SiteNav() {
@@ -16,37 +17,31 @@ export function SiteNav() {
   return (
     <nav aria-label="Primary">
       <ul className="siteNav__list">
-        {links.map((link) => {
-          const active =
-            !("external" in link && link.external) &&
-            (link.href === "/"
-              ? pathname === "/"
-              : pathname === link.href || pathname.startsWith(`${link.href}/`));
+        {links
+          .filter((link) => !("hidden" in link && link.hidden))
+          .map((link) => {
+            const active =
+              link.href === "/"
+                ? pathname === "/"
+                : pathname === link.href ||
+                  pathname.startsWith(`${link.href}/`);
 
-          if ("external" in link && link.external) {
             return (
               <li key={link.href}>
-                <a className="siteNav__link" href={link.href}>
+                <Link
+                  className={
+                    active
+                      ? "siteNav__link siteNav__link--active"
+                      : "siteNav__link"
+                  }
+                  href={link.href}
+                  aria-current={active ? "page" : undefined}
+                >
                   {link.label}
-                </a>
+                </Link>
               </li>
             );
-          }
-
-          return (
-            <li key={link.href}>
-              <Link
-                className={
-                  active ? "siteNav__link siteNav__link--active" : "siteNav__link"
-                }
-                href={link.href}
-                aria-current={active ? "page" : undefined}
-              >
-                {link.label}
-              </Link>
-            </li>
-          );
-        })}
+          })}
       </ul>
     </nav>
   );

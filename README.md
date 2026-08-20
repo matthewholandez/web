@@ -12,8 +12,8 @@ pnpm lint
 | Route | Source |
 | --- | --- |
 | `/` | `content/about.md` |
-| `/now` | `content/now/*.md` |
+| `/now` | `content/now/*.md` (unpublished) |
 | `/projects` | `app/projects-data.ts` |
-| `/time` | `app/time/` countdown |
+| `/contact` | `content/contact.md` |
 
 Design system: `DESIGN.md`.

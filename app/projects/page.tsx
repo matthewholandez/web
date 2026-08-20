@@ -25,8 +25,7 @@ export default function ProjectsPage() {
 
         <div className="prose">
           <p>
-            A short list of things I&apos;ve built — tools, translations, and
-            visualizations. Most of them live on GitHub.
+            These are some things I've built!
           </p>
         </div>
 

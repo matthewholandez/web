@@ -4,8 +4,8 @@ This is the design reference for **mholandez.com** — a personal site for Matth
 Holandez. The aesthetic is **quiet prose with a left sidebar**: cool sage marks on
 a soft green-gray page, set entirely in **Neue Montreal**. There is no component
 library and no UI framework beyond the basics; everything is hand-authored plain
-CSS in `app/globals.css` (shared shell + content routes), `app/now/now.css`
-(the `/now` route), and `app/time/time.css` (the `/time` route).
+CSS in `app/globals.css` (shared shell + content routes) and `app/now/now.css`
+(the `/now` route).
 
 If you're picking this up as a designer, the guiding principle is **whisper, don't
 shout**. The site reads like a short personal calling card — no shadows, no cards,
@@ -20,11 +20,12 @@ type or heavy chrome.
 - **Next.js 16** (App Router) + **React 19**
 - **Plain CSS**, hand-written in `app/globals.css` / route CSS files. No CSS
   modules, no styled-components, no Tailwind.
-- **MDX** via `@next/mdx` for About (`content/about.md`) and `/now`
-  (`content/now/YYYY-MM-DD.md`), mapped through `mdx-components.tsx`.
+- **MDX** via `@next/mdx` for About (`content/about.md`), Contact
+  (`content/contact.md`), and `/now` (`content/now/YYYY-MM-DD.md`), mapped
+  through `mdx-components.tsx`.
 - **Neue Montreal** via `next/font/local`, registered once in `app/fonts.ts` (exposed
-  as `--font-neue`, applied to `<html>` in `app/layout.tsx`). Two weight-mapped cuts
-  are bundled from `app/fonts/` (Regular + Semibold), so `font-weight` picks the cut.
+  as `--font-neue`, applied to `<html>` in `app/layout.tsx`). Regular is bundled from
+  `app/fonts/`, so `font-weight: 400` picks that cut.
 - Shared chrome lives in `app/components/` — `SiteShell`, `SiteNav` (client, for
   active route), and `ExternalLink` (↗ suffix for outbound links).
 
@@ -45,7 +46,7 @@ gradient), not a flat cream field and not pink.
 | `--muted`      | `#6e7470` | Secondary text — dates, project descriptions                  |
 | `--mark`       | `#cfe3d6` | Sage highlight — active nav, inline keywords/links            |
 | `--mark-hover` | `#b9d6c4` | Slightly deeper sage on hover                                 |
-| `--faint`      | `#e2e6e3` | Soft marks (footer dot, `/time` colon separators)             |
+| `--faint`      | `#e2e6e3` | Soft marks (`/now` rule separators)                           |
 
 Usage rules:
 
@@ -63,9 +64,8 @@ Usage rules:
   stack: `ui-sans-serif, system-ui, -apple-system, sans-serif`.
 - **Base:** 16px, weight 400, line-height 1.7, tracking `-0.005em` on the `body`.
   Prose is meant to breathe — keep leading generous.
-- **Weights in use — two cuts** (`app/fonts.ts` maps each to a `font-weight`):
-  - **400 Regular** — shell pages (About, Now, Projects) and secondary `/time` copy.
-  - **600 Semibold** — reserved for the `/time` countdown numerals and separators.
+- **Weight in use — one cut** (`app/fonts.ts` maps it to a `font-weight`):
+  - **400 Regular** — all shell pages (About, Now, Projects, Contact).
 
 There are **no display sizes** on the content routes. The About page keeps the name
 in a visually hidden `<h1 class="srOnly">` — identity lives in the opening prose
@@ -87,20 +87,19 @@ in a visually hidden `<h1 class="srOnly">` — identity lives in the opening pro
   `~2.75rem` top margin.
 - No cards, no bordered panels, no inset media. Nesting stays flat.
 
-`/time` is the exception: full-viewport centered countdown, no sidebar shell.
-
 ---
 
 ## Components / patterns
 
 ### Site shell
 
-- **`SiteShell`** — wraps About, Now, and Projects with `.shell` / sticky
+- **`SiteShell`** — wraps About, Now, Projects, and Contact with `.shell` / sticky
   `.shell__nav` / `.shell__main`.
-- **`SiteNav`** — vertical list: About (`/`), Now (`/now`), Projects (`/projects`),
-  Say Hi (`mailto:…`). Hover uses `--mark`; the active route uses the deeper
-  `--mark-hover` so current page reads clearly. On small screens the list goes
-  horizontal.
+- **`SiteNav`** — vertical list: About (`/`), Projects (`/projects`), Contact
+  (`/contact`). `/now` stays in the links array but is unpublished via
+  `NOW_PUBLISHED` in `app/now/published.ts`. Hover uses `--mark`; the active
+  route uses the deeper `--mark-hover` so current page reads clearly. On small
+  screens the list goes horizontal.
 
 ### About (`/`)
 
@@ -120,6 +119,13 @@ in a visually hidden `<h1 class="srOnly">` — identity lives in the opening pro
 - Short intro prose, then `.projectList` — each item is a marked `ExternalLink`
   name plus muted `.projectList__desc`. Project data lives in
   `app/projects-data.ts`.
+
+### Contact (`/contact`)
+
+- **Authoring.** Edit `content/contact.md` — plain markdown, no frontmatter.
+  The page (`app/contact/page.tsx`) imports it via `@next/mdx` and renders it
+  inside `.prose`. Typically one marked `mailto:` link (no form, no ↗).
+  Semantic heading is visually hidden like About and Projects.
 
 ### Marks & arrows
 
@@ -171,6 +177,11 @@ blurb about what Matthew is currently up to. It uses the shared `SiteShell` and
 palette; route-specific prose styles live in `app/now/now.css`, scoped under
 `.now`.
 
+**Unpublished.** Files stay; the page still renders at `/now`. `NOW_PUBLISHED`
+in `app/now/published.ts` is `false`, which hides it from nav, sitemap, and
+robots, and sets `noindex`. Flip that flag to publish. Restore the About
+copy link in `content/about.md` at the same time.
+
 - **Authoring.** One file per point in time: `content/now/YYYY-MM-DD.md`
   (plain markdown body, no frontmatter). Drop a new dated file to post an
   update; older files stay and remain visible. Display order is filename
@@ -182,36 +193,6 @@ palette; route-specific prose styles live in `app/now/now.css`, scoped under
   from the newest filename, then one `<article class="now-entry">` per file —
   each with a muted `<time>` taken from its `YYYY-MM-DD` name. Navigation back
   home is via the sidebar (no footer “← Home” link).
-
----
-
-## The `/time` countdown page
-
-`/time` (`app/time/`) is the **one place scale is allowed** — a full-screen live
-countdown to the next queued milestone. It shares the site's palette
-(`:root` tokens) and typeface (`--font-neue`, inherited from `<html>`); it differs by
-centering the readout, using Semibold for the numerals, and **omitting the sidebar
-shell**.
-
-- **Weights.** Numerals/separators are Neue Montreal **Semibold (600)**; labels, meta,
-  and footer are **Regular (400)**. No uppercase tracked eyebrows.
-- **Scoping convention:** all styles live in `app/time/time.css`, every selector
-  prefixed with `.time-remaining`. That wrapper (rendered in `app/time/layout.tsx`) is a
-  full-viewport surface (`min-height: 100dvh`) that centers the readout. Keep any new
-  `/time` styles under this prefix so they stay contained to the route.
-- **Key pieces:** `.readout`/`.cell`/`.num` (fluid `clamp(2.75rem, 12vw, 8rem)`
-  numerals, `tabular-nums`), a blinking `.sep--blink` colon on the minutes cell,
-  `.meta` lines (business-days count + target), a fixed `.footer` with a
-  "What is this?" button + "Home" link, and an accessible about `.modal`
-  (`role="dialog"`, Escape / click-outside to close, focus moved to Close).
-- **Motion:** `blink` (1s) and `fade` (0.15s) keyframes, both disabled under
-  `prefers-reduced-motion: reduce`.
-- **Data:** `app/time/config.ts` holds an `EVENTS` queue (`target`, `targetLabel`,
-  `eventLabel`) plus Ontario holidays. `getActiveEvent(now)` / `getDisplayEvent(now)`
-  pick the closest future milestone (or the latest past one when the queue is
-  exhausted). Business-day math lives in `app/time/businessDays.ts`. To schedule
-  another countdown, append to `EVENTS` — the page always shows the soonest
-  upcoming entry.
 
 ---
 
@@ -229,18 +210,19 @@ shell**.
   both set in Neue Montreal Regular. Keep it in sync with the page's type/color
   if those change.
 - **Structured data:** `Person` JSON-LD injected in `app/layout.tsx`.
-- **Sitemap:** `/`, `/now`, `/projects`, `/time`.
+- **Sitemap:** `/`, `/projects`, `/contact` (`/now` omitted while unpublished).
 
 ---
 
 ## Adding to the page — quick rules
 
 1. Edit About copy → change `content/about.md` (links + `**highlights**`).
-2. New `/now` update → add `content/now/YYYY-MM-DD.md` (filename is the date;
+2. Edit Contact copy → change `content/contact.md`.
+3. New `/now` update → add `content/now/YYYY-MM-DD.md` (filename is the date;
    older files stay on the page, sorted newest-first).
-3. New project → push to `app/projects-data.ts`.
-4. New content route → wrap in `SiteShell` and keep prose ≤~34rem.
-5. New styles → write plain CSS in `app/globals.css`, using the color tokens.
-6. Do **not** add display type, cards, pink/cream accents, or icon-heavy chrome
+4. New project → push to `app/projects-data.ts`.
+5. New content route → wrap in `SiteShell` and keep prose ≤~34rem.
+6. New styles → write plain CSS in `app/globals.css`, using the color tokens.
+7. Do **not** add display type, cards, pink/cream accents, or icon-heavy chrome
    on the content routes.
-7. Keep it light-only; honor `prefers-reduced-motion`.
+8. Keep it light-only; honor `prefers-reduced-motion`.
