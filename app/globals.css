@@ -210,21 +210,36 @@ a:hover .extArrow {
   color: var(--ink);
 }
 
-/* ——— Privacy prose headings ——— */
+/* ——— Privacy ——— */
+
+.privacyPage .name {
+  margin: 0 0 0.35rem;
+  font-size: 1.35rem;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+}
+
+.privacy.prose {
+  gap: 0.85rem;
+}
 
 .privacy h2,
 .privacy .md-heading {
-  margin: 1.75rem 0 0;
-  font-size: inherit;
+  margin: 1.85rem 0 0;
+  font-size: 1.125rem;
   font-weight: 400;
-  line-height: inherit;
-  letter-spacing: inherit;
+  line-height: 1.4;
+  letter-spacing: -0.015em;
   color: var(--ink);
 }
 
 .privacy h2:first-child,
 .privacy .md-heading:first-child {
-  margin-top: 1.35rem;
+  margin-top: 1.1rem;
+}
+
+.privacy .md-p {
+  color: var(--muted);
 }
 
 /* ——— Projects list ——— */

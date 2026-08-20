@@ -133,7 +133,11 @@ in a visually hidden `<h1 class="srOnly">` — identity lives in the opening pro
 
 - **Authoring.** Edit `content/privacy.md` — plain markdown, no frontmatter.
   Boilerplate privacy copy noting Vercel Web Analytics (cookieless page-view
-  analytics). Rendered in `.prose.privacy` with quiet body-sized `h2`s.
+  analytics). Rendered in `.prose.privacy`.
+- **Hierarchy.** Still one type cut (Regular). The page title (`.privacyPage
+  .name`) steps up to `1.35rem`. Section `h2`s stay near body size but sit in
+  `--ink` with tighter tracking; body paragraphs use `--muted` so heading vs
+  copy separates by value, not weight.
 - **Footer link.** Every `SiteShell` page shows a muted lowercase `privacy`
   link (`.siteFooter`) at the bottom of the main column — not in the nav.
 

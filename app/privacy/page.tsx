@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <SiteShell>
-      <main>
+      <main className="privacyPage">
         <h1 className="name">Privacy</h1>
         <div className="prose privacy">
           <Privacy />
