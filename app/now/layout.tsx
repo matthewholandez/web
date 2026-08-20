@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
+import { NOW_PUBLISHED } from "./published";
 import "./now.css";
 
 export const metadata: Metadata = {
   title: "Now",
   description: "What Matthew Holandez is up to right now.",
+  robots: NOW_PUBLISHED
+    ? { index: true, follow: true }
+    : { index: false, follow: false },
   alternates: {
     canonical: "/now",
   },

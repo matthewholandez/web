@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { NOW_PUBLISHED } from "./now/published";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
@@ -8,17 +9,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 1,
     },
+    ...(NOW_PUBLISHED
+      ? [
+          {
+            url: "https://mholandez.com/now",
+            lastModified: new Date(),
+            changeFrequency: "monthly" as const,
+            priority: 0.8,
+          },
+        ]
+      : []),
     {
-      url: "https://mholandez.com/now",
+      url: "https://mholandez.com/projects",
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
-      url: "https://mholandez.com/time",
+      url: "https://mholandez.com/contact",
       lastModified: new Date(),
       changeFrequency: "yearly",
-      priority: 0.5,
+      priority: 0.6,
     },
   ];
 }

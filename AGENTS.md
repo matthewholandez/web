@@ -20,7 +20,7 @@ If a change touches how the site looks or how UI is built but doesn't fit an exi
 
 ## Cursor Cloud specific instructions
 
-Single Next.js 16 (App Router) app; **pnpm** is the package manager (`pnpm-lock.yaml`). Standard scripts are in `package.json`: `pnpm dev` (dev server on port 3000), `pnpm build`, `pnpm start`, `pnpm lint`. No database, backend, env vars, or external services are needed — the `/time` countdown is fully client-side.
+Single Next.js 16 (App Router) app; **pnpm** is the package manager (`pnpm-lock.yaml`). Standard scripts are in `package.json`: `pnpm dev` (dev server on port 3000), `pnpm build`, `pnpm start`, `pnpm lint`. No database, backend, env vars, or external services are needed. Styling is plain CSS (no Tailwind).
 
-- Dev/test target: `http://localhost:3000` (routes: `/` and `/time`). Run the dev server with `pnpm dev`.
-- Heads up: `pnpm lint` currently reports a pre-existing error in `app/time/SiteFooter.tsx` (an `<a href="/">` that Next wants as `<Link />`) and exits non-zero. This is not caused by environment setup — don't treat a failing lint as a broken setup.
+- Dev/test target: `http://localhost:3000` (routes: `/`, `/projects`, `/contact`; `/now` exists but is unpublished). Run the dev server with `pnpm dev`.
+- About copy: `content/about.md`. Contact copy: `content/contact.md`. Now updates: `content/now/YYYY-MM-DD.md`. To publish `/now`, set `NOW_PUBLISHED` in `app/now/published.ts`.
