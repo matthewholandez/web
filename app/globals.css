@@ -192,6 +192,56 @@ a:hover .extArrow {
   opacity: 0.9;
 }
 
+/* ——— Site footer ——— */
+
+.siteFooter {
+  margin: 4rem 0 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.siteFooter__link {
+  color: var(--muted);
+  transition: color 150ms ease;
+}
+
+.siteFooter__link:hover {
+  color: var(--ink);
+}
+
+/* ——— Privacy ——— */
+
+.privacyPage .name {
+  margin: 0 0 0.35rem;
+  font-size: 1.35rem;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+}
+
+.privacy.prose {
+  gap: 0.85rem;
+}
+
+.privacy h2,
+.privacy .md-heading {
+  margin: 1.85rem 0 0;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+.privacy h2:first-child,
+.privacy .md-heading:first-child {
+  margin-top: 1.1rem;
+}
+
+.privacy .md-p {
+  color: var(--muted);
+}
+
 /* ——— Projects list ——— */
 
 .projectList {
@@ -252,7 +302,8 @@ a:hover .extArrow {
 
   .siteNav__link,
   .mark,
-  .extArrow {
+  .extArrow,
+  .siteFooter__link {
     transition: none;
   }
 }
