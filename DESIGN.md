@@ -23,7 +23,8 @@ type or heavy chrome.
 - **MDX** via `@next/mdx` for About (`content/about.md`), Contact
   (`content/contact.md`), Privacy (`content/privacy.md`), and `/now`
   (`content/now/YYYY-MM-DD.md`), mapped through `mdx-components.tsx`.
-- **Vercel Web Analytics** via `@vercel/analytics` in the root layout.
+- **Vercel Web Analytics** via `@vercel/analytics` and **Speed Insights** via
+  `@vercel/speed-insights` in the root layout.
 - **Neue Montreal** via `next/font/local`, registered once in `app/fonts.ts` (exposed
   as `--font-neue`, applied to `<html>` in `app/layout.tsx`). Regular is bundled from
   `app/fonts/`, so `font-weight: 400` picks that cut.
@@ -229,6 +230,9 @@ copy link in `content/about.md` at the same time.
 - **Analytics:** `@vercel/analytics` (`Analytics` from `@vercel/analytics/next`)
   in `app/layout.tsx`. Tracks page views in production when Web Analytics is
   enabled on the Vercel project.
+- **Speed Insights:** `@vercel/speed-insights` (`SpeedInsights` from
+  `@vercel/speed-insights/next`) in `app/layout.tsx`. Reports Core Web Vitals
+  in production when Speed Insights is enabled on the Vercel project.
 
 ---
 

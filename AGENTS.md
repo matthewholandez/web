@@ -25,3 +25,4 @@ Single Next.js 16 (App Router) app; **pnpm** is the package manager (`pnpm-lock.
 - Dev/test target: `http://localhost:3000` (routes: `/`, `/projects`, `/contact`, `/privacy`; `/now` exists but is unpublished). Run the dev server with `pnpm dev`.
 - About copy: `content/about.md`. Contact copy: `content/contact.md`. Privacy copy: `content/privacy.md`. Now updates: `content/now/YYYY-MM-DD.md`. To publish `/now`, set `NOW_PUBLISHED` in `app/now/published.ts`.
 - Analytics: `@vercel/analytics` is wired in `app/layout.tsx`; enable Web Analytics in the Vercel project dashboard for production data.
+- Speed Insights: `@vercel/speed-insights` is wired in `app/layout.tsx`; enable Speed Insights in the Vercel project dashboard for production data.
