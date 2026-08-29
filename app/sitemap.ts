@@ -20,12 +20,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         ]
       : []),
     {
-      url: "https://mholandez.com/projects",
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
       url: "https://mholandez.com/contact",
       lastModified: new Date(),
       changeFrequency: "yearly",

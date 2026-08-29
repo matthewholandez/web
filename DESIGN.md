@@ -67,7 +67,7 @@ Usage rules:
 - **Base:** 16px, weight 400, line-height 1.7, tracking `-0.005em` on the `body`.
   Prose is meant to breathe — keep leading generous.
 - **Weight in use — one cut** (`app/fonts.ts` maps it to a `font-weight`):
-  - **400 Regular** — all shell pages (About, Now, Projects, Contact).
+  - **400 Regular** — all shell pages (About, Now, Contact, Privacy).
 
 There are **no display sizes** on the content routes. The About page keeps the name
 in a visually hidden `<h1 class="srOnly">` — identity lives in the opening prose
@@ -104,11 +104,11 @@ in a visually hidden `<h1 class="srOnly">` — identity lives in the opening pro
 
 ### Site shell
 
-- **`SiteShell`** — wraps About, Now, Projects, Contact, and Privacy with
+- **`SiteShell`** — wraps About, Now, Contact, and Privacy with
   `.shell` / sticky `.shell__nav` / `.shell__main`, plus a quiet `.siteFooter`
   privacy link at the bottom of the main column.
-- **`SiteNav`** — vertical list: About (`/`), Projects (`/projects`), Contact
-  (`/contact`). `/now` stays in the links array but is unpublished via
+- **`SiteNav`** — vertical list: About (`/`) and Contact (`/contact`). `/now`
+  stays in the links array but is unpublished via
   `NOW_PUBLISHED` in `app/now/published.ts`. Hover uses `--mark`; the active
   route uses the deeper `--mark-hover` so current page reads clearly. Each page
   explicitly gives `SiteShell` its active href, which remains stable when an
@@ -127,18 +127,12 @@ in a visually hidden `<h1 class="srOnly">` — identity lives in the opening pro
 - **`.extLinks`** — bottom row of GitHub / LinkedIn / Email with ↗ suffixes.
 - **Signature** — `public/signature.png` at 32px tall under the link row.
 
-### Projects (`/projects`)
-
-- Short intro prose, then `.projectList` — each item is a marked `ExternalLink`
-  name plus muted `.projectList__desc`. Project data lives in
-  `app/projects-data.ts`.
-
 ### Contact (`/contact`)
 
 - **Authoring.** Edit `content/contact.md` — plain markdown, no frontmatter.
   The page (`app/contact/page.tsx`) imports it via `@next/mdx` and renders it
   inside `.prose`. Typically one marked `mailto:` link (no form, no ↗).
-  Semantic heading is visually hidden like About and Projects.
+  Semantic heading is visually hidden like About.
 
 ### Privacy (`/privacy`)
 
@@ -265,7 +259,7 @@ copy link in `content/about.md` at the same time.
   both set in Neue Montreal Regular. Keep it in sync with the page's type/color
   if those change.
 - **Structured data:** `Person` JSON-LD injected in `app/layout.tsx`.
-- **Sitemap:** `/`, `/projects`, `/contact`, `/privacy` (`/now` omitted while
+- **Sitemap:** `/`, `/contact`, `/privacy` (`/now` omitted while
   unpublished).
 - **Analytics:** `@vercel/analytics` (`Analytics` from `@vercel/analytics/next`)
   in `app/layout.tsx`. Tracks page views in production when Web Analytics is
@@ -283,7 +277,7 @@ copy link in `content/about.md` at the same time.
 3. Edit Privacy copy → change `content/privacy.md`.
 4. New `/now` update → add `content/now/YYYY-MM-DD.md` (filename is the date;
    older files stay on the page, sorted newest-first).
-5. New project → push to `app/projects-data.ts`.
+5. New project → add it to the project sentence in `content/about.md`.
 6. New content route → wrap in `SiteShell` and keep prose ≤~34rem.
 7. New styles → write plain CSS in `app/globals.css`, using the color tokens.
 8. Do **not** add display type, cards, pink/cream accents, or icon-heavy chrome

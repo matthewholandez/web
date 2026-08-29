@@ -4,7 +4,6 @@ import { NOW_PUBLISHED } from "../now/published";
 const links = [
   { href: "/", label: "About" },
   { href: "/now", label: "Now", hidden: !NOW_PUBLISHED },
-  { href: "/projects", label: "Projects" },
   { href: "/contact", label: "Contact" },
 ] as const;
 

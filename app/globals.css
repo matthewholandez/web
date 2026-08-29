@@ -437,28 +437,6 @@ a:hover .extArrow {
   color: var(--muted);
 }
 
-/* ——— Projects list ——— */
-
-.projectList {
-  margin: 2rem 0 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 1.1rem;
-}
-
-.projectList__item {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.45rem 0.75rem;
-}
-
-.projectList__desc {
-  color: var(--muted);
-}
-
 /* ——— Quiet headings / meta (Now) ——— */
 
 .name {
