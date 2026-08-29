@@ -4,8 +4,7 @@ This is the design reference for **mholandez.com** — a personal site for Matth
 Holandez. The aesthetic is **quiet prose with a left sidebar**: cool sage marks on
 a soft green-gray page, set entirely in **Neue Montreal**. There is no component
 library and no UI framework beyond the basics; everything is hand-authored plain
-CSS in `app/globals.css` (shared shell + content routes) and `app/now/now.css`
-(the `/now` route).
+CSS in `app/globals.css`.
 
 If you're picking this up as a designer, the guiding principle is **whisper, don't
 shout**. The site reads like a short personal calling card — no shadows, no cards,
@@ -21,8 +20,8 @@ type or heavy chrome.
 - **Plain CSS**, hand-written in `app/globals.css` / route CSS files. No CSS
   modules, no styled-components, no Tailwind.
 - **MDX** via `@next/mdx` for About (`content/about.md`), Contact
-  (`content/contact.md`), Privacy (`content/privacy.md`), and `/now`
-  (`content/now/YYYY-MM-DD.md`), mapped through `mdx-components.tsx`.
+  (`content/contact.md`), Privacy (`content/privacy.md`), and explanations
+  (`content/explanations/*.md`), mapped through `mdx-components.tsx`.
 - **Vercel Web Analytics** via `@vercel/analytics` and **Speed Insights** via
   `@vercel/speed-insights` in the root layout.
 - **Neue Montreal** via `next/font/local`, registered once in `app/fonts.ts` (exposed
@@ -48,7 +47,7 @@ gradient), not a flat cream field and not pink.
 | `--muted`      | `#6e7470` | Secondary text — dates, project descriptions                  |
 | `--mark`       | `#cfe3d6` | Sage highlight — active nav, inline keywords/links            |
 | `--mark-hover` | `#b9d6c4` | Slightly deeper sage on hover                                 |
-| `--faint`      | `#e2e6e3` | Soft marks (`/now` rule separators)                           |
+| `--faint`      | `#e2e6e3` | Soft explanation-column separators                           |
 
 Usage rules:
 
@@ -67,12 +66,11 @@ Usage rules:
 - **Base:** 16px, weight 400, line-height 1.7, tracking `-0.005em` on the `body`.
   Prose is meant to breathe — keep leading generous.
 - **Weight in use — one cut** (`app/fonts.ts` maps it to a `font-weight`):
-  - **400 Regular** — all shell pages (About, Now, Contact, Privacy).
+  - **400 Regular** — all shell pages (About, Contact, Privacy).
 
 There are **no display sizes** on the content routes. The About page keeps the name
 in a visually hidden `<h1 class="srOnly">` — identity lives in the opening prose
-("I'm Matthew Holandez"), not a hero lockup. `/now` still uses a quiet visible
-`.name` heading styled as body type.
+("I'm Matthew Holandez"), not a hero lockup.
 
 ---
 
@@ -92,8 +90,8 @@ in a visually hidden `<h1 class="srOnly">` — identity lives in the opening pro
 - **Breakpoint:** `720px` — nav stacks above content as a horizontal wrap; shell
   padding tightens to `2.25rem 1.35rem 4rem`.
 - **Prose rhythm:** `.prose` uses a `1.35rem` vertical gap between paragraphs.
-- **Section rhythm:** external link row, signature, and major `/now` blocks use
-  `~2.75rem` top margin.
+- **Section rhythm:** the external link row and signature use `~2.75rem` top
+  margin.
 - No cards, enclosing bordered panels, or inset media. Nesting stays flat. When
   an explanation is open, single-pixel `--faint` editorial rules may divide the
   nav, prose, and explanation columns without enclosing any region.
@@ -104,12 +102,11 @@ in a visually hidden `<h1 class="srOnly">` — identity lives in the opening pro
 
 ### Site shell
 
-- **`SiteShell`** — wraps About, Now, Contact, and Privacy with
+- **`SiteShell`** — wraps About, Contact, and Privacy with
   `.shell` / sticky `.shell__nav` / `.shell__main`, plus a quiet `.siteFooter`
   privacy link at the bottom of the main column.
-- **`SiteNav`** — vertical list: About (`/`) and Contact (`/contact`). `/now`
-  stays in the links array but is unpublished via
-  `NOW_PUBLISHED` in `app/now/published.ts`. Hover uses `--mark`; the active
+- **`SiteNav`** — vertical list: About (`/`) and Contact (`/contact`). Hover uses
+  `--mark`; the active
   route uses the deeper `--mark-hover` so current page reads clearly. Each page
   explicitly gives `SiteShell` its active href, which remains stable when an
   explanation is intercepted. On small screens the list goes horizontal.
@@ -151,7 +148,8 @@ in a visually hidden `<h1 class="srOnly">` — identity lives in the opening pro
 - `.mark` — sage background chip on inline keywords/links; hover deepens to
   `--mark-hover`.
 - `.extArrow` — small ↗ that nudges up-right on link hover (disabled under
-  reduced motion).
+  reduced motion). `ExternalLink` keeps it attached to the label's final word,
+  so an arrow never wraps onto a line by itself.
 
 ### Explanation links
 
@@ -219,32 +217,6 @@ in a visually hidden `<h1 class="srOnly">` — identity lives in the opening pro
 
 ---
 
-## The `/now` page
-
-`/now` (`app/now/`) is a quiet [now page](https://nownownow.com/about) — a dated
-blurb about what Matthew is currently up to. It uses the shared `SiteShell` and
-palette; route-specific prose styles live in `app/now/now.css`, scoped under
-`.now`.
-
-**Unpublished.** Files stay; the page still renders at `/now`. `NOW_PUBLISHED`
-in `app/now/published.ts` is `false`, which hides it from nav, sitemap, and
-robots, and sets `noindex`. Flip that flag to publish. Restore the About
-copy link in `content/about.md` at the same time.
-
-- **Authoring.** One file per point in time: `content/now/YYYY-MM-DD.md`
-  (plain markdown body, no frontmatter). Drop a new dated file to post an
-  update; older files stay and remain visible. Display order is filename
-  descending (`2026-07-29.md` above `2026-01-15.md`).
-- **Markdown → components.** `@next/mdx` compiles the files. Root
-  `mdx-components.tsx` maps markdown elements to quiet React components; links
-  get the `.mark` treatment and external ones append ↗.
-- **Layout.** Semantic `<h1 class="name">Now</h1>`, muted "Updated …" tagline
-  from the newest filename, then one `<article class="now-entry">` per file —
-  each with a muted `<time>` taken from its `YYYY-MM-DD` name. Navigation back
-  home is via the sidebar (no footer “← Home” link).
-
----
-
 ## Assets & metadata
 
 - **Signature:** `public/signature.png` — dark brushstroke "MATTHEW." wordmark on a
@@ -259,8 +231,9 @@ copy link in `content/about.md` at the same time.
   both set in Neue Montreal Regular. Keep it in sync with the page's type/color
   if those change.
 - **Structured data:** `Person` JSON-LD injected in `app/layout.tsx`.
-- **Sitemap:** `/`, `/contact`, `/privacy` (`/now` omitted while
-  unpublished).
+- **Search description:** the site-wide description is the About page's first
+  sentence: “I study Systems Design Engineering at the University of Waterloo.”
+- **Sitemap:** `/`, `/contact`, and `/privacy`.
 - **Analytics:** `@vercel/analytics` (`Analytics` from `@vercel/analytics/next`)
   in `app/layout.tsx`. Tracks page views in production when Web Analytics is
   enabled on the Vercel project.
@@ -275,14 +248,12 @@ copy link in `content/about.md` at the same time.
 1. Edit About copy → change `content/about.md` (links + `**highlights**`).
 2. Edit Contact copy → change `content/contact.md`.
 3. Edit Privacy copy → change `content/privacy.md`.
-4. New `/now` update → add `content/now/YYYY-MM-DD.md` (filename is the date;
-   older files stay on the page, sorted newest-first).
-5. New project → add it to the project sentence in `content/about.md`.
-6. New content route → wrap in `SiteShell` and keep prose ≤~34rem.
-7. New styles → write plain CSS in `app/globals.css`, using the color tokens.
-8. Do **not** add display type, cards, pink/cream accents, or icon-heavy chrome
+4. New project → add it to the project sentence in `content/about.md`.
+5. New content route → wrap in `SiteShell` and keep prose ≤~34rem.
+6. New styles → write plain CSS in `app/globals.css`, using the color tokens.
+7. Do **not** add display type, cards, pink/cream accents, or icon-heavy chrome
    on the content routes.
-9. Keep it light-only; honor `prefers-reduced-motion`.
-10. New explanation → add `content/explanations/my-slug.md` with an `# Heading`,
+8. Keep it light-only; honor `prefers-reduced-motion`.
+9. New explanation → add `content/explanations/my-slug.md` with an `# Heading`,
     then link to `/explanations/my-slug` with normal Markdown. Restart `pnpm dev`
     after adding or renaming a file.

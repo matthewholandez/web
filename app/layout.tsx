@@ -6,7 +6,8 @@ import { neue } from "./fonts";
 import "./globals.css";
 
 const title = "Matthew Holandez";
-const description = "Matthew Holandez — Systems Design Engineering @ UWaterloo";
+const description =
+  "I study Systems Design Engineering at the University of Waterloo.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://mholandez.com"),
@@ -64,7 +65,7 @@ const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Matthew Holandez",
-  description: "Systems Design Engineering @ UWaterloo",
+  description,
   url: "https://mholandez.com",
   email: "mailto:mholandez@uwaterloo.ca",
   sameAs: [

@@ -367,6 +367,14 @@ a.mark:hover,
   transition: transform 150ms ease;
 }
 
+.extArrow::before {
+  content: "↗";
+}
+
+.externalLink__tail {
+  white-space: nowrap;
+}
+
 a:hover .extArrow {
   transform: translate(0.08em, -0.08em);
 }
@@ -437,7 +445,7 @@ a:hover .extArrow {
   color: var(--muted);
 }
 
-/* ——— Quiet headings / meta (Now) ——— */
+/* ——— Quiet headings ——— */
 
 .name {
   margin: 0;
@@ -446,11 +454,6 @@ a:hover .extArrow {
   line-height: inherit;
   letter-spacing: inherit;
   color: var(--ink);
-}
-
-.tagline {
-  margin: 0.15rem 0 0;
-  color: var(--muted);
 }
 
 @keyframes rise {

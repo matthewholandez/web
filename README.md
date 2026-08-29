@@ -12,8 +12,8 @@ pnpm lint
 | Route | Source |
 | --- | --- |
 | `/` | `content/about.md` |
-| `/now` | `content/now/*.md` (unpublished) |
-| `/projects` | `app/projects-data.ts` |
 | `/contact` | `content/contact.md` |
+| `/privacy` | `content/privacy.md` |
+| `/explanations/[slug]` | `content/explanations/*.md` |
 
 Design system: `DESIGN.md`.
