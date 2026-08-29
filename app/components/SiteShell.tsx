@@ -2,11 +2,17 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { SiteNav } from "./SiteNav";
 
-export function SiteShell({ children }: { children: ReactNode }) {
+export function SiteShell({
+  activeHref,
+  children,
+}: {
+  activeHref?: string;
+  children: ReactNode;
+}) {
   return (
     <div className="shell">
       <aside className="shell__nav">
-        <SiteNav />
+        <SiteNav activeHref={activeHref} />
       </aside>
       <div className="shell__main">
         {children}

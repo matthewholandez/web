@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 export default function ProjectsPage() {
   return (
-    <SiteShell>
+    <SiteShell activeHref="/projects">
       <main>
         <h1 className="srOnly">Projects</h1>
 

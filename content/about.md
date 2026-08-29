@@ -1,4 +1,4 @@
-I study Systems Design Engineering at the [University of Waterloo](https://uwaterloo.ca).
+I study [Systems Design Engineering](/explanations/systems-design-engineering) at the [University of Waterloo](https://uwaterloo.ca).
 
 Previously I was at [DeepCode](https://deepcode.ca). This fall, I'll be at [Booked](https://bookedworks.com).
 

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { ExplanationStage } from "./components/ExplanationStage";
 import { neue } from "./fonts";
 import "./globals.css";
 
@@ -74,8 +75,10 @@ const personJsonLd = {
 
 export default function RootLayout({
   children,
+  explanation,
 }: Readonly<{
   children: React.ReactNode;
+  explanation: React.ReactNode;
 }>) {
   return (
     <html lang="en" className={neue.variable} style={{ colorScheme: "light" }}>
@@ -84,7 +87,9 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
-        {children}
+        <ExplanationStage explanation={explanation}>
+          {children}
+        </ExplanationStage>
         <Analytics />
         <SpeedInsights />
       </body>

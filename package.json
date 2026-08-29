@@ -3,8 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "generate:explanations": "node scripts/generate-explanations.mjs",
+    "predev": "pnpm generate:explanations",
     "dev": "next dev",
-    "build": "next build",
+    "prebuild": "pnpm generate:explanations",
+    "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint"
   },

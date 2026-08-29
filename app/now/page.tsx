@@ -6,7 +6,7 @@ export default async function NowPage() {
   const latest = entries[0];
 
   return (
-    <SiteShell>
+    <SiteShell activeHref="/now">
       <main>
         <h1 className="name">Now</h1>
         <p className="tagline">

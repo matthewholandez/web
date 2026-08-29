@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <SiteShell>
+    <SiteShell activeHref="/contact">
       <main>
         <h1 className="srOnly">Contact</h1>
         <div className="prose">

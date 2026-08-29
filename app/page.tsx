@@ -5,7 +5,7 @@ import { SiteShell } from "./components/SiteShell";
 
 export default function Home() {
   return (
-    <SiteShell>
+    <SiteShell activeHref="/">
       <main>
         <h1 className="srOnly">Matthew Holandez</h1>
 

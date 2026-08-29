@@ -82,12 +82,21 @@ in a visually hidden `<h1 class="srOnly">` — identity lives in the opening pro
   prose column (`minmax(0, 34rem)`), `gap: 3.5rem`, max-width `52rem`, padding
   `5.5rem 2rem 5rem`. Justified to the start so the composition sits left-of-center
   like a notebook page, not a dashboard.
+- **Explanation stage:** `.explanationStage` wraps the route content and the
+  `@explanation` parallel-route slot. At wide desktop sizes, opening an
+  explanation expands the centered stage to `76.5rem` and becomes a true
+  three-column editorial layout: navigation, reflowed prose, and explanation.
+  The nav/main proportions tighten fluidly rather than allowing prose to run
+  beneath the explanation. At `960px` and below, the explanation becomes a
+  full-width sheet and the underlying page moves entirely out of view.
 - **Breakpoint:** `720px` — nav stacks above content as a horizontal wrap; shell
   padding tightens to `2.25rem 1.35rem 4rem`.
 - **Prose rhythm:** `.prose` uses a `1.35rem` vertical gap between paragraphs.
 - **Section rhythm:** external link row, signature, and major `/now` blocks use
   `~2.75rem` top margin.
-- No cards, no bordered panels, no inset media. Nesting stays flat.
+- No cards, enclosing bordered panels, or inset media. Nesting stays flat. When
+  an explanation is open, single-pixel `--faint` editorial rules may divide the
+  nav, prose, and explanation columns without enclosing any region.
 
 ---
 
@@ -101,8 +110,9 @@ in a visually hidden `<h1 class="srOnly">` — identity lives in the opening pro
 - **`SiteNav`** — vertical list: About (`/`), Projects (`/projects`), Contact
   (`/contact`). `/now` stays in the links array but is unpublished via
   `NOW_PUBLISHED` in `app/now/published.ts`. Hover uses `--mark`; the active
-  route uses the deeper `--mark-hover` so current page reads clearly. On small
-  screens the list goes horizontal.
+  route uses the deeper `--mark-hover` so current page reads clearly. Each page
+  explicitly gives `SiteShell` its active href, which remains stable when an
+  explanation is intercepted. On small screens the list goes horizontal.
 
 ### About (`/`)
 
@@ -149,6 +159,30 @@ in a visually hidden `<h1 class="srOnly">` — identity lives in the opening pro
 - `.extArrow` — small ↗ that nudges up-right on link hover (disabled under
   reduced motion).
 
+### Explanation links
+
+- **Authoring.** Each explanation is a plain Markdown file in
+  `content/explanations/`, named with a lowercase hyphenated slug. Its first line
+  must be a level-one heading, followed by ordinary Markdown. Links, lists,
+  emphasis, quotes, and inline code use the existing global MDX mappings.
+- **Linking.** Use a normal internal Markdown link to its standalone route:
+  `[Systems Design Engineering](/explanations/systems-design-engineering)`.
+  No React component or hand-maintained content registry is needed.
+- **Discovery.** `scripts/generate-explanations.mjs` creates a typed, generated
+  loader map before `pnpm dev` and `pnpm build`. Do not edit
+  `app/generated/explanation-loaders.ts` by hand. Restart the dev server after
+  adding or renaming an explanation so the loader map is regenerated.
+- **Routes.** `/explanations/[slug]` is the accessible, shareable standalone
+  fallback. In-site navigation is intercepted by the root `@explanation` slot
+  and renders the same MDX in `.explanationPanel` without losing the current
+  page context.
+- **Presentation.** The explanation heading uses the existing sage `.mark` and
+  the slightly smaller (`0.95rem`) body uses `--muted`. Wide screens use faint
+  vertical rules after the nav and before the explanation to clarify the three
+  regions while the main prose rewraps naturally. The panel remains flat and
+  transparent; responsive sheets use the existing paper gradient with no card,
+  shadow, or new color token.
+
 ---
 
 ## Interaction & motion
@@ -161,8 +195,10 @@ in a visually hidden `<h1 class="srOnly">` — identity lives in the opening pro
   1. `.shell__main` rises/fades in on load (`rise`, 0.55s).
   2. Mark background color transitions (150ms).
   3. External arrow nudge on hover (150ms).
+  4. Opening an explanation expands/shifts the page and slides the explanation
+     in from the right (`320ms`).
 - **Reduced motion:** `prefers-reduced-motion: reduce` disables the entrance
-  animation, arrow nudge, and transitions.
+  animations, explanation movement, arrow nudge, and transitions.
 
 ---
 
@@ -182,6 +218,10 @@ in a visually hidden `<h1 class="srOnly">` — identity lives in the opening pro
   on the active item; primary nav is labeled.
 - External links use `target="_blank"` + `rel="noopener noreferrer"`.
 - Decorative ↗ arrows are `aria-hidden`.
+- Explanation triggers are real internal links with standalone destinations.
+  The intercepted panel is an `aside` labeled by its Markdown heading, moves
+  focus to its close control on open, supports Escape, and closes through browser
+  history so Back/Forward behavior stays native.
 
 ---
 
@@ -249,3 +289,6 @@ copy link in `content/about.md` at the same time.
 8. Do **not** add display type, cards, pink/cream accents, or icon-heavy chrome
    on the content routes.
 9. Keep it light-only; honor `prefers-reduced-motion`.
+10. New explanation → add `content/explanations/my-slug.md` with an `# Heading`,
+    then link to `/explanations/my-slug` with normal Markdown. Restart `pnpm dev`
+    after adding or renaming a file.

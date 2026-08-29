@@ -1,7 +1,4 @@
-"use client";
-
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { NOW_PUBLISHED } from "../now/published";
 
 const links = [
@@ -11,20 +8,14 @@ const links = [
   { href: "/contact", label: "Contact" },
 ] as const;
 
-export function SiteNav() {
-  const pathname = usePathname();
-
+export function SiteNav({ activeHref }: { activeHref?: string }) {
   return (
     <nav aria-label="Primary">
       <ul className="siteNav__list">
         {links
           .filter((link) => !("hidden" in link && link.hidden))
           .map((link) => {
-            const active =
-              link.href === "/"
-                ? pathname === "/"
-                : pathname === link.href ||
-                  pathname.startsWith(`${link.href}/`);
+            const active = link.href === activeHref;
 
             return (
               <li key={link.href}>
