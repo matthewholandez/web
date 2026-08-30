@@ -188,7 +188,8 @@ in a visually hidden `<h1 class="srOnly">` — identity lives in the opening pro
   2. Mark background color transitions (150ms).
   3. External arrow nudge on hover (150ms).
   4. Opening an explanation expands/shifts the page and slides the explanation
-     in from the right (`320ms`).
+     in from the right (`320ms`). Close and Escape play the equal reverse motion
+     before completing the history navigation.
 - **Reduced motion:** `prefers-reduced-motion: reduce` disables the entrance
   animations, explanation movement, arrow nudge, and transitions.
 
