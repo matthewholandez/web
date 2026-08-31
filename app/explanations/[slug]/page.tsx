@@ -52,8 +52,8 @@ export default async function ExplanationPage({
   }
 
   return (
-    <SiteShell>
-      <main className="explanationPage">
+    <SiteShell homeLink>
+      <main>
         <ExplanationContent
           Content={Content}
           headingId={`explanation-${slug}-title`}

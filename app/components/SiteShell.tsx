@@ -1,22 +1,28 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { SiteNav } from "./SiteNav";
 
 export function SiteShell({
-  activeHref,
+  homeLink = false,
   children,
 }: {
-  activeHref?: string;
+  homeLink?: boolean;
   children: ReactNode;
 }) {
   return (
     <div className="shell">
-      <aside className="shell__nav">
-        <SiteNav activeHref={activeHref} />
-      </aside>
       <div className="shell__main">
         {children}
         <p className="siteFooter">
+          {homeLink ? (
+            <>
+              <Link href="/" className="siteFooter__link">
+                home
+              </Link>
+              <span className="siteFooter__sep" aria-hidden="true">
+                ·
+              </span>
+            </>
+          ) : null}
           <Link href="/privacy" className="siteFooter__link">
             privacy
           </Link>
