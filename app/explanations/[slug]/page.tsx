@@ -52,7 +52,7 @@ export default async function ExplanationPage({
   }
 
   return (
-    <SiteShell>
+    <SiteShell homeLink>
       <main className="explanationPage">
         <ExplanationContent
           Content={Content}

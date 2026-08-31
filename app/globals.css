@@ -61,13 +61,13 @@ button:focus-visible {
   border: 0;
 }
 
-/* ——— Shell: sidebar + main ——— */
+/* ——— Shell: main + explanation ——— */
 
 .explanationStage {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 0;
   column-gap: 0;
-  width: min(100%, 52rem);
+  width: min(100%, 38rem);
   margin: 0 auto;
   transition:
     width 320ms ease,
@@ -76,8 +76,8 @@ button:focus-visible {
 }
 
 .explanationStage:has(.explanationPanel) {
-  grid-template-columns: minmax(0, 1fr) clamp(18rem, 26vw, 21rem);
-  width: min(calc(100% - 3rem), 76.5rem);
+  grid-template-columns: minmax(0, 1fr) clamp(18rem, 28vw, 22rem);
+  width: min(calc(100% - 3rem), 72rem);
   column-gap: clamp(2rem, 4vw, 3.5rem);
 }
 
@@ -87,76 +87,34 @@ button:focus-visible {
 }
 
 .shell {
-  display: grid;
-  grid-template-columns: 9.5rem minmax(0, 34rem);
-  justify-content: start;
-  gap: 3.5rem;
-  max-width: 52rem;
-  margin: 0 auto;
   padding: 5.5rem 2rem 5rem;
   min-height: 100dvh;
-  transition:
-    grid-template-columns 320ms ease,
-    gap 320ms ease,
-    padding 320ms ease;
-}
-
-.shell__nav {
-  position: sticky;
-  top: 5.5rem;
-  align-self: start;
-  border-right: 1px solid transparent;
-  transition:
-    padding-right 320ms ease,
-    border-color 320ms ease;
+  transition: padding 320ms ease;
 }
 
 .shell__main {
   min-width: 0;
+  max-width: 34rem;
   animation: rise 0.55s ease both;
 }
 
 .explanationStage:has(.explanationPanel) .shell {
-  grid-template-columns: clamp(7.5rem, 12vw, 9.5rem) minmax(0, 34rem);
-  gap: clamp(2rem, 4vw, 3.5rem);
-  max-width: none;
   padding-inline: 1.5rem;
-}
-
-.explanationStage:has(.explanationPanel) .shell__nav {
-  min-height: calc(100dvh - 10.5rem);
-  padding-right: 1.5rem;
-  border-right-color: var(--faint);
 }
 
 .explanationStage:has(.explanationPanel__close[data-closing="true"]) {
   grid-template-columns: minmax(0, 1fr) 0;
-  width: min(100%, 52rem);
+  width: min(100%, 38rem);
   column-gap: 0;
 }
 
 .explanationStage:has(.explanationPanel__close[data-closing="true"]) .shell {
-  grid-template-columns: 9.5rem minmax(0, 34rem);
-  gap: 3.5rem;
-  max-width: none;
   padding-inline: 2rem;
-}
-
-.explanationStage:has(.explanationPanel__close[data-closing="true"])
-  .shell__nav {
-  padding-right: 0;
-  border-right-color: transparent;
 }
 
 @media (max-width: 720px) {
   .shell {
-    grid-template-columns: 1fr;
-    gap: 2.25rem;
     padding: 2.25rem 1.35rem 4rem;
-  }
-
-  .shell__nav {
-    position: static;
   }
 }
 
@@ -333,60 +291,15 @@ button:focus-visible {
       var(--paper-deep) 100%
     );
   }
-  .explanationStage:has(.explanationPanel) .shell__nav {
-    min-height: 0;
-    padding-right: 0;
-    border-right: 0;
-  }
 }
 
 @media (max-width: 720px) {
   .explanationStage:has(.explanationPanel__close[data-closing="true"]) .shell {
-    grid-template-columns: 1fr;
-    gap: 2.25rem;
     padding: 2.25rem 1.35rem 4rem;
   }
 
   .explanationPanel {
     padding: 2.25rem 1.35rem 4rem;
-  }
-}
-
-/* ——— Sidebar nav ——— */
-
-.siteNav__list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.2rem;
-}
-
-.siteNav__link {
-  display: inline-block;
-  padding: 0.2rem 0.45rem;
-  margin-left: -0.45rem;
-  border-radius: 2px;
-  color: var(--ink);
-  transition: background-color 150ms ease;
-}
-
-.siteNav__link:hover {
-  background-color: var(--mark);
-}
-
-.siteNav__link--active,
-.siteNav__link--active:hover {
-  background-color: var(--mark-hover);
-}
-
-@media (max-width: 720px) {
-  .siteNav__list {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 0.15rem 0.35rem;
   }
 }
 
@@ -464,6 +377,10 @@ a:hover .extArrow {
   line-height: 1.4;
 }
 
+.siteFooter__sep {
+  margin: 0 0.55rem;
+}
+
 .siteFooter__link {
   color: var(--muted);
   transition: color 150ms ease;
@@ -531,8 +448,7 @@ a:hover .extArrow {
   .explanationStage,
   .explanationStage__page,
   .explanationPanel,
-  .shell,
-  .shell__nav {
+  .shell {
     animation: none;
     transition: none;
   }
@@ -545,7 +461,6 @@ a:hover .extArrow {
     transform: none;
   }
 
-  .siteNav__link,
   .mark,
   .extArrow,
   .explanationPanel__close,

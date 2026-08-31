@@ -12,8 +12,8 @@ pnpm lint
 | Route | Source |
 | --- | --- |
 | `/` | `content/about.md` |
-| `/contact` | `content/contact.md` |
 | `/privacy` | `content/privacy.md` |
 | `/explanations/[slug]` | `content/explanations/*.md` |
+| `/contact` | redirects to `/explanations/say-hi` |
 
 Design system: `DESIGN.md`.

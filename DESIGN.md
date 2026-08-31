@@ -1,16 +1,16 @@
 # Design System
 
 This is the design reference for **mholandez.com** — a personal site for Matthew
-Holandez. The aesthetic is **quiet prose with a left sidebar**: cool sage marks on
-a soft green-gray page, set entirely in **Neue Montreal**. There is no component
-library and no UI framework beyond the basics; everything is hand-authored plain
-CSS in `app/globals.css`.
+Holandez. The aesthetic is **quiet prose with a right-hand explanation column**:
+cool sage marks on a soft green-gray page, set entirely in **Neue Montreal**.
+There is no component library and no UI framework beyond the basics; everything
+is hand-authored plain CSS in `app/globals.css`.
 
 If you're picking this up as a designer, the guiding principle is **whisper, don't
 shout**. The site reads like a short personal calling card — no shadows, no cards,
 no section eyebrows. Hierarchy comes from **value** (`--ink` vs `--muted`), a soft
-**sage mark** for active nav and inline keywords, and spacing — not from display
-type or heavy chrome.
+**sage mark** for inline keywords, and spacing — not from display type or heavy
+chrome.
 
 ---
 
@@ -19,16 +19,16 @@ type or heavy chrome.
 - **Next.js 16** (App Router) + **React 19**
 - **Plain CSS**, hand-written in `app/globals.css` / route CSS files. No CSS
   modules, no styled-components, no Tailwind.
-- **MDX** via `@next/mdx` for About (`content/about.md`), Contact
-  (`content/contact.md`), Privacy (`content/privacy.md`), and explanations
-  (`content/explanations/*.md`), mapped through `mdx-components.tsx`.
+- **MDX** via `@next/mdx` for About (`content/about.md`), Privacy
+  (`content/privacy.md`), and explanations (`content/explanations/*.md`),
+  mapped through `mdx-components.tsx`.
 - **Vercel Web Analytics** via `@vercel/analytics` and **Speed Insights** via
   `@vercel/speed-insights` in the root layout.
 - **Neue Montreal** via `next/font/local`, registered once in `app/fonts.ts` (exposed
   as `--font-neue`, applied to `<html>` in `app/layout.tsx`). Regular is bundled from
   `app/fonts/`, so `font-weight: 400` picks that cut.
-- Shared chrome lives in `app/components/` — `SiteShell`, `SiteNav` (client, for
-  active route), and `ExternalLink` (↗ suffix for outbound links).
+- Shared chrome lives in `app/components/` — `SiteShell` and `ExternalLink`
+  (↗ suffix for outbound links).
 
 ---
 
@@ -45,15 +45,15 @@ gradient), not a flat cream field and not pink.
 | `--paper-deep` | `#eef1ec` | Gradient end                                                  |
 | `--ink`        | `#151716` | Primary text                                                  |
 | `--muted`      | `#6e7470` | Secondary text — dates, project descriptions                  |
-| `--mark`       | `#cfe3d6` | Sage highlight — active nav, inline keywords/links            |
+| `--mark`       | `#cfe3d6` | Sage highlight — inline keywords/links                        |
 | `--mark-hover` | `#b9d6c4` | Slightly deeper sage on hover                                 |
 | `--faint`      | `#e2e6e3` | Soft explanation-column separators                           |
 
 Usage rules:
 
 - Primary copy is `--ink`; supporting/secondary copy is `--muted`.
-- Interactive emphasis uses the sage `--mark` background (nav active state and
-  `.mark` inline links). Do **not** switch to pink, purple, or cream/terracotta.
+- Interactive emphasis uses the sage `--mark` background on `.mark` inline
+  links. Do **not** switch to pink, purple, or cream/terracotta.
 - Brand/theme colors (`theme_color`, `background_color` in `public/site.webmanifest`,
   and the OG image background) are `--paper` (`#f5f6f4`).
 
@@ -66,7 +66,7 @@ Usage rules:
 - **Base:** 16px, weight 400, line-height 1.7, tracking `-0.005em` on the `body`.
   Prose is meant to breathe — keep leading generous.
 - **Weight in use — one cut** (`app/fonts.ts` maps it to a `font-weight`):
-  - **400 Regular** — all shell pages (About, Contact, Privacy).
+  - **400 Regular** — all shell pages (About, Privacy, standalone explanations).
 
 There are **no display sizes** on the content routes. The About page keeps the name
 in a visually hidden `<h1 class="srOnly">` — identity lives in the opening prose
@@ -76,25 +76,23 @@ in a visually hidden `<h1 class="srOnly">` — identity lives in the opening pro
 
 ## Layout & spacing
 
-- **Shell:** `.shell` — CSS grid with a sticky left nav column (`9.5rem`) and a
-  prose column (`minmax(0, 34rem)`), `gap: 3.5rem`, max-width `52rem`, padding
-  `5.5rem 2rem 5rem`. Justified to the start so the composition sits left-of-center
-  like a notebook page, not a dashboard.
+- **Shell:** `.shell` — a single main column with padding `5.5rem 2rem 5rem`.
+  Prose inside `.shell__main` is capped at `34rem`. Justified to the start so
+  the composition sits left-of-center like a notebook page, not a dashboard.
 - **Explanation stage:** `.explanationStage` wraps the route content and the
-  `@explanation` parallel-route slot. At wide desktop sizes, opening an
-  explanation expands the centered stage to `76.5rem` and becomes a true
-  three-column editorial layout: navigation, reflowed prose, and explanation.
-  The nav/main proportions tighten fluidly rather than allowing prose to run
-  beneath the explanation. At `960px` and below, the explanation becomes a
-  full-width sheet and the underlying page moves entirely out of view.
-- **Breakpoint:** `720px` — nav stacks above content as a horizontal wrap; shell
-  padding tightens to `2.25rem 1.35rem 4rem`.
+  `@explanation` parallel-route slot. At rest the stage is `38rem` (prose plus
+  padding). Opening an explanation expands it to `72rem` and becomes a true
+  two-column layout: the main column takes most of the width (`1fr`) and the
+  explanation sits in a narrower right column (`clamp(18rem, 28vw, 22rem)`).
+  At `960px` and below, the explanation becomes a full-width sheet and the
+  underlying page moves entirely out of view.
+- **Breakpoint:** `720px` — shell padding tightens to `2.25rem 1.35rem 4rem`.
 - **Prose rhythm:** `.prose` uses a `1.35rem` vertical gap between paragraphs.
 - **Section rhythm:** the external link row and signature use `~2.75rem` top
   margin.
 - No cards, enclosing bordered panels, or inset media. Nesting stays flat. When
-  an explanation is open, single-pixel `--faint` editorial rules may divide the
-  nav, prose, and explanation columns without enclosing any region.
+  an explanation is open, a single-pixel `--faint` editorial rule divides the
+  main column from the explanation without enclosing either region.
 
 ---
 
@@ -102,14 +100,12 @@ in a visually hidden `<h1 class="srOnly">` — identity lives in the opening pro
 
 ### Site shell
 
-- **`SiteShell`** — wraps About, Contact, and Privacy with
-  `.shell` / sticky `.shell__nav` / `.shell__main`, plus a quiet `.siteFooter`
-  privacy link at the bottom of the main column.
-- **`SiteNav`** — vertical list: About (`/`) and Contact (`/contact`). Hover uses
-  `--mark`; the active
-  route uses the deeper `--mark-hover` so current page reads clearly. Each page
-  explicitly gives `SiteShell` its active href, which remains stable when an
-  explanation is intercepted. On small screens the list goes horizontal.
+- **`SiteShell`** — wraps About, Privacy, and standalone explanation pages with
+  `.shell` / `.shell__main`, plus a quiet `.siteFooter` at the bottom of the
+  main column. Privacy and standalone explanations pass `homeLink` so the
+  footer also includes a muted `home` link before `privacy`. There is no
+  primary nav — the site is a single About page, with contact living as an
+  explanation.
 
 ### About (`/`)
 
@@ -121,15 +117,17 @@ in a visually hidden `<h1 class="srOnly">` — identity lives in the opening pro
   external `https://…` links also get a trailing ↗; internal paths use
   `next/link`. Wrap a non-link keyword in `**bold**` to get the same mark
   highlight (e.g. `**Systems Design Engineering**`).
-- **`.extLinks`** — bottom row of GitHub / LinkedIn / Email with ↗ suffixes.
+- **`.extLinks`** — bottom row of GitHub / LinkedIn with ↗ suffixes.
 - **Signature** — `public/signature.png` at 32px tall under the link row.
 
-### Contact (`/contact`)
+### Contact (`/explanations/say-hi`)
 
-- **Authoring.** Edit `content/contact.md` — plain markdown, no frontmatter.
-  The page (`app/contact/page.tsx`) imports it via `@next/mdx` and renders it
-  inside `.prose`. Typically one marked `mailto:` link (no form, no ↗).
-  Semantic heading is visually hidden like About.
+- **Authoring.** Edit `content/explanations/say-hi.md` — same convention as
+  other explanations (level-one heading, then ordinary Markdown). Linked from
+  About as `[say hi!](/explanations/say-hi)`. Typically one marked `mailto:`
+  link (no form, no ↗) plus outbound social links.
+- **Redirect.** `/contact` permanently redirects here so older links still
+  resolve.
 
 ### Privacy (`/privacy`)
 
@@ -141,7 +139,8 @@ in a visually hidden `<h1 class="srOnly">` — identity lives in the opening pro
   `--ink` with tighter tracking; body paragraphs use `--muted` so heading vs
   copy separates by value, not weight.
 - **Footer link.** Every `SiteShell` page shows a muted lowercase `privacy`
-  link (`.siteFooter`) at the bottom of the main column — not in the nav.
+  link (`.siteFooter`) at the bottom of the main column. Inner pages also
+  show a `home` link, separated by a middot.
 
 ### Marks & arrows
 
@@ -169,18 +168,17 @@ in a visually hidden `<h1 class="srOnly">` — identity lives in the opening pro
   and renders the same MDX in `.explanationPanel` without losing the current
   page context.
 - **Presentation.** The explanation heading uses the existing sage `.mark` and
-  the slightly smaller (`0.95rem`) body uses `--muted`. Wide screens use faint
-  vertical rules after the nav and before the explanation to clarify the three
-  regions while the main prose rewraps naturally. The panel remains flat and
-  transparent; responsive sheets use the existing paper gradient with no card,
-  shadow, or new color token.
+  the slightly smaller (`0.95rem`) body uses `--muted`. Wide screens use a faint
+  vertical rule before the explanation to clarify the two regions while the
+  main column keeps its measure. The panel remains flat and transparent;
+  responsive sheets use the existing paper gradient with no card, shadow, or
+  new color token.
 
 ---
 
 ## Interaction & motion
 
-- **Hover:** sage mark deepens; external arrows translate slightly; nav links pick
-  up the mark background.
+- **Hover:** sage mark deepens; external arrows translate slightly.
 - **Focus:** a visible `2px solid var(--ink)` outline with `3px` offset on all
   focusable `a`/`button` (`:focus-visible`). Don't remove this.
 - **Motion (intentional, quiet):**
@@ -207,8 +205,8 @@ in a visually hidden `<h1 class="srOnly">` — identity lives in the opening pro
 
 - Light-only, high contrast (`#151716` on `#f5f6f4`).
 - Visible focus rings (above) — preserve them.
-- About keeps a semantic visually-hidden `<h1>`; nav uses `aria-current="page"`
-  on the active item; primary nav is labeled.
+- About keeps a semantic visually-hidden `<h1>`; primary identity lives in the
+  opening prose. Inner pages offer a footer `home` link back to `/`.
 - External links use `target="_blank"` + `rel="noopener noreferrer"`.
 - Decorative ↗ arrows are `aria-hidden`.
 - Explanation triggers are real internal links with standalone destinations.
@@ -234,7 +232,8 @@ in a visually hidden `<h1 class="srOnly">` — identity lives in the opening pro
 - **Structured data:** `Person` JSON-LD injected in `app/layout.tsx`.
 - **Search description:** the site-wide description is the About page's first
   sentence: “I study Systems Design Engineering at the University of Waterloo.”
-- **Sitemap:** `/`, `/contact`, and `/privacy`.
+- **Sitemap:** `/` and `/privacy`. `/contact` is a permanent redirect to
+  `/explanations/say-hi` and is not listed.
 - **Analytics:** `@vercel/analytics` (`Analytics` from `@vercel/analytics/next`)
   in `app/layout.tsx`. Tracks page views in production when Web Analytics is
   enabled on the Vercel project.
@@ -247,7 +246,7 @@ in a visually hidden `<h1 class="srOnly">` — identity lives in the opening pro
 ## Adding to the page — quick rules
 
 1. Edit About copy → change `content/about.md` (links + `**highlights**`).
-2. Edit Contact copy → change `content/contact.md`.
+2. Edit contact copy → change `content/explanations/say-hi.md`.
 3. Edit Privacy copy → change `content/privacy.md`.
 4. New project → add it to the project sentence in `content/about.md`.
 5. New content route → wrap in `SiteShell` and keep prose ≤~34rem.
