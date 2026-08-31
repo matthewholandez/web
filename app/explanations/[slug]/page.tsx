@@ -53,7 +53,7 @@ export default async function ExplanationPage({
 
   return (
     <SiteShell homeLink>
-      <main className="explanationPage">
+      <main>
         <ExplanationContent
           Content={Content}
           headingId={`explanation-${slug}-title`}

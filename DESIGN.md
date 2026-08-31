@@ -69,8 +69,8 @@ Usage rules:
   - **400 Regular** — all shell pages (About, Privacy, standalone explanations).
 
 There are **no display sizes** on the content routes. The About page keeps the name
-in a visually hidden `<h1 class="srOnly">` — identity lives in the opening prose
-("I'm Matthew Holandez"), not a hero lockup.
+in a visually hidden `<h1 class="srOnly">` — identity lives in the opening prose,
+not a hero lockup.
 
 ---
 
@@ -111,8 +111,8 @@ in a visually hidden `<h1 class="srOnly">` — identity lives in the opening pro
 
 - **Authoring.** Edit `content/about.md` — plain markdown, no frontmatter.
   The homepage (`app/page.tsx`) imports that file via `@next/mdx` and renders
-  it inside `.prose`. Chrome around it (contact `.extLinks` row + signature)
-  stays in the React page.
+  it inside `.prose`. Chrome around it (GitHub/LinkedIn `.extLinks` row +
+  signature) stays in the React page.
 - **Markdown → marks.** Links become sage `.mark` chips (`mdx-components.tsx`):
   external `https://…` links also get a trailing ↗; internal paths use
   `next/link`. Wrap a non-link keyword in `**bold**` to get the same mark

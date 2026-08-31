@@ -89,7 +89,6 @@ button:focus-visible {
 .shell {
   padding: 5.5rem 2rem 5rem;
   min-height: 100dvh;
-  transition: padding 320ms ease;
 }
 
 .shell__main {
@@ -98,24 +97,10 @@ button:focus-visible {
   animation: rise 0.55s ease both;
 }
 
-.explanationStage:has(.explanationPanel) .shell {
-  padding-inline: 1.5rem;
-}
-
 .explanationStage:has(.explanationPanel__close[data-closing="true"]) {
   grid-template-columns: minmax(0, 1fr) 0;
   width: min(100%, 38rem);
   column-gap: 0;
-}
-
-.explanationStage:has(.explanationPanel__close[data-closing="true"]) .shell {
-  padding-inline: 2rem;
-}
-
-@media (max-width: 720px) {
-  .shell {
-    padding: 2.25rem 1.35rem 4rem;
-  }
 }
 
 /* ——— Explanations ——— */
@@ -294,7 +279,7 @@ button:focus-visible {
 }
 
 @media (max-width: 720px) {
-  .explanationStage:has(.explanationPanel__close[data-closing="true"]) .shell {
+  .shell {
     padding: 2.25rem 1.35rem 4rem;
   }
 
@@ -395,15 +380,16 @@ a:hover .extArrow {
 .privacyPage .name {
   margin: 0 0 0.35rem;
   font-size: 1.35rem;
+  font-weight: 400;
   line-height: 1.35;
   letter-spacing: -0.02em;
+  color: var(--ink);
 }
 
 .privacy.prose {
   gap: 0.85rem;
 }
 
-.privacy h2,
 .privacy .md-heading {
   margin: 1.85rem 0 0;
   font-size: 1.125rem;
@@ -413,24 +399,8 @@ a:hover .extArrow {
   color: var(--ink);
 }
 
-.privacy h2:first-child,
-.privacy .md-heading:first-child {
-  margin-top: 1.1rem;
-}
-
 .privacy .md-p {
   color: var(--muted);
-}
-
-/* ——— Quiet headings ——— */
-
-.name {
-  margin: 0;
-  font-size: inherit;
-  font-weight: 400;
-  line-height: inherit;
-  letter-spacing: inherit;
-  color: var(--ink);
 }
 
 @keyframes rise {
@@ -447,8 +417,7 @@ a:hover .extArrow {
 @media (prefers-reduced-motion: reduce) {
   .explanationStage,
   .explanationStage__page,
-  .explanationPanel,
-  .shell {
+  .explanationPanel {
     animation: none;
     transition: none;
   }
