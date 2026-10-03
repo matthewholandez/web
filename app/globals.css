@@ -1,13 +1,10 @@
 :root {
-  /* Cool sage minimalism — layout borrowed from quiet personal sites,
-     palette deliberately not cream/pink. */
-  --paper: #f5f6f4;
-  --paper-deep: #eef1ec;
-  --ink: #151716;
-  --muted: #6e7470;
-  --mark: #cfe3d6;
-  --mark-hover: #b9d6c4;
-  --faint: #e2e6e3;
+  --paper: #fafafa;
+  --ink: #171717;
+  --muted: #666666;
+  --mark: #ebebeb;
+  --mark-hover: #dedede;
+  --faint: #dddddd;
 
   color-scheme: light;
 }
@@ -18,10 +15,7 @@
 
 html,
 body {
-  background:
-    radial-gradient(120% 80% at 0% 0%, rgba(207, 227, 214, 0.35), transparent 55%),
-    linear-gradient(180deg, var(--paper) 0%, var(--paper-deep) 100%);
-  background-attachment: fixed;
+  background: var(--paper);
   color: var(--ink);
   min-height: 100%;
 }
@@ -87,7 +81,7 @@ button:focus-visible {
 }
 
 .shell {
-  padding: 5.5rem 2rem 5rem;
+  padding: 6.5rem 2rem 5rem;
   min-height: 100dvh;
 }
 
@@ -270,11 +264,7 @@ button:focus-visible {
     margin: 0;
     padding: 3.5rem max(1.35rem, calc((100% - 34rem) / 2)) 4rem;
     border-left: 0;
-    background: linear-gradient(
-      180deg,
-      var(--paper) 0%,
-      var(--paper-deep) 100%
-    );
+    background: var(--paper);
   }
 }
 
@@ -290,10 +280,31 @@ button:focus-visible {
 
 /* ——— Prose ——— */
 
+.signatureHeading {
+  display: flex;
+  align-items: center;
+  min-height: 32px;
+  margin: 0;
+  font-size: inherit;
+  font-weight: 400;
+  line-height: inherit;
+}
+
+.signatureHeading__image {
+  display: block;
+  width: auto;
+  height: 32px;
+}
+
 .prose {
   display: flex;
   flex-direction: column;
   gap: 1.35rem;
+}
+
+.homeIntro {
+  margin-top: 2.5rem;
+  gap: 1.9rem;
 }
 
 .prose p,
@@ -338,25 +349,28 @@ a:hover .extArrow {
 }
 
 .extLinks {
-  margin-top: 2.75rem;
+  margin-top: 2.5rem;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.85rem 1.35rem;
+  gap: 0.65rem 1.2rem;
 }
 
-.signature {
-  display: block;
-  height: 32px;
-  width: auto;
-  margin-top: 2.75rem;
-  opacity: 0.9;
+.extLinks a,
+.siteFooter__link {
+  color: var(--muted);
+  transition: color 150ms ease;
+}
+
+.extLinks a:hover,
+.siteFooter__link:hover {
+  color: var(--ink);
 }
 
 /* ——— Site footer ——— */
 
 .siteFooter {
-  margin: 4rem 0 0;
+  margin: 4.5rem 0 0;
   color: var(--muted);
   font-size: 0.85rem;
   line-height: 1.4;
@@ -364,15 +378,6 @@ a:hover .extArrow {
 
 .siteFooter__sep {
   margin: 0 0.55rem;
-}
-
-.siteFooter__link {
-  color: var(--muted);
-  transition: color 150ms ease;
-}
-
-.siteFooter__link:hover {
-  color: var(--ink);
 }
 
 /* ——— Privacy ——— */
@@ -433,6 +438,7 @@ a:hover .extArrow {
   .mark,
   .extArrow,
   .explanationPanel__close,
+  .extLinks a,
   .siteFooter__link {
     transition: none;
   }

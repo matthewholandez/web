@@ -1,7 +1,3 @@
-I study [Systems Design Engineering](/explanations/systems-design-engineering) at the [University of Waterloo](https://uwaterloo.ca).
+I study Systems Design Engineering at the University of Waterloo. I'm currently at Booked, and previously worked at DeepCode.
 
-Currently, I'm at [Booked](https://bookedworks.com). Previously I was at [DeepCode](https://deepcode.ca).
-
-A few projects I've worked on: [Intelligo](https://github.com/matthewholandez/intelligo), an AI web novel translator; [Wat Course](https://github.com/matthewholandez/wat-course), an academic advisor for UW students; and [AllOfOurVotes](https://allofourvotes.org), visualizations of UN voting data for increased transparency around global issues.
-
-If you've made it this far, I think you should [say hi!](/explanations/say-hi)
+Outside work, I've worked on Intelligo, a web novel translator; Wat Course, an academic advisor for Waterloo students; and AllOfOurVotes, a way to explore UN voting data.
