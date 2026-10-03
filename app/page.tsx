@@ -1,34 +1,35 @@
-import Image from "next/image";
 import About from "@/content/about.md";
-import { ExternalLink } from "./components/ExternalLink";
+import { SignatureHeading } from "./components/SignatureHeading";
 import { SiteShell } from "./components/SiteShell";
 
 export default function Home() {
   return (
     <SiteShell>
       <main>
-        <h1 className="srOnly">Matthew Holandez</h1>
+        <SignatureHeading />
 
-        <div className="prose">
+        <div className="prose homeIntro">
           <About />
         </div>
 
-        <div className="extLinks">
-          <ExternalLink href="https://github.com/matthewholandez">
+        <nav className="extLinks" aria-label="Contact and profiles">
+          <a href="mailto:mholandez@uwaterloo.ca">Email</a>
+          <a
+            href="https://github.com/matthewholandez"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             GitHub
-          </ExternalLink>
-          <ExternalLink href="https://linkedin.com/in/mholandez">
+          </a>
+          <a
+            href="https://linkedin.com/in/mholandez"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             LinkedIn
-          </ExternalLink>
-        </div>
+          </a>
+        </nav>
 
-        <Image
-          className="signature"
-          src="/signature.png"
-          alt="Matthew Holandez signature"
-          width={2400}
-          height={400}
-        />
       </main>
     </SiteShell>
   );

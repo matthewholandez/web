@@ -58,7 +58,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f5f6f4",
+  themeColor: "#fafafa",
 };
 
 const personJsonLd = {
