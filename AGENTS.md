@@ -22,7 +22,7 @@ If a change touches how the site looks or how UI is built but doesn't fit an exi
 
 Single Next.js 16 (App Router) app; **pnpm** is the package manager (`pnpm-lock.yaml`). Standard scripts are in `package.json`: `pnpm dev` (dev server on port 3000), `pnpm build`, `pnpm start`, `pnpm lint`. No database, backend, env vars, or external services are needed. Styling is plain CSS (no Tailwind).
 
-- Dev/test target: `http://localhost:3000` (routes: `/`, `/privacy`, and `/explanations/[slug]`; `/contact` redirects to `/explanations/say-hi`). Run the dev server with `pnpm dev`.
-- About copy: `content/about.md`. Contact copy: `content/explanations/say-hi.md`. Privacy copy: `content/privacy.md`. Explanation copy: `content/explanations/*.md`.
+- Dev/test target: `http://localhost:3000`. The only content route is `/`. Run the dev server with `pnpm dev`.
+- Homepage copy: `content/about.md`, the only content Markdown file. Preserve `@next/mdx`, `mdx-components.tsx`, and `mdx.d.ts` for Markdown compilation and rendering. Contact links live in `app/page.tsx`.
 - Analytics: `@vercel/analytics` is wired in `app/layout.tsx`; enable Web Analytics in the Vercel project dashboard for production data.
 - Speed Insights: `@vercel/speed-insights` is wired in `app/layout.tsx`; enable Speed Insights in the Vercel project dashboard for production data.

@@ -12,8 +12,9 @@ pnpm lint
 | Route | Source |
 | --- | --- |
 | `/` | `content/about.md` |
-| `/privacy` | `content/privacy.md` |
-| `/explanations/[slug]` | `content/explanations/*.md` |
-| `/contact` | redirects to `/explanations/say-hi` |
+
+`content/about.md` is the only content Markdown file. `@next/mdx` compiles it,
+and `mdx-components.tsx` maps Markdown elements to React components. Contact
+links live in `app/page.tsx`.
 
 Design system: `DESIGN.md`.
