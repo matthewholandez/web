@@ -4,7 +4,6 @@
   --muted: #666666;
   --mark: #ebebeb;
   --mark-hover: #dedede;
-  --faint: #dddddd;
 
   color-scheme: light;
 }
@@ -43,44 +42,9 @@ button:focus-visible {
   outline-offset: 3px;
 }
 
-.srOnly {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-/* ——— Shell: main + explanation ——— */
-
-.explanationStage {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 0;
-  column-gap: 0;
+.shell {
   width: min(100%, 38rem);
   margin: 0 auto;
-  transition:
-    width 320ms ease,
-    grid-template-columns 320ms ease,
-    column-gap 320ms ease;
-}
-
-.explanationStage:has(.explanationPanel) {
-  grid-template-columns: minmax(0, 1fr) clamp(18rem, 28vw, 22rem);
-  width: min(calc(100% - 3rem), 72rem);
-  column-gap: clamp(2rem, 4vw, 3.5rem);
-}
-
-.explanationStage__page,
-.explanationStage__slot {
-  min-width: 0;
-}
-
-.shell {
   padding: 6.5rem 2rem 5rem;
   min-height: 100dvh;
 }
@@ -91,180 +55,9 @@ button:focus-visible {
   animation: rise 0.55s ease both;
 }
 
-.explanationStage:has(.explanationPanel__close[data-closing="true"]) {
-  grid-template-columns: minmax(0, 1fr) 0;
-  width: min(100%, 38rem);
-  column-gap: 0;
-}
-
-/* ——— Explanations ——— */
-
-.explanationPanel {
-  position: sticky;
-  top: 5.5rem;
-  max-height: calc(100dvh - 7rem);
-  min-height: calc(100dvh - 10.5rem);
-  margin-top: 5.5rem;
-  padding-left: clamp(2rem, 3vw, 2.75rem);
-  border-left: 1px solid var(--faint);
-  overflow-y: auto;
-  animation: explanation-in 320ms ease both;
-}
-
-.explanationStage:has(.explanationPanel__close[data-closing="true"])
-  .explanationPanel {
-  pointer-events: none;
-  animation: explanation-out 320ms ease both;
-}
-
-.explanationPanel__close {
-  display: block;
-  margin: 0 0 1.35rem auto;
-  padding: 0.15rem 0.25rem;
-  border: 0;
-  border-radius: 2px;
-  background: transparent;
-  color: var(--muted);
-  font: inherit;
-  line-height: 1.4;
-  cursor: pointer;
-  transition:
-    color 150ms ease,
-    background-color 150ms ease;
-}
-
-.explanationPanel__close:hover {
-  color: var(--ink);
-  background-color: var(--mark);
-}
-
-.explanationTitle {
-  margin: 0 0 1.35rem;
-  font-size: inherit;
-  font-weight: 400;
-  line-height: inherit;
-  letter-spacing: inherit;
-}
-
-.explanationProse {
-  gap: 1rem;
-  font-size: 0.95rem;
-  line-height: 1.65;
-}
-
-.explanationProse .md-p {
-  color: var(--muted);
-}
-
-.explanationProse .md-heading:not(.explanationTitle) {
-  margin: 1.1rem 0 0;
-  color: var(--ink);
-  font-size: inherit;
-  font-weight: 400;
-  line-height: inherit;
-}
-
-.explanationProse .md-list {
-  margin: 0;
-  padding-left: 1.25rem;
-  color: var(--muted);
-}
-
-.explanationProse .md-list li + li {
-  margin-top: 0.35rem;
-}
-
-.explanationProse .md-quote {
-  margin: 0;
-  padding-left: 1rem;
-  border-left: 1px solid var(--faint);
-  color: var(--muted);
-}
-
-.explanationProse .md-hr {
-  width: 100%;
-  margin: 0.35rem 0;
-  border: 0;
-  border-top: 1px solid var(--faint);
-}
-
-.explanationProse .md-code {
-  font: inherit;
-  font-size: 0.9em;
-  background: var(--faint);
-  padding: 0.08em 0.2em;
-  border-radius: 2px;
-}
-
-@keyframes explanation-in {
-  from {
-    opacity: 0;
-    transform: translateX(1.5rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes explanation-out {
-  from {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateX(1.5rem);
-  }
-}
-
 @media (max-width: 960px) {
-  .explanationStage {
-    display: block;
+  .shell {
     width: 100%;
-  }
-
-  .explanationStage:has(.explanationPanel) {
-    width: 100%;
-  }
-
-  .explanationStage:has(.explanationPanel__close[data-closing="true"]) {
-    width: 100%;
-  }
-
-  .explanationStage__page {
-    transition: transform 320ms ease;
-  }
-
-  .explanationStage:has(.explanationPanel) .explanationStage__page {
-    transform: translateX(-100%);
-  }
-
-  .explanationStage:has(.explanationPanel__close[data-closing="true"])
-    .explanationStage__page {
-    transform: translateX(0);
-  }
-
-  .explanationStage__slot {
-    position: fixed;
-    z-index: 10;
-    inset: 0 0 0 auto;
-    width: 100%;
-    pointer-events: none;
-  }
-
-  .explanationStage__slot:has(.explanationPanel) {
-    pointer-events: auto;
-  }
-
-  .explanationPanel {
-    position: static;
-    max-height: 100dvh;
-    min-height: 100dvh;
-    margin: 0;
-    padding: 3.5rem max(1.35rem, calc((100% - 34rem) / 2)) 4rem;
-    border-left: 0;
-    background: var(--paper);
   }
 }
 
@@ -272,13 +65,7 @@ button:focus-visible {
   .shell {
     padding: 2.25rem 1.35rem 4rem;
   }
-
-  .explanationPanel {
-    padding: 2.25rem 1.35rem 4rem;
-  }
 }
-
-/* ——— Prose ——— */
 
 .signatureHeading {
   display: flex;
@@ -356,56 +143,13 @@ a:hover .extArrow {
   gap: 0.65rem 1.2rem;
 }
 
-.extLinks a,
-.siteFooter__link {
+.extLinks a {
   color: var(--muted);
   transition: color 150ms ease;
 }
 
-.extLinks a:hover,
-.siteFooter__link:hover {
+.extLinks a:hover {
   color: var(--ink);
-}
-
-/* ——— Site footer ——— */
-
-.siteFooter {
-  margin: 4.5rem 0 0;
-  color: var(--muted);
-  font-size: 0.85rem;
-  line-height: 1.4;
-}
-
-.siteFooter__sep {
-  margin: 0 0.55rem;
-}
-
-/* ——— Privacy ——— */
-
-.privacyPage .name {
-  margin: 0 0 0.35rem;
-  font-size: 1.35rem;
-  font-weight: 400;
-  line-height: 1.35;
-  letter-spacing: -0.02em;
-  color: var(--ink);
-}
-
-.privacy.prose {
-  gap: 0.85rem;
-}
-
-.privacy .md-heading {
-  margin: 1.85rem 0 0;
-  font-size: 1.125rem;
-  font-weight: 400;
-  line-height: 1.4;
-  letter-spacing: -0.015em;
-  color: var(--ink);
-}
-
-.privacy .md-p {
-  color: var(--muted);
 }
 
 @keyframes rise {
@@ -420,13 +164,6 @@ a:hover .extArrow {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .explanationStage,
-  .explanationStage__page,
-  .explanationPanel {
-    animation: none;
-    transition: none;
-  }
-
   .shell__main {
     animation: none;
   }
@@ -437,9 +174,7 @@ a:hover .extArrow {
 
   .mark,
   .extArrow,
-  .explanationPanel__close,
-  .extLinks a,
-  .siteFooter__link {
+  .extLinks a {
     transition: none;
   }
 }

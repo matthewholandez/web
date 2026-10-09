@@ -1,11 +1,10 @@
 import About from "@/content/about.md";
 import { SignatureHeading } from "./components/SignatureHeading";
-import { SiteShell } from "./components/SiteShell";
 
 export default function Home() {
   return (
-    <SiteShell>
-      <main>
+    <div className="shell">
+      <main className="shell__main">
         <SignatureHeading />
 
         <div className="prose homeIntro">
@@ -29,8 +28,7 @@ export default function Home() {
             LinkedIn
           </a>
         </nav>
-
       </main>
-    </SiteShell>
+    </div>
   );
 }
