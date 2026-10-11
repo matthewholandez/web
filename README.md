@@ -18,3 +18,7 @@ and `mdx-components.tsx` maps Markdown elements to React components. Contact
 links live in `app/page.tsx`.
 
 Design system: `DESIGN.md`.
+
+## Typography
+
+Set in [Libron](https://github.com/nicoverbruggen/libron) by Nico Verbruggen, a modified version of Readerly, based on Newsreader by Production Type. Licensed under the SIL Open Font License 1.1 (`app/fonts/LIBRON-LICENSE.txt`).
