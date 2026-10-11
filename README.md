@@ -21,4 +21,4 @@ Design system: `DESIGN.md`.
 
 ## Typography
 
-Set in [Libron](https://github.com/nicoverbruggen/libron) by Nico Verbruggen, a modified version of Readerly, based on Newsreader by Production Type. Licensed under the SIL Open Font License 1.1 (`app/fonts/LIBRON-LICENSE.txt`).
+Set in [Libron](https://github.com/nicoverbruggen/libron) by Nico Verbruggen, a modified version of [Readerly](https://github.com/nicoverbruggen/readerly), based on [Newsreader](https://github.com/productiontype/Newsreader) by The Newsreader Project Authors. Licensed under the SIL Open Font License 1.1 (`app/fonts/LIBRON-LICENSE.txt`).
