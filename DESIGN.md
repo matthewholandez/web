@@ -71,8 +71,7 @@ Keep new colors neutral. Do not add accent colors, gradients, cards, or shadows.
   `#fafafa`. Open Graph text uses `--ink` and `--muted` values.
 - `public/signature.png` is the monochrome handwritten heading. The client
   `SignatureHeading` component swaps in text on image failure.
-- Vercel Web Analytics and Speed Insights remain in the root layout. The
-  sitemap lists only `/`.
+- The sitemap lists only `/`.
 
 ## Editing rules
 

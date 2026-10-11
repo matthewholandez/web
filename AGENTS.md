@@ -24,5 +24,3 @@ Single Next.js 16 (App Router) app; **pnpm** is the package manager (`pnpm-lock.
 
 - Dev/test target: `http://localhost:3000`. The only content route is `/`. Run the dev server with `pnpm dev`.
 - Homepage copy: `content/about.md`, the only content Markdown file. Preserve `@next/mdx`, `mdx-components.tsx`, and `mdx.d.ts` for Markdown compilation and rendering. Contact links live in `app/page.tsx`.
-- Analytics: `@vercel/analytics` is wired in `app/layout.tsx`; enable Web Analytics in the Vercel project dashboard for production data.
-- Speed Insights: `@vercel/speed-insights` is wired in `app/layout.tsx`; enable Speed Insights in the Vercel project dashboard for production data.
