@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { neue } from "./fonts";
+import { libron } from "./fonts";
 import "./globals.css";
 
 const title = "Matthew Holandez";
@@ -77,7 +77,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={neue.variable} style={{ colorScheme: "light" }}>
+    <html lang="en" className={libron.variable} style={{ colorScheme: "light" }}>
       <body>
         <script
           type="application/ld+json"
