@@ -46,6 +46,18 @@ Keep new colors neutral. Do not add accent colors, gradients, cards, or shadows.
 - No full-name text heading, hero, project cards, primary navigation, or
   inline links appear on the homepage.
 
+## Quiet asides (Hearts2Hearts)
+
+- `NowPlaying` is a fixed bottom-left mini player (Omarchy layout, Libron type):
+  album art with mute overlay, title, artist, and a four-bar EQ that animates
+  while unmuted. Clicking the art or the title/artist toggles mute and opens a
+  speech bubble that rises from the card (K-pop / Hearts2Hearts aside). Playback
+  starts muted for autoplay policy, then unmutes at low volume (~22). Dismiss
+  the bubble with outside click or Escape — no modal backdrop. Cover:
+  `public/covers/the-chase.jpg`. Audio streams from a visually hidden YouTube
+  IFrame API player (`rvduT4ZasWI`); no local audio file and no visible embed.
+  Hairline uses `--mark-hover`; keep it monochrome.
+
 ## Markdown rendering
 
 - `@next/mdx` compiles `content/about.md` through the `.md` extension configured

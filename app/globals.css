@@ -45,7 +45,7 @@ button:focus-visible {
 .shell {
   width: min(100%, 38rem);
   margin: 0 auto;
-  padding: 6.5rem 2rem 5rem;
+  padding: 6.5rem 2rem 7.5rem;
   min-height: 100dvh;
 }
 
@@ -63,7 +63,7 @@ button:focus-visible {
 
 @media (max-width: 720px) {
   .shell {
-    padding: 2.25rem 1.35rem 4rem;
+    padding: 2.25rem 1.35rem 6.5rem;
   }
 }
 
@@ -152,6 +152,210 @@ a:hover .extArrow {
   color: var(--ink);
 }
 
+/* Omarchy-shaped corner player — Libron type, monochrome chrome. */
+.nowPlaying {
+  position: fixed;
+  left: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 15.5rem;
+  max-width: calc(100vw - 2.5rem);
+  padding: 0.55rem 0.85rem 0.55rem 0.55rem;
+  background: var(--paper);
+  border: 1px solid var(--mark-hover);
+  animation: rise 0.55s ease both;
+  animation-delay: 0.12s;
+}
+
+/* Soft speech bubble that grows out of the card. */
+.nowPlaying__bubble {
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 0.7rem);
+  width: min(17.5rem, calc(100vw - 2.5rem));
+  padding: 0.85rem 0.95rem;
+  background: var(--paper);
+  border: 1px solid var(--mark-hover);
+  transform-origin: 1.6rem bottom;
+  animation: bubbleRise 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.nowPlaying__bubbleText {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--ink);
+  text-wrap: pretty;
+}
+
+.nowPlaying__bubbleTail {
+  position: absolute;
+  left: 1.35rem;
+  bottom: -0.34rem;
+  width: 0.62rem;
+  height: 0.62rem;
+  background: var(--paper);
+  border-right: 1px solid var(--mark-hover);
+  border-bottom: 1px solid var(--mark-hover);
+  transform: rotate(45deg);
+}
+
+@keyframes bubbleRise {
+  from {
+    opacity: 0;
+    transform: translateY(0.55rem) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Stream via YouTube; keep the iframe out of sight. */
+.nowPlaying__yt {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  border: 0;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.nowPlaying__art {
+  position: relative;
+  flex: 0 0 auto;
+  width: 3.5rem;
+  height: 3.5rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.nowPlaying__cover {
+  display: block;
+  width: 3.5rem;
+  height: 3.5rem;
+  object-fit: cover;
+}
+
+.nowPlaying__mute {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(23, 23, 23, 0.42);
+  transition: background-color 150ms ease;
+}
+
+.nowPlaying__art:hover .nowPlaying__mute {
+  background: rgba(23, 23, 23, 0.28);
+}
+
+.nowPlaying__art[aria-pressed="true"] .nowPlaying__mute {
+  background: rgba(23, 23, 23, 0.18);
+}
+
+.nowPlaying__meta {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.1rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+}
+
+.nowPlaying__title,
+.nowPlaying__artist {
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.nowPlaying__title {
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+.nowPlaying__artist {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.3;
+}
+
+.nowPlaying__bars {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 0.14rem;
+  height: 0.85rem;
+}
+
+.nowPlaying__bars i {
+  display: block;
+  width: 0.14rem;
+  height: 35%;
+  background: var(--muted);
+  opacity: 0.45;
+}
+
+.nowPlaying__bars.is-active i {
+  opacity: 0.85;
+  animation: eq 0.9s ease-in-out infinite;
+}
+
+.nowPlaying__bars.is-active i:nth-child(1) {
+  animation-delay: 0ms;
+}
+.nowPlaying__bars.is-active i:nth-child(2) {
+  animation-delay: 120ms;
+}
+.nowPlaying__bars.is-active i:nth-child(3) {
+  animation-delay: 40ms;
+}
+.nowPlaying__bars.is-active i:nth-child(4) {
+  animation-delay: 180ms;
+}
+
+@keyframes eq {
+  0%,
+  100% {
+    height: 30%;
+  }
+  50% {
+    height: 100%;
+  }
+}
+
+@media (max-width: 720px) {
+  .nowPlaying {
+    left: 0.85rem;
+    bottom: 0.85rem;
+    min-width: 0;
+  }
+}
+
 @keyframes rise {
   from {
     opacity: 0;
@@ -164,7 +368,9 @@ a:hover .extArrow {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .shell__main {
+  .shell__main,
+  .nowPlaying,
+  .nowPlaying__bubble {
     animation: none;
   }
 
@@ -174,7 +380,13 @@ a:hover .extArrow {
 
   .mark,
   .extArrow,
-  .extLinks a {
+  .extLinks a,
+  .nowPlaying__mute {
     transition: none;
+  }
+
+  .nowPlaying__bars.is-active i {
+    animation: none;
+    height: 55%;
   }
 }

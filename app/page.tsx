@@ -1,4 +1,5 @@
 import About from "@/content/about.md";
+import { NowPlaying } from "./components/NowPlaying";
 import { SignatureHeading } from "./components/SignatureHeading";
 
 export default function Home() {
@@ -29,6 +30,8 @@ export default function Home() {
           </a>
         </nav>
       </main>
+
+      <NowPlaying />
     </div>
   );
 }
